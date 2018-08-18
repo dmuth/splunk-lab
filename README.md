@@ -22,7 +22,7 @@ created dashboards as well:**
 **If you want to do data analytics on local files, and persist the ingested data between Splunk runs, and
 persist created dashboards as well:**
 
-`docker run -p 8000:8000 -v $(pwd)/data:/data -v $(pwd):/mnt -v $(pwd)/app:/app dmuth1/splunk-lab`
+`docker run -p 8000:8000 -v $(pwd)/data:/data -v $(pwd):/mnt -v $(pwd)/app:/app -d dmuth1/splunk-lab`
 
 
 ### Less Common Uses
