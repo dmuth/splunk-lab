@@ -10,6 +10,20 @@ Here are some ways in which to run this container--note that in all instances Sp
 be listening on http://localhost:8000/, so change the first argument for `-p` if you want
 a different port.  And whatever you do, do NOT expose this port to the Internet. (more on that later)
 
+### Most Common Uses:
+
+**If you are having a system issue, and want to ingest your logs, persist the ingested data between Splunk runs, and persist 
+created dashboards as well:**
+
+`docker run -p 8000:8000 -v /var/log:/logs -v $(pwd)/data:/data -v $(pwd)/app:/app -d dmuth1/splunk-lab`
+
+**If you want to do data analytics on local files, and persist the ingested data between Splunk runs, and
+persist created dashboards as well:**
+
+`docker run -p 8000:8000 -v $(pwd)/data:/data -v $(pwd):/mnt -v $(pwd)/app:/app -it dmuth1/splunk-lab bash`
+
+
+### Less Common Uses
 
 Persist data between runs:
 
