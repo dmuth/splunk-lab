@@ -42,7 +42,7 @@ echo "# Persist data and ingest /var/log/:"
 echo "# 	docker run -p 8000:8000 -v \$(pwd)/data:/data -v /var/log:/logs dmuth1/splunk-lab "
 echo "# "
 echo "# Persist data, ingest /var/log/, and run in the background:"
-echo "# 	docker run -p 8000:8000 -v \$(pwd)/data:/data -v -d \$(pwd):/mnt dmuth1/splunk-lab "
+echo "# 	docker run -p 8000:8000 -v \$(pwd)/data:/data -v \$(pwd):/mnt -d dmuth1/splunk-lab "
 echo "# "
 echo "# "
 
