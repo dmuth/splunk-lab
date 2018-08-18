@@ -1,4 +1,7 @@
 
+# Vim
+*.swp
+*~
 
 data/
 
