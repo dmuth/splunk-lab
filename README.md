@@ -40,7 +40,7 @@ Persist data, mount local directory, save created dashboards and reports, and ru
 
 This Splunk instance has a default login/password of `admin/password`.  It should not be exposed
 to the Internet under ANY circumstances.  If you are running this container on a production machine
-for diagnostic purposes, port 8000 should be firewalled off from the outside world.  Here's to do 
+for diagnostic purposes, port 8000 should be firewalled off from the outside world.  Here's how to do 
 that in iptables:
 
 ```
