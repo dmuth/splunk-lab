@@ -45,6 +45,7 @@ COPY splunk-config/user-prefs.conf /opt/splunk/etc/apps/user-prefs/local/user-pr
 COPY splunk-config/web.conf /opt/splunk/etc/system/local/web.conf.in
 
 RUN ln -s /opt/splunk/var/lib/splunk/defaultdb /data
+RUN ln -s /opt/splunk/etc/apps/search/local /app
 
 #
 # Expose Splunk web
