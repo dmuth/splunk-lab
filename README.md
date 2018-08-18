@@ -13,23 +13,23 @@ a different port.  And whatever you do, do NOT expose this port to the Internet.
 
 Persist data between runs:
 
-`docker run -p 8000:8000 -v \$(pwd)/data:/data dmuth1/splunk-lab`
+`docker run -p 8000:8000 -v $(pwd)/data:/data dmuth1/splunk-lab`
 
 Persist data, and mount current directory as `/mnt`:
 
-`docker run -p 8000:8000 -v \$(pwd)/data:/data -v \$(pwd):/mnt dmuth1/splunk-lab`
+`docker run -p 8000:8000 -v $(pwd)/data:/data -v $(pwd):/mnt dmuth1/splunk-lab`
 
 Persist data, mount current directory as `/mnt`, and spawn interactive shell:
 
-`docker run -p 8000:8000 -v \$(pwd)/data:/data -v \$(pwd):/mnt -it dmuth1/splunk-lab bash`
+`docker run -p 8000:8000 -v $(pwd)/data:/data -v $(pwd):/mnt -it dmuth1/splunk-lab bash`
 
 Persist data and ingest `/var/log/`:
 
-`docker run -p 8000:8000 -v \$(pwd)/data:/data -v /var/log:/logs dmuth1/splunk-lab`
+`docker run -p 8000:8000 -v $(pwd)/data:/data -v /var/log:/logs dmuth1/splunk-lab`
 
 Persist data, ingest `/var/log/`, and run in the background:
 
-`docker run -p 8000:8000 -v \$(pwd)/data:/data -v -d \$(pwd):/mnt dmuth1/splunk-lab`
+`docker run -p 8000:8000 -v $(pwd)/data:/data -v -d $(pwd):/mnt dmuth1/splunk-lab`
 
 
 ## A Word About Security
