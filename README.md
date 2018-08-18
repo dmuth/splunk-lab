@@ -80,8 +80,7 @@ lines when you want to push up changes to Docker Hub:
 
 ```
 docker build . -t splunk-lab && docker run -p 8000:8000 -v $(pwd):/mnt -v /var/log:/logs -it splunk-lab bash
-docker tag splunk-lab dmuth1/splunk-lab
-docker push dmuth1/splunk-lab
+docker tag splunk-lab dmuth1/splunk-lab && docker push dmuth1/splunk-lab
 ```
 
 
