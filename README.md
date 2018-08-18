@@ -1,4 +1,6 @@
 
+<img src="img/splunk-logo.jpg" width="300" align="right" />
+
 # Splunk Lab
 
 This project lets you stand up a Splunk instance in Docker on a quick and dirty basis.
