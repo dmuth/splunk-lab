@@ -32,6 +32,7 @@ Persist data, mount local directory, and run in the background:
 `docker run -p 8000:8000 -v $(pwd)/data:/data -v $(pwd):/mnt -d dmuth1/splunk-lab`
 
 Persist data, mount local directory, save created dashboards and reports, and run in the background:
+
 `docker run -p 8000:8000 -v $(pwd)/data:/data -v $(pwd):/mnt -v $(pwd)/app:/app -d dmuth1/splunk-lab`
 
 
