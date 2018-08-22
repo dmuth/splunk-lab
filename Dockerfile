@@ -44,7 +44,16 @@ COPY splunk-config/ui-prefs.conf /opt/splunk/etc/system/local/ui-prefs.conf
 COPY splunk-config/user-prefs.conf /opt/splunk/etc/apps/user-prefs/local/user-prefs.conf
 COPY splunk-config/web.conf /opt/splunk/etc/system/local/web.conf.in
 
-RUN ln -s /opt/splunk/var/lib/splunk/defaultdb /data
+
+#
+# Link to our data directory so that any data we create gets exported.
+#
+RUN ln -s /opt/splunk/var/lib/splunk/ /data
+
+
+#
+# Link to our search app so that anything we create get exported.
+#
 RUN ln -s /opt/splunk/etc/apps/search/local /app
 
 #
