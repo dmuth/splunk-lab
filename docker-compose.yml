@@ -1,0 +1,22 @@
+
+version: "3"
+
+services:
+
+  splunk-lab:
+    image: dmuth1/splunk-lab
+    restart: "always"
+    privileged: true
+    volumes:
+      - /var/log:/logs
+      - ./data:/data
+      - .:/mnt
+      - ./app:/app
+    environment:
+      - TZ=EST5EDT
+    ports:
+      - 8000:8000
+    environment:
+      - TZ=EST5EDT
+
+
