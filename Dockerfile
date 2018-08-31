@@ -37,6 +37,7 @@ RUN apt-get update && apt-get install -y wget procps fping less iptables \
 # Copy in some Splunk configuration
 #
 COPY splunk-config/inputs.conf /opt/splunk/etc/system/local/inputs.conf
+COPY splunk-config/props.conf /opt/splunk/etc/system/local/props.conf
 COPY splunk-config/server.conf /opt/splunk/etc/system/local/server.conf
 COPY splunk-config/splunk-launch.conf /opt/splunk/etc/
 COPY splunk-config/user-seed.conf /opt/splunk/etc/system/local/user-seed.conf.in
