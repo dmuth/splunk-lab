@@ -4,3 +4,8 @@
 data/
 app/
 
+logs/
+*.raw
+*.log
+*.txt
+
