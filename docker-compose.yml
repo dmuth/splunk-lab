@@ -3,12 +3,13 @@ version: "3"
 
 services:
 
-  splunk-lab:
+  splunk:
     image: dmuth1/splunk-lab
-    restart: "always"
+    restart: "unless-stopped"
     privileged: true
     volumes:
-      - /var/log:/logs
+      #- /var/log:/logs/
+      - ./logs:/logs/
       - ./data:/data
       - .:/mnt
       - ./app:/app
