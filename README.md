@@ -97,6 +97,11 @@ docker tag splunk-lab dmuth1/splunk-lab && docker push dmuth1/splunk-lab
 ```
 
 
+## Additional Reading
+
+- <a href="https://github.com/dmuth/splunk-network-health-check">Splunk Network Health Check</a>
+
+
 ## Contact
 
 My email is doug.muth@gmail.com.  I am also <a href="http://twitter.com/dmuth">@dmuth on Twitter</a> 
