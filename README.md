@@ -18,12 +18,18 @@ a different port.
 **If you are having a system issue, and want to ingest your logs, persist the ingested data between Splunk runs, and persist 
 created dashboards as well:**
 
-`docker run -p 8000:8000 -v /var/log:/logs -v $(pwd)/data:/data -v $(pwd)/app:/app -d dmuth1/splunk-lab`
+`docker run -p 8000:8000 -e SPLUNK_PASSWORD=password -v /var/log:/logs -v $(pwd)/data:/data -v $(pwd)/app:/app -d dmuth1/splunk-lab`
 
 **If you want to do data analytics on files in the logs/ directory, and persist the ingested data between Splunk runs, and
 persist created dashboards as well:**
 
-`docker run -p 8000:8000 -v $(pwd)/logs:/logs -v $(pwd)/data:/data -v $(pwd)/app:/app -d dmuth1/splunk-lab`
+`docker run -p 8000:8000 -e SPLUNK_PASSWORD=password -v $(pwd)/logs:/logs -v $(pwd)/data:/data -v $(pwd)/app:/app -d dmuth1/splunk-lab`
+
+
+Once Splunk is running, you can log in with the `admin` user and password you specified, 
+and doing a query for `index=main` should show your logs.
+
+BTW, your password will be sanity checked.  Don't use `password` as your password. ;-)
 
 
 ### Less Common Uses
