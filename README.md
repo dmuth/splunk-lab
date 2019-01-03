@@ -10,7 +10,8 @@ This project lets you stand up a Splunk instance in Docker on a quick and dirty 
 
 Here are some ways in which to run this container--note that in all instances Splunk will
 be listening on <a href="https://localhost:8000/">https://localhost:8000/</a>, so change the first argument for `-p` if you want
-a different port.  And whatever you do, do NOT expose this port to the Internet. (more on that later)
+a different port.
+
 
 ### Most Common Uses:
 
