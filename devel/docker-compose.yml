@@ -9,7 +9,7 @@ version: "3"
 services:
 
   splunk:
-    build: .
+    build: ..
     restart: "unless-stopped"
     #
     # This is so that entire directories can be mounted.
@@ -26,7 +26,7 @@ services:
       #
       # You will have to change this to something other than 'password' in order to use Splunk Lab.
       #
-      - SPLUNK_PASSWORD=password
+      - SPLUNK_PASSWORD=password1
     ports:
       - 9000:8000
 
@@ -38,6 +38,7 @@ services:
     build:
       context: .
       dockerfile: "Dockerfile-nginx"
+    restart: "unless-stopped"
     volumes:
       - .:/mnt
       - ./logs:/var/log/nginx/
@@ -52,6 +53,7 @@ services:
     build:
       context: .
       dockerfile: "Dockerfile-client"
+    restart: "unless-stopped"
     volumes:
       - .:/mnt
     

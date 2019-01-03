@@ -69,7 +69,7 @@ docker build . -t splunk-lab && docker run -p 8000:8000 -v $(pwd):/mnt -v /var/l
 
 If you'd like to spin up Splunk Lab, but also have a copy of Nginx running on <a href="http://localhost:9001">http://localhost:9001</a>, try running this command:
 
-`docker-compose -f ./docker-compose-devel.yml up`
+`docker-compose -f ./devel/docker-compose.yml up`
 
 Nginx's logs will be written to the same directory that Splunk Lab ingests logs from, so queries for
 `index=main` should start to show results almost immediately.  Furthermore, a client is spun up 
