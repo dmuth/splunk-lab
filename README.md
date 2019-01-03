@@ -94,7 +94,6 @@ lines when you want to push up changes to Docker Hub:
 
 ```
 docker build . -t splunk-lab && docker run -p 8000:8000 -v $(pwd):/mnt -v /var/log:/logs -it splunk-lab bash
-docker tag splunk-lab dmuth1/splunk-lab && docker push dmuth1/splunk-lab
 ```
 
 ## Development with an Nginx instance feeding logs
@@ -108,6 +107,15 @@ Nginx's logs will be written to the same directory that Splunk Lab ingests logs 
 which will run a GET request against Nginx once every 10 seconds, which will cause logs to be written
 and ingested into the `main` Index almost immediately.
 
+
+## Deployment
+
+Run this when you're ready to push up changes to Docker Hub:
+
+```
+docker build . -t splunk-lab
+docker tag splunk-lab dmuth1/splunk-lab && docker push dmuth1/splunk-lab
+```
 
 
 ## Additional Reading
