@@ -50,33 +50,10 @@ Persist data, mount local directory, save created dashboards and reports, and ru
 
 ## A Word About Security
 
-This Splunk instance has a default login/password of `admin/password`.  It should not be exposed
-to the Internet under ANY circumstances.  If you are running this container on a production machine
-for diagnostic purposes, port 8000 should be firewalled off from the outside world.  Here's how to do 
-that in iptables:
+HTTPS is turned on by default.  Passwords such as `password` and `12345` are not permitted.
 
-```
-iptables -I INPUT -p tcp --dport 8000 -j DROP -m comment --comment "Splunk: Drop"
-iptables -I INPUT -p tcp -d localhost --dport 8000 -j ACCEPT -m comment --comment "Splunk: Accept"
-ip6tables -I INPUT -p tcp --dport 8000 -j DROP -m comment --comment "Splunk: Drop"
-ip6tables -I INPUT -p tcp -d localhost --dport 8000 -j ACCEPT -m comment --comment "Splunk: Accept"
-```
-
-The above will do the following:
-
-- Insert a rule at the start of the `INPUT` chain to drop all traffic to port 8000
-- Insert a rule at the start of the same chain (before the previous rule) to allow traffic to port 8000 from `localhost` ONLY.
-- Then do the same for IPv6.  You do have iptables rules for IPv6, right? :-)
-
-
-To access port 8000 from another host, you'd SSH to the target host as follows:
-`ssh -L 8000:localhost:8000 HOSTNAME`.
-
-If you are already SSHed in, you can set up forwardings on the fly, try this instead:
-- Press the `<return>` key.
-- Type `~C`.  That will bring up an `ssh> ` prompt.
-- Type `-L 8000:localhost:8000` and hit `<return>`.  That will set up the port forwarding on the fly.
-- Go to http://localhost:8000/
+Please, <a href="https://diceware.dmuth.org/">use a strong password</a> if you are deploying
+this on a public-facing machine.
 
 
 ## FAQ
@@ -84,7 +61,6 @@ If you are already SSHed in, you can set up forwardings on the fly, try this ins
 ### Does this work on Macs?
 
 Sure does!  I built this on a Mac. :-)
-
 
 
 ## Development
