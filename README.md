@@ -78,6 +78,7 @@ If you are already SSHed in, you can set up forwardings on the fly, try this ins
 - Type `-L 8000:localhost:8000` and hit `<return>`.  That will set up the port forwarding on the fly.
 - Go to http://localhost:8000/
 
+
 ## FAQ
 
 ### Does this work on Macs?
@@ -95,6 +96,18 @@ lines when you want to push up changes to Docker Hub:
 docker build . -t splunk-lab && docker run -p 8000:8000 -v $(pwd):/mnt -v /var/log:/logs -it splunk-lab bash
 docker tag splunk-lab dmuth1/splunk-lab && docker push dmuth1/splunk-lab
 ```
+
+## Development with an Nginx instance feeding logs
+
+If you'd like to spin up Splunk Lab, but also have a copy of Nginx running on <a href="http://localhost:9001">http://localhost:9001</a>, try running this command:
+
+`docker-compose -f ./docker-compose-devel.yml`
+
+Nginx's logs will be written to the same directory that Splunk Lab ingests logs from, so queries for
+`index=main` should start to show results almost immediately.  Furthermore, a client is spun up 
+which will run a GET request against Nginx once every 10 seconds, which will cause logs to be written
+and ingested into the `main` Index almost immediately.
+
 
 
 ## Additional Reading

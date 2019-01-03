@@ -1,0 +1,58 @@
+
+#
+# Run against this Dockerfile with the command: 
+#
+# docker-compose -f ./docker-compose-devel.yml
+#
+version: "3"
+
+services:
+
+  splunk:
+    build: .
+    restart: "unless-stopped"
+    #
+    # This is so that entire directories can be mounted.
+    #
+    privileged: true
+    volumes:
+      #- /var/log:/logs/
+      - ./logs:/logs/
+      - ./data:/data
+      - .:/mnt
+      - ./app:/app
+    environment:
+      - TZ=EST5EDT
+      #
+      # You will have to change this to something other than 'password' in order to use Splunk Lab.
+      #
+      - SPLUNK_PASSWORD=password
+    ports:
+      - 9000:8000
+
+
+  #
+  # Spin up Nginx just so we can hit that webserver and ingest those logs into Splunk
+  #
+  nginx:
+    build:
+      context: .
+      dockerfile: "Dockerfile-nginx"
+    volumes:
+      - .:/mnt
+      - ./logs:/var/log/nginx/
+    ports:
+      - 9001:80
+
+
+  #
+  # The client service will run curl against the Nginx webserver once every 10 seconds.
+  #
+  client:
+    build:
+      context: .
+      dockerfile: "Dockerfile-client"
+    volumes:
+      - .:/mnt
+    
+

@@ -1,0 +1,8 @@
+
+FROM alpine
+
+RUN apk add -U curl
+
+CMD /mnt/entrypoint-client.sh
+
+

@@ -6,6 +6,9 @@ services:
   splunk:
     image: dmuth1/splunk-lab
     restart: "unless-stopped"
+    #
+    # This is so that entire directories can be mounted.
+    #
     privileged: true
     volumes:
       #- /var/log:/logs/
@@ -15,9 +18,11 @@ services:
       - ./app:/app
     environment:
       - TZ=EST5EDT
+      #
+      # You will have to change this to something other than 'password' in order to use Splunk Lab.
+      #
+      - SPLUNK_PASSWORD=password
     ports:
       - 8000:8000
-    environment:
-      - TZ=EST5EDT
 
 
