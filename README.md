@@ -4,6 +4,7 @@
 # Splunk Lab
 
 This project lets you stand up a Splunk instance in Docker on a quick and dirty basis.
+It is based on <a href="https://hub.docker.com/r/splunk/splunk/">Splunk's official Dockerfile</a>
 
 
 ## Usage
