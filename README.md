@@ -70,7 +70,7 @@ Run the first line to stand up a development instance, and the subsequent
 lines when you want to push up changes to Docker Hub:
 
 ```
-docker build . -t splunk-lab && docker run -p 8000:8000 -v $(pwd):/mnt -v /var/log:/logs -it splunk-lab bash
+docker build . -t splunk-lab && docker run -p 8000:8000 -v $(pwd):/mnt -v /var/log:/logs -e SPLUNK_PASSWORD=password -it splunk-lab bash
 ```
 
 ## Development with an Nginx instance feeding logs
