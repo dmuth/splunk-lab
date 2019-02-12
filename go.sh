@@ -35,6 +35,9 @@ then
 	echo "! "
 	echo "! ERROR: Log directory '${SPLUNK_LOGS}' does not exist!"
 	echo "! "
+	echo "! Please set the environment variable \$SPLUNK_LOGS to the "
+	echo "! directory you wish to ingest and re-run this script."
+	echo "! "
 	exit 1
 fi
 
