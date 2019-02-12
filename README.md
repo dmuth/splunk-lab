@@ -13,7 +13,7 @@ Paste this in on the command line:
 
 `bash <(curl -s https://raw.githubusercontent.com/dmuth/splunk-lab/master/go.sh)`
 
-...and the script will print up what directory it will read from, etc.  Follow the on-screen
+...and the script will print up what directory it will ingest logs from, etc.  Follow the on-screen
 instructions for setting environment variables and you'll be up and running in no time!
 
 
