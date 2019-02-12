@@ -7,6 +7,16 @@ This project lets you stand up a Splunk instance in Docker on a quick and dirty 
 It is based on <a href="https://hub.docker.com/r/splunk/splunk/">Splunk's official Dockerfile</a>
 
 
+## Quick Start!
+
+Paste this in on the command line:
+
+`bash <(curl -s https://raw.githubusercontent.com/dmuth/splunk-lab/master/go.sh)`
+
+...and the script will print up what directory it will read from, etc.  Follow the on-screen
+instructions for setting environment variables and you'll be up and running in no time!
+
+
 ## Usage
 
 Here are some ways in which to run this container--note that in all instances Splunk will
