@@ -27,6 +27,18 @@ SPLUNK_APP="app"
 SPLUNK_BG=${SPLUNK_BG:-}
 
 
+if ! test $(which docker)
+then
+	echo "! "
+	echo "! Docker not found in the system path!"
+	echo "! "
+	echo "! Please double-check that Docker is installed on your system, otherwise you "
+	echo "! can go to https://www.docker.com/ to download Docker. "
+	echo "! "
+	exit 1
+fi
+
+
 #
 # Sanity check to make sure our log directory exists
 #
