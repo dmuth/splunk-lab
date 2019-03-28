@@ -76,12 +76,14 @@ Sure does!  I built this on a Mac. :-)
 
 ## Development
 
-Run the first line to stand up a development instance, and the subsequent 
-lines when you want to push up changes to Docker Hub:
+I wrote a series of helper scripts in `bin/` to make the process easier:
 
-```
-docker build . -t splunk-lab && docker run -p 8000:8000 -v $(pwd):/mnt -v /var/log:/logs -e SPLUNK_PASSWORD=password -it splunk-lab bash
-```
+- `./bin/build.sh` - Build the container.
+- `./bin/push.sh` - Tag and push the container.
+- `./bin/devel.sh` - Build and tag the container, then start it with an interactive bash shell.
+   - This is a wrapper for the above-mentioned `go.sh` script. Any environment variables that work there will work here.
+- `./bin/clean.sh` - Remove logs/ and/or data/ directories.
+
 
 ## Development with an Nginx instance feeding logs
 
@@ -93,16 +95,6 @@ Nginx's logs will be written to the same directory that Splunk Lab ingests logs 
 `index=main` should start to show results almost immediately.  Furthermore, a client is spun up 
 which will run a GET request against Nginx once every 10 seconds, which will cause logs to be written
 and ingested into the `main` Index almost immediately.
-
-
-## Deployment
-
-Run this when you're ready to push up changes to Docker Hub:
-
-```
-docker build . -t splunk-lab
-docker tag splunk-lab dmuth1/splunk-lab && docker push dmuth1/splunk-lab
-```
 
 
 ## Additional Reading
