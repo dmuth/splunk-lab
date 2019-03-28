@@ -25,6 +25,7 @@ SPLUNK_LOGS=${SPLUNK_LOGS:-logs}
 SPLUNK_PORT=${SPLUNK_PORT:-8000}
 SPLUNK_APP="app"
 SPLUNK_BG=${SPLUNK_BG:-}
+SPLUNK_DEVEL=${SPLUNK_DEVEL:-}
 
 
 if ! test $(which docker)
@@ -53,6 +54,18 @@ then
 	exit 1
 fi
 
+if test "$SPLUNK_DEVEL" -a "$SPLUNK_BG"
+then
+	echo "! "
+	echo "! You cannot specify both SPLUNK_DEVEL and SPLUNK_BG!"
+	echo "! "
+	exit 1
+fi
+
+
+#
+# Now create our props.conf if it doesn't exist...
+#
 if test ! -f ${SPLUNK_APP}/props.conf
 then
 	echo "# ${SPLUNK_APP}/props.conf does not exist!  Creating it..."
@@ -75,6 +88,7 @@ MAX_DAYS_AGO=10951
 EOF
 
 fi
+
 
 #
 # Start forming our command
@@ -101,11 +115,25 @@ then
 	CMD="${CMD} -d "
 fi
 
+if test "$SPLUNK_DEVEL"
+then
+	CMD="${CMD} -it"
+fi
+
 CMD="${CMD} dmuth1/splunk-lab"
 
+if test "$SPLUNK_DEVEL"
+then
+	CMD="${CMD} bash"
+fi
 
 echo "# "
-echo "# About to run Splunk Lab!"
+if test ! "${SPLUNK_DEVEL}"
+then
+	echo "# About to run Splunk Lab!"
+else
+	echo "# About to run Splunk Lab IN DEVELOPMENT MODE!"
+fi
 echo "# "
 echo "# Before we do, please take a few seconds to ensure that your options are correct:"
 echo "# "
