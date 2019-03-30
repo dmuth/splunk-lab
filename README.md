@@ -74,6 +74,7 @@ via one of the includes apps:
     - Non-RSS
        - Non-streaming
           - <a href="http://www3.septa.org/hackathon/">Philadelphia Public Transit API</a>
+             - <a href="http://www3.septa.org/hackathon/TrainView/">Regional Rail Train Data</a>
           - <a href="https://developers.coinbase.com/docs/wallet/guides/price-data">Coinbase API</a>
          - <a href="https://www.weather.gov/documentation/services-web-api">National Weather Service</a>
             - <a href="https://api.weather.gov/gridpoints/PHI/49,75/forecast">Philadelphia Forecast</a>
