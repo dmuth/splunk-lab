@@ -61,34 +61,42 @@ RUN ln -s /opt/splunk/etc/apps/search/local /app
 
 
 #
+# Prepare to install apps
+#
+RUN apt-get install -y wget
+WORKDIR /tmp
+
+#
 # Install Syndication app
 # https://splunkbase.splunk.com/app/2646/
 #
-WORKDIR /tmp
-COPY vendor/syndication-input-rssatomrdf_12.tgz /tmp
+RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/syndication-input-rssatomrdf_12.tgz
 RUN tar xfvz syndication-input-rssatomrdf_12.tgz
 RUN mv syndication /opt/splunk/etc/apps/
+RUN rm -fv /tmp/syndication-input-rssatomrdf_12.tgz
 
 #
 # Install Rest API Modular Input
 # https://splunkbase.splunk.com/app/1546/#/details
 #
-COPY vendor/rest-api-modular-input_154.tgz /tmp
+RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/rest-api-modular-input_154.tgz
 RUN tar xfvz rest-api-modular-input_154.tgz
 RUN mv rest_ta /opt/splunk/etc/apps/
+RUN rm -fv /tmp/rest-api-modular-input_154.tgz
 
 
 #
 # Install Python for Scientific computing and Splunk ML Toolkit
 #
-COPY vendor/python-for-scientific-computing-for-linux-64-bit_14.tgz /tmp
+RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/python-for-scientific-computing-for-linux-64-bit_14.tgz
 RUN tar xfvz python-for-scientific-computing-for-linux-64-bit_14.tgz
 RUN mv Splunk_SA_Scientific_Python_linux_x86_64 /opt/splunk/etc/apps/
+RUN rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_14.tgz
 
-
-COPY vendor/splunk-machine-learning-toolkit_420.tgz /tmp
+RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/splunk-machine-learning-toolkit_420.tgz
 RUN tar xfvz splunk-machine-learning-toolkit_420.tgz 
 RUN mv Splunk_ML_Toolkit /opt/splunk/etc/apps/
+RUN rm -fv /tmp/splunk-machine-learning-toolkit_420.tgz 
 
 
 #
