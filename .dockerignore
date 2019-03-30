@@ -11,3 +11,5 @@ logs/
 
 devel/*
 
+vendor/*
+

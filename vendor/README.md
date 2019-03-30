@@ -7,6 +7,12 @@
    - License: GNU GPL
 - <a href="https://splunkbase.splunk.com/app/1546/">REST API Modular Input</a>
    - License: Apache 2
+- Machine Learning
+   - <a href="https://splunkbase.splunk.com/app/2882/">Python for Scientific Computing (for Linux 64-bit)</a>
+      - License: <a href="https://www.splunk.com/en_us/legal/splunk-software-license-agreement.html">Splunk Standard License Agreement</a>
+   - <a href="https://splunkbase.splunk.com/app/2890/">Splunk Machine Learning Toolkit</a>
+      - License: <a href="https://www.splunk.com/en_us/legal/splunk-software-license-agreement.html">Splunk Standard License Agreement</a>
+
 
 
 

@@ -64,8 +64,8 @@ RUN ln -s /opt/splunk/etc/apps/search/local /app
 # Install Syndication app
 # https://splunkbase.splunk.com/app/2646/
 #
-COPY vendor/syndication-input-rssatomrdf_12.tgz /tmp
 WORKDIR /tmp
+COPY vendor/syndication-input-rssatomrdf_12.tgz /tmp
 RUN tar xfvz syndication-input-rssatomrdf_12.tgz
 RUN mv syndication /opt/splunk/etc/apps/
 
@@ -74,9 +74,21 @@ RUN mv syndication /opt/splunk/etc/apps/
 # https://splunkbase.splunk.com/app/1546/#/details
 #
 COPY vendor/rest-api-modular-input_154.tgz /tmp
-WORKDIR /tmp
 RUN tar xfvz rest-api-modular-input_154.tgz
 RUN mv rest_ta /opt/splunk/etc/apps/
+
+
+#
+# Install Python for Scientific computing and Splunk ML Toolkit
+#
+COPY vendor/python-for-scientific-computing-for-linux-64-bit_14.tgz /tmp
+RUN tar xfvz python-for-scientific-computing-for-linux-64-bit_14.tgz
+RUN mv Splunk_SA_Scientific_Python_linux_x86_64 /opt/splunk/etc/apps/
+
+
+COPY vendor/splunk-machine-learning-toolkit_420.tgz /tmp
+RUN tar xfvz splunk-machine-learning-toolkit_420.tgz 
+RUN mv Splunk_ML_Toolkit /opt/splunk/etc/apps/
 
 
 #
