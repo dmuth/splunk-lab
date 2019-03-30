@@ -53,7 +53,7 @@ this on a public-facing machine.
 
 ## Splunk Apps Included
 
-The following Splunk apps are included in this image:
+The following Splunk apps are included in this Docker image:
 
 - <a href="https://splunkbase.splunk.com/app/2646/">Syndication Input</a>
 - <a href="https://splunkbase.splunk.com/app/1546/">REST API Modular Input</a>
