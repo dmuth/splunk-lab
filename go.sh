@@ -118,6 +118,7 @@ fi
 if test "$SPLUNK_DEVEL"
 then
 	CMD="${CMD} -it"
+	CMD="${CMD} -v $(pwd):/mnt "
 fi
 
 CMD="${CMD} dmuth1/splunk-lab"
