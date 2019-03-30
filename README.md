@@ -56,7 +56,30 @@ this on a public-facing machine.
 The following Splunk apps are included in this Docker image:
 
 - <a href="https://splunkbase.splunk.com/app/2646/">Syndication Input</a>
-- <a href="https://splunkbase.splunk.com/app/1546/">REST API Modular Input</a>
+- <a href="https://splunkbase.splunk.com/app/1546/">REST API Modular Input</a> (requires registration)
+
+
+## Free Sources of Data
+
+I put together this curated list of free sources of data which can be pulled into Splunk
+via one of the includes apps:
+
+- Free
+    - RSS
+       - <a href="https://answers.splunk.com/feed/questions.rss">Recent questions posted to Splunk Answers</a>
+       - <a href="http://www.cnn.com/services/rss/">CNN RSS feeds</a>
+       - <a href="https://www.flickr.com/services/feeds/docs/photos_public/">Flickr's Public feed</a>
+          - <a href="https://api.flickr.com/services/feeds/photos_public.gne">Public Photos</a>
+          - <a href="https://api.flickr.com/services/feeds/photos_public.gne?tags=cheetah">Public photos tagged "cheetah"</a>
+    - Non-RSS
+       - Non-streaming
+          - <a href="http://www3.septa.org/hackathon/">Philadelphia Public Transit API</a>
+          - <a href="https://developers.coinbase.com/docs/wallet/guides/price-data">Coinbase API</a>
+         - <a href="https://www.weather.gov/documentation/services-web-api">National Weather Service</a>
+            - <a href="https://api.weather.gov/gridpoints/PHI/49,75/forecast">Philadelphia Forecast</a>
+            - <a href="https://api.weather.gov/gridpoints/PHI/49,75/forecast/hourly">Philadelphia Hourly Forecast</a>
+       - Streaming
+          - <a href="https://www.meetup.com/meetup_api/docs/stream/2/rsvps/">Meetup RSVPs</a>
 
 
 ## FAQ
