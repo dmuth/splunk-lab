@@ -43,14 +43,6 @@ and doing a query for `index=main` should show your logs.
 BTW, your password will be sanity checked.  Don't use `password` as your password. ;-)
 
 
-## A Word About Security
-
-HTTPS is turned on by default.  Passwords such as `password` and `12345` are not permitted.
-
-Please, <a href="https://diceware.dmuth.org/">use a strong password</a> if you are deploying
-this on a public-facing machine.
-
-
 ## Splunk Apps Included
 
 The following Splunk apps are included in this Docker image:
@@ -88,6 +80,14 @@ via one of the includes apps:
        - Streaming
           - <a href="https://www.meetup.com/meetup_api/docs/stream/2/rsvps/">Meetup RSVPs</a>
              - <a href="http://stream.meetup.com/2/rsvps">RSVP Endpoint</a>
+
+
+## A Word About Security
+
+HTTPS is turned on by default.  Passwords such as `password` and `12345` are not permitted.
+
+Please, <a href="https://diceware.dmuth.org/">use a strong password</a> if you are deploying
+this on a public-facing machine.
 
 
 ## FAQ
