@@ -60,6 +60,12 @@ then
 
 	rm -rf logs/
 
+	echo "# "
+	echo "# Creating empty logs/ directory..."
+	echo "# "
+	mkdir logs
+	touch logs/empty.txt
+
 fi
 
 echo "# Done!"
