@@ -80,6 +80,7 @@ via one of the includes apps:
             - <a href="https://api.weather.gov/gridpoints/PHI/49,75/forecast/hourly">Philadelphia Hourly Forecast</a>
        - Streaming
           - <a href="https://www.meetup.com/meetup_api/docs/stream/2/rsvps/">Meetup RSVPs</a>
+             - <a href="http://stream.meetup.com/2/rsvps">RSVP Endpoint</a>
 
 
 ## FAQ
