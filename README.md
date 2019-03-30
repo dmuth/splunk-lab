@@ -43,28 +43,19 @@ and doing a query for `index=main` should show your logs.
 BTW, your password will be sanity checked.  Don't use `password` as your password. ;-)
 
 
-### Less Common Uses
-
-Persist data between runs:
-
-`docker run -p 8000:8000 -v $(pwd)/data:/data dmuth1/splunk-lab`
-
-Persist data, mount current directory as `/mnt`, and spawn interactive shell:
-
-`docker run -p 8000:8000 -v $(pwd)/data:/data -v $(pwd):/mnt -it dmuth1/splunk-lab bash`
-
-Persist data and ingest mulitple directories:
-
-`docker run -p 8000:8000 -v $(pwd)/data:/data -v /var/log:/logs/syslog -v /opt/log:/logs/opt/ dmuth1/splunk-lab`
-
-
-
 ## A Word About Security
 
 HTTPS is turned on by default.  Passwords such as `password` and `12345` are not permitted.
 
 Please, <a href="https://diceware.dmuth.org/">use a strong password</a> if you are deploying
 this on a public-facing machine.
+
+
+## Splunk Apps Included
+
+The following Splunk apps are included in this image:
+
+- <a href="https://splunkbase.splunk.com/app/2646/">Syndication Input</a>
 
 
 ## FAQ

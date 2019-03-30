@@ -59,6 +59,17 @@ RUN ln -s /opt/splunk/var/lib/splunk/ /data
 #
 RUN ln -s /opt/splunk/etc/apps/search/local /app
 
+
+#
+# Install Syndication app
+# https://splunkbase.splunk.com/app/2646/
+#
+COPY vendor/syndication-input-rssatomrdf_12.tgz /tmp
+WORKDIR /tmp
+RUN tar xfvz syndication-input-rssatomrdf_12.tgz
+RUN mv syndication /opt/splunk/etc/apps/
+
+
 #
 # Expose Splunk web
 #
