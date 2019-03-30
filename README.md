@@ -56,6 +56,7 @@ this on a public-facing machine.
 The following Splunk apps are included in this image:
 
 - <a href="https://splunkbase.splunk.com/app/2646/">Syndication Input</a>
+- <a href="https://splunkbase.splunk.com/app/1546/">REST API Modular Input</a>
 
 
 ## FAQ

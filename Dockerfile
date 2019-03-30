@@ -69,6 +69,15 @@ WORKDIR /tmp
 RUN tar xfvz syndication-input-rssatomrdf_12.tgz
 RUN mv syndication /opt/splunk/etc/apps/
 
+#
+# Install Rest API Modular Input
+# https://splunkbase.splunk.com/app/1546/#/details
+#
+COPY vendor/rest-api-modular-input_154.tgz /tmp
+WORKDIR /tmp
+RUN tar xfvz rest-api-modular-input_154.tgz
+RUN mv rest_ta /opt/splunk/etc/apps/
+
 
 #
 # Expose Splunk web
