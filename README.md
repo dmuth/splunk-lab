@@ -27,25 +27,6 @@ be listening on <a href="https://localhost:8000/">https://localhost:8000/</a>, s
 a different port.
 
 
-### Most Common Uses:
-
-**If you are having a system issue, and want to ingest your logs, persist the ingested data between Splunk runs, and persist 
-created dashboards as well:**
-
-`docker run -p 8000:8000 -e SPLUNK_PASSWORD=password -v /var/log:/logs -v $(pwd)/data:/data -v $(pwd)/app:/app -d dmuth1/splunk-lab`
-
-**If you want to do data analytics on files in the logs/ directory, and persist the ingested data between Splunk runs, and
-persist created dashboards as well:**
-
-`docker run -p 8000:8000 -e SPLUNK_PASSWORD=password -v $(pwd)/logs:/logs -v $(pwd)/data:/data -v $(pwd)/app:/app -d dmuth1/splunk-lab`
-
-
-Once Splunk is running, you can log in with the `admin` user and password you specified, 
-and doing a query for `index=main` should show your logs.
-
-BTW, your password will be sanity checked.  Don't use `password` as your password. ;-)
-
-
 ## Splunk Apps Included
 
 The following Splunk apps are included in this Docker image:
@@ -83,6 +64,25 @@ via one of the includes apps:
        - Streaming
           - <a href="https://www.meetup.com/meetup_api/docs/stream/2/rsvps/">Meetup RSVPs</a>
              - <a href="http://stream.meetup.com/2/rsvps">RSVP Endpoint</a>
+
+
+### Most Common Uses:
+
+**If you are having a system issue, and want to ingest your logs, persist the ingested data between Splunk runs, and persist 
+created dashboards as well:**
+
+`docker run -p 8000:8000 -e SPLUNK_PASSWORD=password -v /var/log:/logs -v $(pwd)/data:/data -v $(pwd)/app:/app -d dmuth1/splunk-lab`
+
+**If you want to do data analytics on files in the logs/ directory, and persist the ingested data between Splunk runs, and
+persist created dashboards as well:**
+
+`docker run -p 8000:8000 -e SPLUNK_PASSWORD=password -v $(pwd)/logs:/logs -v $(pwd)/data:/data -v $(pwd)/app:/app -d dmuth1/splunk-lab`
+
+
+Once Splunk is running, you can log in with the `admin` user and password you specified, 
+and doing a query for `index=main` should show your logs.
+
+BTW, your password will be sanity checked.  Don't use `password` as your password. ;-)
 
 
 ## A Word About Security
