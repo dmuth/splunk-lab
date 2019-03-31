@@ -16,6 +16,9 @@ Paste this in on the command line:
 ...and the script will print up what directory it will ingest logs from, etc.  Follow the on-screen
 instructions for setting environment variables and you'll be up and running in no time!
 
+Here's a demo:
+
+<a href="https://asciinema.org/a/237934" target="_blank"><img src="https://asciinema.org/a/237934.svg" /></a>
 
 ## Usage
 
