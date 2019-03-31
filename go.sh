@@ -24,7 +24,7 @@ SPLUNK_DATA=${SPLUNK_DATA:-data}
 SPLUNK_LOGS=${SPLUNK_LOGS:-logs}
 SPLUNK_PORT=${SPLUNK_PORT:-8000}
 SPLUNK_APP="app"
-SPLUNK_BG=${SPLUNK_BG:-}
+SPLUNK_BG=${SPLUNK_BG:-1}
 SPLUNK_DEVEL=${SPLUNK_DEVEL:-}
 
 
@@ -54,12 +54,19 @@ then
 	exit 1
 fi
 
-if test "$SPLUNK_DEVEL" -a "$SPLUNK_BG"
+if test "$SPLUNK_DEVEL"
 then
-	echo "! "
-	echo "! You cannot specify both SPLUNK_DEVEL and SPLUNK_BG!"
-	echo "! "
-	exit 1
+	#
+	# This wacky check for $SPLUNK_BG is here because setting it
+	# an empty string causes it to "default" to 1.  Silly bash!
+	#
+	if test "$SPLUNK_BG" -a "$SPLUNK_BG" != 0
+	then
+		echo "! "
+		echo "! You cannot specify both SPLUNK_DEVEL and SPLUNK_BG!"
+		echo "! "
+		exit 1
+	fi
 fi
 
 
@@ -110,7 +117,7 @@ fi
 
 CMD="${CMD} -v ${SPLUNK_LOGS}:/logs"
 
-if test "$SPLUNK_BG"
+if test "$SPLUNK_BG" -a "$SPLUNK_BG" != 0
 then
 	CMD="${CMD} -d "
 fi
@@ -145,7 +152,7 @@ echo "# Logs will be read from:            ${SPLUNK_LOGS}"
 echo "# App dashboards will be stored in:  ${SPLUNK_APP}"
 echo "# Indexed data will be stored in:    ${SPLUNK_DATA}"
 echo "# "
-if test "$SPLUNK_BG"
+if test "$SPLUNK_BG" -a "$SPLUNK_BG" != 0
 then
 echo "# Background Mode?                   YES"
 else 
@@ -160,7 +167,7 @@ echo "# - \$SPLUNK_PORT"
 echo "# - \$SPLUNK_LOGS"
 echo "# - \$SPLUNK_APP"
 echo "# - \$SPLUNK_DATA"
-echo "# - \$SPLUNK_BG - Set to any value to run the container in the background. Note this may hide errors."
+echo "# - \$SPLUNK_BG - Set to any value to run the container in the background. Set to empty to run in the foreground."
 echo "# "
 
 echo "> "
@@ -172,6 +179,22 @@ read
 echo "# "
 echo "# Launching container..."
 echo "# "
-$CMD
 
-echo "#"
+if test ! "$SPLUNK_BG" -o "$SPLUNK_BG" == 0
+then
+	$CMD
+
+else
+	ID=$($CMD)
+	SHORT_ID=$(echo $ID | cut -c-4)
+	echo "#"
+	echo "# Running Docker container with ID: ${ID}"
+	echo "#"
+	echo "# Inspect container logs with: docker logs ${SHORT_ID}"
+	echo "#"
+	echo "# Kill container with: docker kill ${SHORT_ID}"
+	echo "#"
+
+fi
+
+
