@@ -57,6 +57,19 @@ pushd /opt/splunk/etc/system/local/ >/dev/null
 cat user-seed.conf.in | sed -e "s/%password%/${SPLUNK_PASSWORD}/" > user-seed.conf
 cat web.conf.in | sed -e "s/%password%/${SPLUNK_PASSWORD}/" > web.conf
 
+
+#
+# If a Rest Modular API key was specified, add it in.
+#
+if test "$REST_KEY"
+then
+	SRC="activation_key = Visit https://www.baboonbones.com/#activation"
+	REPLACE="activation_key = ${REST_KEY}"
+
+	sed -i "s|${SRC}|${REPLACE}|" ${FILE} /opt/splunk/etc/system/local/inputs.conf
+
+fi
+
 popd > /dev/null
 
 #
@@ -64,9 +77,6 @@ popd > /dev/null
 #
 /opt/splunk/bin/splunk start --accept-license
 
-echo "# "
-echo "# "
-echo "# Available env vars: TZ, SPLUNK_PASSWORD"
 echo "# "
 echo "# "
 echo "# Here are some ways in which to run this container: "

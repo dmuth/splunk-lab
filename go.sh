@@ -17,7 +17,7 @@ set -e
 
 
 #
-# Set default values for our 
+# Set default values for our vars
 #
 SPLUNK_PASSWORD=${SPLUNK_PASSWORD:-password}
 SPLUNK_DATA=${SPLUNK_DATA:-data}
@@ -26,6 +26,7 @@ SPLUNK_PORT=${SPLUNK_PORT:-8000}
 SPLUNK_APP="app"
 SPLUNK_BG=${SPLUNK_BG:-1}
 SPLUNK_DEVEL=${SPLUNK_DEVEL:-}
+REST_KEY=${REST_KEY:-}
 
 
 if ! test $(which docker)
@@ -117,6 +118,11 @@ fi
 
 CMD="${CMD} -v ${SPLUNK_LOGS}:/logs"
 
+if test "${REST_KEY}"
+then
+	CMD="${CMD} -e REST_KEY=${REST_KEY}"
+fi
+
 if test "$SPLUNK_BG" -a "$SPLUNK_BG" != 0
 then
 	CMD="${CMD} -d "
@@ -151,6 +157,10 @@ echo "# "
 echo "# Logs will be read from:            ${SPLUNK_LOGS}"
 echo "# App dashboards will be stored in:  ${SPLUNK_APP}"
 echo "# Indexed data will be stored in:    ${SPLUNK_DATA}"
+if test "$REST_KEY"
+then
+	echo "# Rest API Modular Input key:        ${REST_KEY}"
+fi
 echo "# "
 if test "$SPLUNK_BG" -a "$SPLUNK_BG" != 0
 then
@@ -168,6 +178,12 @@ echo "# - \$SPLUNK_LOGS"
 echo "# - \$SPLUNK_APP"
 echo "# - \$SPLUNK_DATA"
 echo "# - \$SPLUNK_BG - Set to any value to run the container in the background. Set to empty to run in the foreground."
+if test "$REST_KEY"
+then
+	echo "# - \$REST_KEY - Key for the Rest API Modular Input app."
+else
+	echo "# - \$REST_KEY - Key for the Rest API Modular Input app. Go to https://www.baboonbones.com/#activation if you need one."
+fi
 echo "# "
 
 echo "> "
