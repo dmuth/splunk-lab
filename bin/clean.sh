@@ -3,6 +3,9 @@
 # Clean up after runnning an instance of Splunk Lab
 #
 
+# Errors are fatal
+set -e
+
 CLEAN_DATA=""
 CLEAN_LOGS=""
 
