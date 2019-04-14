@@ -35,6 +35,13 @@ RUN apt-get update && apt-get install -y wget procps fping less iptables \
     && rm /tmp/${SPLUNK_FILENAME}.md5 \
     && apt-get purge -y --auto-remove wget 
 
+
+#
+# Copy in vendor/README.md, which contains license info on the various apps.
+#
+COPY vendor/README.md /README.md
+
+
 #
 # Copy in some Splunk configuration
 #
