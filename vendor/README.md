@@ -2,6 +2,8 @@
 
 # Splunk Apps Included
 
+Depending on which Docker image you pull, some of all of the following Splunk Apps
+may be included in this image:
 
 - <a href="https://splunkbase.splunk.com/app/2646/">Syndication Input</a>
    - License: GNU GPL
