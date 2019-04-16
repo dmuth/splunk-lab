@@ -61,6 +61,7 @@ via one of the includes apps:
          - <a href="https://www.weather.gov/documentation/services-web-api">National Weather Service</a>
             - <a href="https://api.weather.gov/gridpoints/PHI/49,75/forecast">Philadelphia Forecast</a>
             - <a href="https://api.weather.gov/gridpoints/PHI/49,75/forecast/hourly">Philadelphia Hourly Forecast</a>
+         - <a href="https://www.alphavantage.co/">Alpha Vantage</a> - Free stock quotes.
        - Streaming
           - <a href="https://www.meetup.com/meetup_api/docs/stream/2/rsvps/">Meetup RSVPs</a>
              - <a href="http://stream.meetup.com/2/rsvps">RSVP Endpoint</a>
