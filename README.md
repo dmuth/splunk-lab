@@ -20,12 +20,6 @@ Here's a demo:
 
 <a href="https://asciinema.org/a/237934" target="_blank"><img src="https://asciinema.org/a/237934.svg" /></a>
 
-## Usage
-
-Here are some ways in which to run this container--note that in all instances Splunk will
-be listening on <a href="https://localhost:8000/">https://localhost:8000/</a>, so change the first argument for `-p` if you want
-a different port.
-
 
 ## Splunk Apps Included
 
@@ -67,7 +61,7 @@ via one of the includes apps:
              - <a href="http://stream.meetup.com/2/rsvps">RSVP Endpoint</a>
 
 
-### Most Common Uses:
+## Common Uses
 
 **If you are having a system issue, and want to ingest your logs, persist the ingested data between Splunk runs, and persist 
 created dashboards as well:**
@@ -88,7 +82,7 @@ BTW, your password will be sanity checked.  Don't use `password` as your passwor
 
 ## A Word About Security
 
-HTTPS is turned on by default.  Passwords such as `password` and `12345` are not permitted.
+HTTPS is turned on by default.  Passwords such as `password` and `<a href="https://www.youtube.com/watch?v=a6iW-8xPw3k">12345</a>` are not permitted.
 
 Please, <a href="https://diceware.dmuth.org/">use a strong password</a> if you are deploying
 this on a public-facing machine.
