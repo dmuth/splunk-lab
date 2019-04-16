@@ -11,7 +11,7 @@ It is based on <a href="https://hub.docker.com/r/splunk/splunk/">Splunk's offici
 
 Paste this in on the command line:
 
-`bash <(curl -s https://raw.githubusercontent.com/dmuth/splunk-lab/master/go.sh)`
+`SPLUNK_START_ARGS=--accept-license bash <(curl -s https://raw.githubusercontent.com/dmuth/splunk-lab/master/go.sh)`
 
 ...and the script will print up what directory it will ingest logs from, etc.  Follow the on-screen
 instructions for setting environment variables and you'll be up and running in no time!

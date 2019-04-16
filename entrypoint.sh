@@ -8,6 +8,21 @@ TZ="${TZ:=EST5EDT}"
 SPLUNK_PASSWORD="${SPLUNK_PASSWORD:=password}"
 
 #
+# Require the user to accept the license to continue
+#
+if test "$SPLUNK_START_ARGS" != "--accept-license"
+then
+	echo "! "
+	echo "! You need to accept the Splunk License in order to continue."
+	echo "! Please restart this container with SPLUNK_START_ARGS set to \"--accept-license\" "
+	echo "! as follows: "
+	echo "! "
+	echo "! SPLUNK_START_ARGS=--accept-license"
+	echo "! "
+	exit 1
+fi
+
+#
 # Check for bad passwords.
 #
 if test "$SPLUNK_PASSWORD" == "password"

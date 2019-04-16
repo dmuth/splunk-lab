@@ -29,6 +29,17 @@ SPLUNK_ML=${SPLUNK_ML:--1}
 SPLUNK_DEVEL=${SPLUNK_DEVEL:-}
 REST_KEY=${REST_KEY:-}
 
+if test "$SPLUNK_START_ARGS" != "--accept-license"
+then
+	echo "! "
+	echo "! You need to accept the Splunk License in order to continue."
+	echo "! Please restart this container with SPLUNK_START_ARGS set to \"--accept-license\" "
+	echo "! as follows: "
+	echo "! "
+	echo "! SPLUNK_START_ARGS=--accept-license"
+	echo "! "
+fi
+
 
 #
 # Massage -1 into an empty string.  This is for the benefit of if we're
@@ -137,6 +148,11 @@ fi
 if test "$SPLUNK_BG" -a "$SPLUNK_BG" != 0
 then
 	CMD="${CMD} -d "
+fi
+
+if test "$SPLUNK_START_ARGS" -a "$SPLUNK_START_ARGS" != 0
+then
+	CMD="${CMD} -e SPLUNK_START_ARGS=${SPLUNK_START_ARGS}"
 fi
 
 if test "$SPLUNK_DEVEL"
