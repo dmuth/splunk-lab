@@ -16,6 +16,10 @@ Paste this in on the command line:
 ...and the script will print up what directory it will ingest logs from, etc.  Follow the on-screen
 instructions for setting environment variables and you'll be up and running in no time!
 
+## Screenshots
+
+<a href="./img/splunk-rest-api-input.png"><img src="./img/splunk-rest-api-input.png" width="250" /></a> <a href="./img/splunk-syndication-feed.png"><img src="./img/splunk-syndication-feed.png" width="250" /></a> <a href="./img/splunk-cnn-headlines.png"><img src="./img/splunk-cnn-headlines.png" width="250" /></a>
+
 
 ## Splunk Apps Included
 
