@@ -25,8 +25,19 @@ SPLUNK_LOGS=${SPLUNK_LOGS:-logs}
 SPLUNK_PORT=${SPLUNK_PORT:-8000}
 SPLUNK_APP="app"
 SPLUNK_BG=${SPLUNK_BG:-1}
+SPLUNK_ML=${SPLUNK_ML:--1}
 SPLUNK_DEVEL=${SPLUNK_DEVEL:-}
 REST_KEY=${REST_KEY:-}
+
+
+#
+# Massage -1 into an empty string.  This is for the benefit of if we're
+# called from devel.sh.
+#
+if test "$SPLUNK_ML" == "-1"
+then
+	SPLUNK_ML=""
+fi
 
 
 if ! test $(which docker)
@@ -134,7 +145,15 @@ then
 	CMD="${CMD} -v $(pwd):/mnt "
 fi
 
-CMD="${CMD} dmuth1/splunk-lab"
+IMAGE="dmuth1/splunk-lab"
+IMAGE="splunk-lab" # Debugging/testing
+if test "$SPLUNK_ML"
+then
+	IMAGE="dmuth1/splunk-lab-ml"
+	IMAGE="splunk-lab-ml" # Debugging/testing
+fi
+
+CMD="${CMD} ${IMAGE}"
 
 if test "$SPLUNK_DEVEL"
 then
@@ -160,7 +179,18 @@ echo "# Indexed data will be stored in:    ${SPLUNK_DATA}"
 if test "$REST_KEY"
 then
 	echo "# Rest API Modular Input key:        ${REST_KEY}"
+else
+	echo "# Rest API Modular Input key:        ( Get yours at https://www.baboonbones.com/#activation )"
 fi
+
+echo "# "
+if test "$SPLUNK_ML"
+then
+	echo "# Splunk Machine Learning Image?     YES"
+else
+	echo "# Splunk Machine Learning Image?     NO (Enable by setting SPLUNK_ML in the environment)"
+fi
+
 echo "# "
 if test "$SPLUNK_BG" -a "$SPLUNK_BG" != 0
 then

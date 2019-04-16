@@ -13,6 +13,7 @@ echo "# "
 echo "# Building Docker container..."
 echo "# "
 docker build . -t splunk-lab
+docker build . -f Dockerfile-ml -t splunk-lab-ml
 
 echo "# Done!"
 

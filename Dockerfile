@@ -8,8 +8,8 @@
 FROM debian:stretch
 
 ENV SPLUNK_PRODUCT splunk
-ENV SPLUNK_VERSION 7.2.3
-ENV SPLUNK_BUILD 06d57c595b80
+ENV SPLUNK_VERSION 7.2.5
+ENV SPLUNK_BUILD 088f49762779
 
 
 ENV SPLUNK_FILENAME splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz
@@ -91,19 +91,6 @@ RUN tar xfvz rest-api-modular-input_154.tgz
 RUN mv rest_ta /opt/splunk/etc/apps/
 RUN rm -fv /tmp/rest-api-modular-input_154.tgz
 
-
-#
-# Install Python for Scientific computing and Splunk ML Toolkit
-#
-RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/python-for-scientific-computing-for-linux-64-bit_14.tgz
-RUN tar xfvz python-for-scientific-computing-for-linux-64-bit_14.tgz
-RUN mv Splunk_SA_Scientific_Python_linux_x86_64 /opt/splunk/etc/apps/
-RUN rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_14.tgz
-
-RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/splunk-machine-learning-toolkit_420.tgz
-RUN tar xfvz splunk-machine-learning-toolkit_420.tgz 
-RUN mv Splunk_ML_Toolkit /opt/splunk/etc/apps/
-RUN rm -fv /tmp/splunk-machine-learning-toolkit_420.tgz 
 
 
 #
