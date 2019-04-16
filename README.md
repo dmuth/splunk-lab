@@ -82,7 +82,7 @@ BTW, your password will be sanity checked.  Don't use `password` as your passwor
 
 ## A Word About Security
 
-HTTPS is turned on by default.  Passwords such as `password` and `<a href="https://www.youtube.com/watch?v=a6iW-8xPw3k">12345</a>` are not permitted.
+HTTPS is turned on by default.  Passwords such as `password` and <a href="https://www.youtube.com/watch?v=a6iW-8xPw3k">12345</a> are not permitted.
 
 Please, <a href="https://diceware.dmuth.org/">use a strong password</a> if you are deploying
 this on a public-facing machine.
