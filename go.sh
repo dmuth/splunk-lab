@@ -162,11 +162,11 @@ then
 fi
 
 IMAGE="dmuth1/splunk-lab"
-IMAGE="splunk-lab" # Debugging/testing
+#IMAGE="splunk-lab" # Debugging/testing
 if test "$SPLUNK_ML"
 then
 	IMAGE="dmuth1/splunk-lab-ml"
-	IMAGE="splunk-lab-ml" # Debugging/testing
+	#IMAGE="splunk-lab-ml" # Debugging/testing
 fi
 
 CMD="${CMD} ${IMAGE}"
