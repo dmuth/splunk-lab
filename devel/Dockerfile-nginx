@@ -1,5 +1,0 @@
-
-FROM nginx
-
-RUN rm -fv /var/log/nginx/access.log /var/log/nginx/error.log
-
