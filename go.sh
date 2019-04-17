@@ -28,6 +28,7 @@ SPLUNK_BG=${SPLUNK_BG:-1}
 SPLUNK_ML=${SPLUNK_ML:--1}
 SPLUNK_DEVEL=${SPLUNK_DEVEL:-}
 REST_KEY=${REST_KEY:-}
+CONTAINER_NAME=${CONTAINER_NAME:-}
 
 if test "$SPLUNK_START_ARGS" != "--accept-license"
 then
@@ -145,6 +146,11 @@ then
 	CMD="${CMD} -e REST_KEY=${REST_KEY}"
 fi
 
+if test "${CONTAINER_NAME}"
+then
+	CMD="${CMD} --name ${CONTAINER_NAME}"
+fi
+
 if test "$SPLUNK_BG" -a "$SPLUNK_BG" != 0
 then
 	CMD="${CMD} -d "
@@ -198,13 +204,19 @@ then
 else
 	echo "# Rest API Modular Input key:        ( Get yours at https://www.baboonbones.com/#activation )"
 fi
+if test "$CONTAINER_NAME"
+then
+	echo "# Docker container name:             ${CONTAINER_NAME}"
+else
+	echo "# Docker container name:             (Set with \$CONTAINER_NAME, if you like)"
+fi
 
 echo "# "
 if test "$SPLUNK_ML"
 then
 	echo "# Splunk Machine Learning Image?     YES"
 else
-	echo "# Splunk Machine Learning Image?     NO (Enable by setting SPLUNK_ML in the environment)"
+	echo "# Splunk Machine Learning Image?     NO (Enable by setting \$SPLUNK_ML in the environment)"
 fi
 
 echo "# "
@@ -247,8 +259,16 @@ then
 	$CMD
 
 else
-	ID=$($CMD)
-	SHORT_ID=$(echo $ID | cut -c-4)
+	if test ! "$CONTAINER_NAME"
+	then
+		ID=$($CMD)
+		SHORT_ID=$(echo $ID | cut -c-4)
+
+	else
+		ID=$($CMD)
+		SHORT_ID=$CONTAINER_NAME
+
+	fi
 	echo "#"
 	echo "# Running Docker container with ID: ${ID}"
 	echo "#"
