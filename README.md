@@ -27,6 +27,7 @@ The following Splunk apps are included in this Docker image:
 
 - <a href="https://splunkbase.splunk.com/app/2646/">Syndication Input</a>
 - <a href="https://splunkbase.splunk.com/app/1546/">REST API Modular Input</a> (requires registration)
+- <a href="https://splunkbase.splunk.com/app/3212/">Wordcloud Custom Visualization</a>
 - Machine Learning
    - <a href="https://splunkbase.splunk.com/app/2882/">Python for Scientific Computing (for Linux 64-bit)</a>
    - <a href="https://splunkbase.splunk.com/app/2890/">Splunk Machine Learning Toolkit</a>

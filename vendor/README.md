@@ -9,6 +9,8 @@ may be included in this image:
    - License: GNU GPL
 - <a href="https://splunkbase.splunk.com/app/1546/">REST API Modular Input</a>
    - License: Apache 2
+- <a href="https://splunkbase.splunk.com/app/3212/">Wordcloud Custom Visualization</a>
+   - License: <a href="https://d38o4gzaohghws.cloudfront.net/static/misc/eula.html">End User License Agreement for Third-Party Content</a>
 - Machine Learning
    - <a href="https://splunkbase.splunk.com/app/2882/">Python for Scientific Computing (for Linux 64-bit)</a>
       - License: <a href="https://www.splunk.com/en_us/legal/splunk-software-license-agreement.html">Splunk Standard License Agreement</a>
@@ -16,5 +18,8 @@ may be included in this image:
       - License: <a href="https://www.splunk.com/en_us/legal/splunk-software-license-agreement.html">Splunk Standard License Agreement</a>
 
 
+If you use any of these apps, you are agreeing to be bound by those terms!
+
+If you do NOT agree with a particular license, do NOT use the application which uses that license!
 
 

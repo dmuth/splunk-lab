@@ -91,6 +91,14 @@ RUN tar xfvz rest-api-modular-input_154.tgz
 RUN mv rest_ta /opt/splunk/etc/apps/
 RUN rm -fv /tmp/rest-api-modular-input_154.tgz
 
+#
+# Install Wordcloud app
+# https://splunkbase.splunk.com/app/3212/
+#
+RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/wordcloud-custom-visualization_111.tgz
+RUN tar xfvz wordcloud-custom-visualization_111.tgz
+RUN mv wordcloud_app /opt/splunk/etc/apps/
+RUN rm -fv /tmp/wordcloud-custom-visualization_111.tgz
 
 
 #
