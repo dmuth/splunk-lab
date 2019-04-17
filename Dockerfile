@@ -102,6 +102,14 @@ RUN rm -fv /tmp/wordcloud-custom-visualization_111.tgz
 
 
 #
+# Install the Splunk Lab app and set it to the default
+#
+COPY splunk-lab-app /opt/splunk/etc/apps/splunk-lab
+RUN mkdir -p /opt/splunk/etc/users/admin/user-prefs/local
+RUN mv /opt/splunk/etc/apps/splunk-lab/user-prefs.conf /opt/splunk/etc/users/admin/user-prefs/local/
+
+
+#
 # Expose Splunk web
 #
 EXPOSE 8000/tcp
