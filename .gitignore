@@ -6,4 +6,7 @@
 data/
 logs/
 
+# Steve Jobs
+.DS_Store
+
 
