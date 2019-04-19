@@ -40,6 +40,7 @@ then
 	echo "! "
 	echo "! SPLUNK_START_ARGS=--accept-license"
 	echo "! "
+	exit 1
 fi
 
 
