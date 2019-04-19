@@ -1,0 +1,4 @@
+<nav search_view="search">
+  <view name="welcome" default='true' />
+  <view name="search"  />
+</nav>

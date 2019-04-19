@@ -1,0 +1,37 @@
+<dashboard>
+  <label>Welcome To Splunk Lab!</label>
+  <row>
+  <html>
+
+<p>
+Splunk Lab is the quick and easy way to spin up an instance of Splunk in Docker to do ad-hoc data analysis on one or more logfiles or REST/RSS endpoints!
+</p>
+<br/>
+
+<h1>Places of interest</h1>
+
+
+<ul>
+  <li><a href="/app/search/search">Search existing events</a></li>
+  <ul>
+    <li><a href="/app/splunk-lab/search?q=search%20index%3D_internal%20earliest%3D-1h&amp;display.page.search.mode=smart&amp;dispatch.sample_ratio=1&amp;workload_pool=&amp;earliest=-1h&amp;latest=now">Search "_internal" Index over the last hour</a> - This is guaranteed to have data from Splunk itself</li>
+    <li><a href="/app/splunk-lab/search?q=search%20index%3Dmain%20earliest%3D-1d&amp;display.page.search.mode=smart&amp;dispatch.sample_ratio=1&amp;workload_pool=&amp;earliest=-1h&amp;latest=now">Search "main" Index over the last day</a> - This will not have data unless there are files in your logs/ directory or you have turned on HTTP or REST data ingestion.</li>
+  </ul>
+  <li><a href="/app/wordcloud_app/wordcloud_gallery">Wordcloud App</a></li>
+  <li><a href="/manager/splunk-lab/data/inputs/rest">Rest Data Endpoints</a> - Turn these on to get current BitCoin prices, stock prices, Philly Weather, and more!</li>
+  <li><a href="/manager/splunk-lab/data/inputs/syndication">Syndication Feed</a> - Turn these on to get RSS feeds from places like CNN, Flickr, and Splunk Questions</li>
+  <li><a href="/app/Splunk_ML_Toolkit/contents">Splunk ML Toolkit</a> - If the <tt>splunk-lab-ml</tt> image was used, Machine Learning will be available.</li>
+</ul>
+
+
+<h1>Need Help?</h1>
+<ul>
+  <li><a href="https://github.com/dmuth/splunk-lab">Splunk Lab on the web</a></li>
+  <li><a href="https://github.com/dmuth/splunk-lab/issues">Open an Issue in GitHub</a></li>
+  <li><a href="https://twitter.com/dmuth">Say hi on Twitter!</a></li>
+</ul>
+
+
+  </html>
+  </row>
+</dashboard>
