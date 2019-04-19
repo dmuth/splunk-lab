@@ -28,7 +28,8 @@ SPLUNK_BG=${SPLUNK_BG:-1}
 SPLUNK_ML=${SPLUNK_ML:--1}
 SPLUNK_DEVEL=${SPLUNK_DEVEL:-}
 REST_KEY=${REST_KEY:-}
-CONTAINER_NAME=${CONTAINER_NAME:-}
+DOCKER_NAME=${DOCKER_NAME:-}
+DOCKER_RM=${DOCKER_RM:-}
 
 if test "$SPLUNK_START_ARGS" != "--accept-license"
 then
@@ -146,9 +147,14 @@ then
 	CMD="${CMD} -e REST_KEY=${REST_KEY}"
 fi
 
-if test "${CONTAINER_NAME}"
+if test "${DOCKER_NAME}"
 then
-	CMD="${CMD} --name ${CONTAINER_NAME}"
+	CMD="${CMD} --name ${DOCKER_NAME}"
+fi
+
+if test "${DOCKER_RM}"
+then
+	CMD="${CMD} --rm"
 fi
 
 if test "$SPLUNK_BG" -a "$SPLUNK_BG" != 0
@@ -204,11 +210,17 @@ then
 else
 	echo "# Rest API Modular Input key:        ( Get yours at https://www.baboonbones.com/#activation )"
 fi
-if test "$CONTAINER_NAME"
+if test "$DOCKER_NAME"
 then
-	echo "# Docker container name:             ${CONTAINER_NAME}"
+	echo "# Docker container name:             ${DOCKER_NAME}"
 else
-	echo "# Docker container name:             (Set with \$CONTAINER_NAME, if you like)"
+	echo "# Docker container name:             (Set with \$DOCKER_NAME, if you like)"
+fi
+if test "$DOCKER_RM"
+then
+	echo "# Removing container at exit?        YES"
+else
+	echo "# Removing container at exit?        NO"
 fi
 
 echo "# "
@@ -259,14 +271,14 @@ then
 	$CMD
 
 else
-	if test ! "$CONTAINER_NAME"
+	if test ! "$DOCKER_NAME"
 	then
 		ID=$($CMD)
 		SHORT_ID=$(echo $ID | cut -c-4)
 
 	else
 		ID=$($CMD)
-		SHORT_ID=$CONTAINER_NAME
+		SHORT_ID=$DOCKER_NAME
 
 	fi
 	echo "#"
