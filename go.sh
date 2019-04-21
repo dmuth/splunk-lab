@@ -172,6 +172,7 @@ if test "$SPLUNK_DEVEL"
 then
 	CMD="${CMD} -it"
 	CMD="${CMD} -v $(pwd):/mnt "
+	CMD="${CMD} -v $(pwd)/splunk-lab-app:/opt/splunk/etc/apps/splunk-lab "
 fi
 
 IMAGE="dmuth1/splunk-lab"
