@@ -30,6 +30,8 @@ SPLUNK_DEVEL=${SPLUNK_DEVEL:-}
 REST_KEY=${REST_KEY:-}
 DOCKER_NAME=${DOCKER_NAME:-}
 DOCKER_RM=${DOCKER_RM:-}
+DOCKER_CMD=${DOCKER_CMD:-}
+
 
 if test "$SPLUNK_START_ARGS" != "--accept-license"
 then
@@ -175,6 +177,12 @@ then
 	CMD="${CMD} -v $(pwd)/splunk-lab-app:/opt/splunk/etc/apps/splunk-lab "
 fi
 
+if test "$DOCKER_CMD"
+then
+	CMD="${CMD} ${DOCKER_CMD} "
+fi
+
+
 IMAGE="dmuth1/splunk-lab"
 #IMAGE="splunk-lab" # Debugging/testing
 if test "$SPLUNK_ML"
@@ -200,17 +208,17 @@ fi
 echo "# "
 echo "# Before we do, please take a few seconds to ensure that your options are correct:"
 echo "# "
-echo "# URL:                               https://localhost:${SPLUNK_PORT}"
-echo "# Login/password:                    admin/${SPLUNK_PASSWORD}"
+echo "# URL:                               https://localhost:${SPLUNK_PORT} (Change with \$SPLUNK_PORT)"
+echo "# Login/password:                    admin/${SPLUNK_PASSWORD} (Change with \$SPLUNK_PASSWORD)"
 echo "# "
-echo "# Logs will be read from:            ${SPLUNK_LOGS}"
-echo "# App dashboards will be stored in:  ${SPLUNK_APP}"
-echo "# Indexed data will be stored in:    ${SPLUNK_DATA}"
+echo "# Logs will be read from:            ${SPLUNK_LOGS} (Change with \$SPLUNK_LOGS)"
+echo "# App dashboards will be stored in:  ${SPLUNK_APP} (Change with \$SPLUNK_APP)"
+echo "# Indexed data will be stored in:    ${SPLUNK_DATA} (Change with \$SPLUNK_DATA)"
 if test "$REST_KEY"
 then
 	echo "# Rest API Modular Input key:        ${REST_KEY}"
 else
-	echo "# Rest API Modular Input key:        ( Get yours at https://www.baboonbones.com/#activation )"
+	echo "# Rest API Modular Input key:        (Get yours at https://www.baboonbones.com/#activation and set with \$REST_KEY)"
 fi
 if test "$DOCKER_NAME"
 then
@@ -218,11 +226,19 @@ then
 else
 	echo "# Docker container name:             (Set with \$DOCKER_NAME, if you like)"
 fi
+
 if test "$DOCKER_RM"
 then
 	echo "# Removing container at exit?        YES"
 else
-	echo "# Removing container at exit?        NO"
+	echo "# Removing container at exit?        NO (Set with \$DOCKER_RM=1)"
+fi
+
+if test "$DOCKER_CMD"
+then
+	echo "# Docker command injection:          ${DOCKER_CMD}"
+else
+	echo "# Docker command injection:          (Feel free to set with \$DOCKER_CMD)"
 fi
 
 echo "# "
@@ -238,24 +254,9 @@ if test "$SPLUNK_BG" -a "$SPLUNK_BG" != 0
 then
 echo "# Background Mode?                   YES"
 else 
-echo "# Background Mode?                   NO"
+echo "# Background Mode?                   NO (Set with \$SPLUNK_BG)"
 fi
-echo "# "
-echo "# "
-echo "# The above configuration settings can be changed by setting these environment variables:"
-echo "# "
-echo "# - \$SPLUNK_PASSWORD"
-echo "# - \$SPLUNK_PORT"
-echo "# - \$SPLUNK_LOGS"
-echo "# - \$SPLUNK_APP"
-echo "# - \$SPLUNK_DATA"
-echo "# - \$SPLUNK_BG - Set to any value to run the container in the background. Set to empty to run in the foreground."
-if test "$REST_KEY"
-then
-	echo "# - \$REST_KEY - Key for the Rest API Modular Input app."
-else
-	echo "# - \$REST_KEY - Key for the Rest API Modular Input app. Go to https://www.baboonbones.com/#activation if you need one."
-fi
+
 echo "# "
 
 echo "> "
