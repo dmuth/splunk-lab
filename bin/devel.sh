@@ -17,6 +17,6 @@ echo "# "
 docker tag splunk-lab dmuth1/splunk-lab
 docker tag splunk-lab-ml dmuth1/splunk-lab-ml
 
-SPLUNK_DEVEL=1 SPLUNK_BG=0 REST_KEY=${REST_KEY} SPLUNK_PASSWORD=password1 ./go.sh
+SPLUNK_DEVEL=1 SPLUNK_BG=0 REST_KEY=${REST_KEY} SPLUNK_PASSWORD=${SPLUNK_PASSWORD:-password1} ./go.sh
 
 
