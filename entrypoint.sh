@@ -4,8 +4,8 @@
 #
 
 
-TZ="${TZ:=EST5EDT}"
 SPLUNK_PASSWORD="${SPLUNK_PASSWORD:=password}"
+
 
 #
 # Require the user to accept the license to continue
