@@ -33,6 +33,8 @@ The following Splunk apps are included in this Docker image:
 All apps are covered under their own license.  Please check <a href="vendor/README.md">the Apps page</a>
 for more info.
 
+Splunk has its own license.  Please abide by it.
+
 
 ## Free Sources of Data
 

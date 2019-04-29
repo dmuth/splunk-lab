@@ -22,4 +22,6 @@ If you use any of these apps, you are agreeing to be bound by those terms!
 
 If you do NOT agree with a particular license, do NOT use the application which uses that license!
 
+Splunk has its own license.  Please abide by it.
+
 
