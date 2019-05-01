@@ -107,18 +107,6 @@ I wrote a series of helper scripts in `bin/` to make the process easier:
 - `./bin/clean.sh` - Remove logs/ and/or data/ directories.
 
 
-## Development with an Nginx instance feeding logs
-
-If you'd like to spin up Splunk Lab, but also have a copy of Nginx running on <a href="http://localhost:9001">http://localhost:9001</a>, try running this command:
-
-`docker-compose -f ./devel/docker-compose.yml up`
-
-Nginx's logs will be written to the same directory that Splunk Lab ingests logs from, so queries for
-`index=main` should start to show results almost immediately.  Furthermore, a client is spun up 
-which will run a GET request against Nginx once every 10 seconds, which will cause logs to be written
-and ingested into the `main` Index almost immediately.
-
-
 ## Additional Reading
 
 - <a href="https://github.com/dmuth/splunk-network-health-check">Splunk Network Health Check</a>
