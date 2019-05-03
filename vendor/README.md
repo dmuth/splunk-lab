@@ -12,7 +12,7 @@ may be included in this image:
 - <a href="https://splunkbase.splunk.com/app/3212/">Wordcloud Custom Visualization</a>
    - License: <a href="https://d38o4gzaohghws.cloudfront.net/static/misc/eula.html">End User License Agreement for Third-Party Content</a>
 - <a href="https://splunkbase.splunk.com/app/2878/">Slack Notification Alert</a>
-      - License: <a href="https://www.splunk.com/en_us/legal/splunk-software-license-agreement.html">Splunk Standard License Agreement</a>
+   - License: <a href="https://www.splunk.com/en_us/legal/splunk-software-license-agreement.html">Splunk Standard License Agreement</a>
 - Machine Learning
    - <a href="https://splunkbase.splunk.com/app/2890/">Splunk Machine Learning Toolkit</a>
       - License: <a href="https://www.splunk.com/en_us/legal/splunk-software-license-agreement.html">Splunk Standard License Agreement</a>
