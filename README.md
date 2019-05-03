@@ -28,6 +28,7 @@ The following Splunk apps are included in this Docker image:
 - <a href="https://splunkbase.splunk.com/app/2646/">Syndication Input</a>
 - <a href="https://splunkbase.splunk.com/app/1546/">REST API Modular Input</a> (requires registration)
 - <a href="https://splunkbase.splunk.com/app/3212/">Wordcloud Custom Visualization</a>
+- <a href="https://splunkbase.splunk.com/app/2878/">Slack Notification Alert</a>
 - <a href="https://splunkbase.splunk.com/app/2890/">Splunk Machine Learning Toolkit</a>
 
 All apps are covered under their own license.  Please check <a href="vendor/README.md">the Apps page</a>

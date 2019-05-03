@@ -87,4 +87,14 @@ RUN tar xfvz wordcloud-custom-visualization_111.tgz
 RUN mv wordcloud_app /opt/splunk/etc/apps/
 RUN rm -fv /tmp/wordcloud-custom-visualization_111.tgz
 
+#
+# Install Slack Notification Alert
+# https://splunkbase.splunk.com/app/2878/
+#
+RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/slack-notification-alert_203.tgz
+RUN tar xfvz slack-notification-alert_203.tgz
+RUN mv slack_alerts /opt/splunk/etc/apps/
+RUN rm -fv /tmp/slack-notification-alert_203.tgz
+
+
 
