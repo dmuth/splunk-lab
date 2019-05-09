@@ -116,7 +116,7 @@ I wrote a series of helper scripts in `bin/` to make the process easier:
 ## Credits
 
 - <a href="http://www.splunk.com/">Splunk</a>, for having such a kick-ass product!
-- <a href="http://patorjk.com/software/taag/">This text to ASCII art generator</a>, for the logo I used in the script.
+- <a href="http://patorjk.com/software/taag/#p=display&h=0&v=0&f=Standard&t=Splunk%20Lab">This text to ASCII art generator</a>, for the logo I used in the script.
 
 
 ## Contact
