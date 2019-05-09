@@ -17,20 +17,26 @@ ENV SPLUNK_PRODUCT splunk
 ENV SPLUNK_VERSION 7.2.5
 ENV SPLUNK_BUILD 088f49762779
 
-
 ENV SPLUNK_FILENAME splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz
 
 ENV SPLUNK_HOME /opt/splunk
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+#
 # make the "en_US.UTF-8" locale so splunk will be utf-8 enabled by default
-RUN apt-get update  && apt-get install -y --no-install-recommends apt-utils && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
+#
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends apt-utils \
+	&& apt-get install -y locales \
+	&& rm -rf /var/lib/apt/lists/* \
 	&& localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-ENV LANG en_US.utf8
+ENV LANG en_US.utf8 
 
+#
 # Download official Splunk release, verify checksum and unzip in /opt/splunk
 # Also backup etc folder, so it will be later copied to the linked volume
+#
 RUN apt-get update && apt-get install -y wget procps fping less iptables \
     && mkdir -p ${SPLUNK_HOME} \
     && wget -qO /tmp/${SPLUNK_FILENAME} https://download.splunk.com/products/${SPLUNK_PRODUCT}/releases/${SPLUNK_VERSION}/linux/${SPLUNK_FILENAME} \
@@ -38,63 +44,52 @@ RUN apt-get update && apt-get install -y wget procps fping less iptables \
     && (cd /tmp && md5sum -c ${SPLUNK_FILENAME}.md5) \
     && tar xzf /tmp/${SPLUNK_FILENAME} --strip 1 -C ${SPLUNK_HOME} \
     && rm /tmp/${SPLUNK_FILENAME} \
-    && rm /tmp/${SPLUNK_FILENAME}.md5 \
-    && apt-get purge -y --auto-remove wget 
+    && rm /tmp/${SPLUNK_FILENAME}.md5 
 
 
 #
-# Link to our data directory so that any data we create gets exported.
+# Link to our data directory and search app so that any data we create gets exported.
 #
-RUN ln -s /opt/splunk/var/lib/splunk/ /data
+RUN ln -s /opt/splunk/var/lib/splunk/ /data \
+	&& ln -s /opt/splunk/etc/apps/search/local /app 
 
-
-#
-# Link to our search app so that anything we create get exported.
-#
-RUN ln -s /opt/splunk/etc/apps/search/local /app
-
-
-#
-# Prepare to install apps
-#
-RUN apt-get install -y wget
 WORKDIR /tmp
 
 #
 # Install Syndication app
 # https://splunkbase.splunk.com/app/2646/
 #
-RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/syndication-input-rssatomrdf_12.tgz
-RUN tar xfvz syndication-input-rssatomrdf_12.tgz
-RUN mv syndication /opt/splunk/etc/apps/
-RUN rm -fv /tmp/syndication-input-rssatomrdf_12.tgz
+RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/syndication-input-rssatomrdf_12.tgz \
+	&& tar xfvz syndication-input-rssatomrdf_12.tgz \
+	&& mv syndication /opt/splunk/etc/apps/ \
+	&& rm -fv /tmp/syndication-input-rssatomrdf_12.tgz \
 
 #
 # Install Rest API Modular Input
 # https://splunkbase.splunk.com/app/1546/#/details
 #
-RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/rest-api-modular-input_154.tgz
-RUN tar xfvz rest-api-modular-input_154.tgz
-RUN mv rest_ta /opt/splunk/etc/apps/
-RUN rm -fv /tmp/rest-api-modular-input_154.tgz
+	&& wget https://s3.amazonaws.com/dmuth-splunk-lab/rest-api-modular-input_154.tgz \
+	&& tar xfvz rest-api-modular-input_154.tgz \
+	&& mv rest_ta /opt/splunk/etc/apps/ \
+	&& rm -fv /tmp/rest-api-modular-input_154.tgz \
 
 #
 # Install Wordcloud app
 # https://splunkbase.splunk.com/app/3212/
 #
-RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/wordcloud-custom-visualization_111.tgz
-RUN tar xfvz wordcloud-custom-visualization_111.tgz
-RUN mv wordcloud_app /opt/splunk/etc/apps/
-RUN rm -fv /tmp/wordcloud-custom-visualization_111.tgz
+	&& wget https://s3.amazonaws.com/dmuth-splunk-lab/wordcloud-custom-visualization_111.tgz \
+	&& tar xfvz wordcloud-custom-visualization_111.tgz \
+	&& mv wordcloud_app /opt/splunk/etc/apps/ \
+	&& rm -fv /tmp/wordcloud-custom-visualization_111.tgz \
 
 #
 # Install Slack Notification Alert
 # https://splunkbase.splunk.com/app/2878/
 #
-RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/slack-notification-alert_203.tgz
-RUN tar xfvz slack-notification-alert_203.tgz
-RUN mv slack_alerts /opt/splunk/etc/apps/
-RUN rm -fv /tmp/slack-notification-alert_203.tgz
+	&& wget https://s3.amazonaws.com/dmuth-splunk-lab/slack-notification-alert_203.tgz \
+	&& tar xfvz slack-notification-alert_203.tgz \
+	&& mv slack_alerts /opt/splunk/etc/apps/ \
+	&& rm -fv /tmp/slack-notification-alert_203.tgz
 
 
 

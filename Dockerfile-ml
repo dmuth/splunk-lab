@@ -7,15 +7,15 @@ FROM splunk-lab-core
 #
 # Install Python for Scientific computing and Splunk ML Toolkit
 #
-RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/python-for-scientific-computing-for-linux-64-bit_14.tgz
-RUN tar xfvz python-for-scientific-computing-for-linux-64-bit_14.tgz
-RUN mv Splunk_SA_Scientific_Python_linux_x86_64 /opt/splunk/etc/apps/
-RUN rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_14.tgz
+RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/python-for-scientific-computing-for-linux-64-bit_14.tgz \
+	&& tar xfvz python-for-scientific-computing-for-linux-64-bit_14.tgz \
+	&& mv Splunk_SA_Scientific_Python_linux_x86_64 /opt/splunk/etc/apps/ \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_14.tgz \
 
-RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/splunk-machine-learning-toolkit_420.tgz
-RUN tar xfvz splunk-machine-learning-toolkit_420.tgz 
-RUN mv Splunk_ML_Toolkit /opt/splunk/etc/apps/
-RUN rm -fv /tmp/splunk-machine-learning-toolkit_420.tgz 
+	&& wget https://s3.amazonaws.com/dmuth-splunk-lab/splunk-machine-learning-toolkit_420.tgz \
+	&& tar xfvz splunk-machine-learning-toolkit_420.tgz \
+	&& mv Splunk_ML_Toolkit /opt/splunk/etc/apps/ \
+	&& rm -fv /tmp/splunk-machine-learning-toolkit_420.tgz 
 
 
 #####
@@ -34,14 +34,8 @@ COPY vendor/README.md /README.md
 #
 # Copy in some Splunk configuration
 #
-COPY splunk-config/inputs.conf /opt/splunk/etc/system/local/inputs.conf
-COPY splunk-config/props.conf /opt/splunk/etc/system/local/props.conf
-COPY splunk-config/server.conf /opt/splunk/etc/system/local/server.conf
 COPY splunk-config/splunk-launch.conf /opt/splunk/etc/
-COPY splunk-config/user-seed.conf /opt/splunk/etc/system/local/user-seed.conf.in
-COPY splunk-config/ui-prefs.conf /opt/splunk/etc/system/local/ui-prefs.conf
-COPY splunk-config/user-prefs.conf /opt/splunk/etc/apps/user-prefs/local/user-prefs.conf
-COPY splunk-config/web.conf /opt/splunk/etc/system/local/web.conf.in
+COPY splunk-config/* /opt/splunk/etc/system/local/
 
 
 #
@@ -49,8 +43,8 @@ COPY splunk-config/web.conf /opt/splunk/etc/system/local/web.conf.in
 #
 WORKDIR /tmp
 COPY splunk-lab-app /opt/splunk/etc/apps/splunk-lab
-RUN mkdir -p /opt/splunk/etc/users/admin/user-prefs/local
-RUN mv /opt/splunk/etc/apps/splunk-lab/user-prefs.conf /opt/splunk/etc/users/admin/user-prefs/local/
+RUN mkdir -p /opt/splunk/etc/users/admin/user-prefs/local \
+	&& mv /opt/splunk/etc/apps/splunk-lab/user-prefs.conf /opt/splunk/etc/users/admin/user-prefs/local/
 
 
 #
