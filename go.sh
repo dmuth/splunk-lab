@@ -19,7 +19,7 @@ set -e
 #
 # Set default values for our vars
 #
-SPLUNK_PASSWORD=${SPLUNK_PASSWORD:-password}
+SPLUNK_PASSWORD=${SPLUNK_PASSWORD:-password1}
 SPLUNK_DATA=${SPLUNK_DATA:-data}
 SPLUNK_LOGS=${SPLUNK_LOGS:-logs}
 SPLUNK_PORT=${SPLUNK_PORT:-8000}
@@ -292,6 +292,19 @@ echo "# Background Mode?                   NO (Set with \$SPLUNK_BG)"
 fi
 
 echo "# "
+
+if test "$SPLUNK_PASSWORD" == "password1"
+then
+	echo "# "
+	echo "# PLEASE NOTE THAT YOU USED THE DEFAULT PASSWORD"
+	echo "# "
+	echo "# If you are testing this on localhost, you are probably fine."
+	echo "# If you are not, then PLEASE use a different password for safety."
+	echo "# If you have trouble coming up with a password, I have a utility "
+	echo "# at https://diceware.dmuth.org/ which will help you pick a password "
+	echo "# that can be remembered."
+	echo "# "
+fi
 
 echo "> "
 echo "> Press ENTER to run Splunk Lab with the above settings, or ctrl-C to abort..."
