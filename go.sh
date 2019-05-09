@@ -24,12 +24,11 @@ SPLUNK_DATA=${SPLUNK_DATA:-data}
 SPLUNK_LOGS=${SPLUNK_LOGS:-logs}
 SPLUNK_PORT=${SPLUNK_PORT:-8000}
 SPLUNK_APP="app"
-SPLUNK_BG=${SPLUNK_BG:-1}
 SPLUNK_ML=${SPLUNK_ML:--1}
 SPLUNK_DEVEL=${SPLUNK_DEVEL:-}
 REST_KEY=${REST_KEY:-}
-DOCKER_NAME=${DOCKER_NAME:-}
-DOCKER_RM=${DOCKER_RM:-}
+DOCKER_NAME=${DOCKER_NAME:-splunk-lab}
+DOCKER_RM=${DOCKER_RM:-1}
 DOCKER_CMD=${DOCKER_CMD:-}
 
 
@@ -116,21 +115,6 @@ then
 	exit 1
 fi
 
-if test "$SPLUNK_DEVEL"
-then
-	#
-	# This wacky check for $SPLUNK_BG is here because setting it
-	# an empty string causes it to "default" to 1.  Silly bash!
-	#
-	if test "$SPLUNK_BG" -a "$SPLUNK_BG" != 0
-	then
-		echo "! "
-		echo "! You cannot specify both SPLUNK_DEVEL and SPLUNK_BG!"
-		echo "! "
-		exit 1
-	fi
-fi
-
 
 #
 # Now create our props.conf if it doesn't exist...
@@ -184,9 +168,28 @@ then
 	CMD="${CMD} -e REST_KEY=${REST_KEY}"
 fi
 
+#
+# Again, doing the same unusual stuff that we are with DOCKER_RM,
+# since the default is to hvae a name.
+#
+if test "${DOCKER_NAME}" == "no"
+then
+	DOCKER_NAME=""
+fi
+
 if test "${DOCKER_NAME}"
 then
 	CMD="${CMD} --name ${DOCKER_NAME}"
+fi
+
+#
+# Only disable --rm if DOCKER_RM is set to "no".
+# We want --rm action by default, since we also have a default name
+# and don't want name conflicts.
+#
+if test "$DOCKER_RM" == "no"
+then
+	DOCKER_RM=""
 fi
 
 if test "${DOCKER_RM}"
@@ -194,10 +197,11 @@ then
 	CMD="${CMD} --rm"
 fi
 
-if test "$SPLUNK_BG" -a "$SPLUNK_BG" != 0
-then
-	CMD="${CMD} -d "
-fi
+#
+# Always run in the background.  If we want the container in the 
+# foreground, run it by hand or use the devel script.
+#
+CMD="${CMD} -d "
 
 if test "$SPLUNK_START_ARGS" -a "$SPLUNK_START_ARGS" != 0
 then
@@ -256,14 +260,14 @@ else
 fi
 if test "$DOCKER_NAME"
 then
-	echo "# Docker container name:             ${DOCKER_NAME}"
+	echo "# Docker container name:             ${DOCKER_NAME} (Disable automatic name with \$DOCKER_NAME=no)"
 else
 	echo "# Docker container name:             (Set with \$DOCKER_NAME, if you like)"
 fi
 
 if test "$DOCKER_RM"
 then
-	echo "# Removing container at exit?        YES"
+	echo "# Removing container at exit?        YES (Disable with \$DOCKER_RM=no)"
 else
 	echo "# Removing container at exit?        NO (Set with \$DOCKER_RM=1)"
 fi
@@ -281,14 +285,6 @@ then
 	echo "# Splunk Machine Learning Image?     YES"
 else
 	echo "# Splunk Machine Learning Image?     NO (Enable by setting \$SPLUNK_ML in the environment)"
-fi
-
-echo "# "
-if test "$SPLUNK_BG" -a "$SPLUNK_BG" != 0
-then
-echo "# Background Mode?                   YES"
-else 
-echo "# Background Mode?                   NO (Set with \$SPLUNK_BG)"
 fi
 
 echo "# "
@@ -316,29 +312,24 @@ echo "# "
 echo "# Launching container..."
 echo "# "
 
-if test ! "$SPLUNK_BG" -o "$SPLUNK_BG" == 0
+if test ! "$DOCKER_NAME"
 then
-	$CMD
+	ID=$($CMD)
+	SHORT_ID=$(echo $ID | cut -c-4)
 
 else
-	if test ! "$DOCKER_NAME"
-	then
-		ID=$($CMD)
-		SHORT_ID=$(echo $ID | cut -c-4)
-
-	else
-		ID=$($CMD)
-		SHORT_ID=$DOCKER_NAME
-
-	fi
-	echo "#"
-	echo "# Running Docker container with ID: ${ID}"
-	echo "#"
-	echo "# Inspect container logs with: docker logs ${SHORT_ID}"
-	echo "#"
-	echo "# Kill container with: docker kill ${SHORT_ID}"
-	echo "#"
+	ID=$($CMD)
+	SHORT_ID=$DOCKER_NAME
 
 fi
+
+echo "#"
+echo "# Running Docker container with ID: ${ID}"
+echo "#"
+echo "# Inspect container logs with: docker logs ${SHORT_ID}"
+echo "#"
+echo "# Kill container with: docker kill ${SHORT_ID}"
+echo "#"
+
 
 
