@@ -113,13 +113,15 @@ I wrote a series of helper scripts in `bin/` to make the process easier:
 - <a href="https://github.com/dmuth/splunk-network-health-check">Splunk Network Health Check</a>
 
 
+## Credits
+
+- <a href="http://www.splunk.com/">Splunk</a>, for having such a kick-ass product!
+- <a href="http://patorjk.com/software/taag/">This text to ASCII art generator</a>, for the logo I used in the script.
+
+
 ## Contact
 
 My email is doug.muth@gmail.com.  I am also <a href="http://twitter.com/dmuth">@dmuth on Twitter</a> 
 and <a href="http://facebook.com/dmuth">Facebook</a>!
-
-
-
-
 
 
