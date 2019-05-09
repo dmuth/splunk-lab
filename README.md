@@ -16,6 +16,17 @@ Paste this in on the command line:
 ...and the script will print up what directory it will ingest logs from, etc.  Follow the on-screen
 instructions for setting environment variables and you'll be up and running in no time!
 
+
+## Apps Built With Splunk Lab
+
+Since building Splunk Lab, I have used it as the basis for building other projects:
+
+- <a href="https://github.com/dmuth/splunk-yelp-reviews">Splunk Yelp Reviews</a>
+   - This project lets you pull down Yelp reviews for venues and view the results in a Splunk dashboard
+- <a href="https://github.com/dmuth/splunk-network-health-check">Splunk Network Health Check</a>/
+   - Pings 1 or more hosts and graphs the results in Splunk so you can monitor network connectivity over time
+
+
 ## Screenshots
 
 <a href="./img/splunk-rest-api-input.png"><img src="./img/splunk-rest-api-input.png" width="250" /></a> <a href="./img/splunk-syndication-feed.png"><img src="./img/splunk-syndication-feed.png" width="250" /></a> <a href="./img/splunk-cnn-headlines.png"><img src="./img/splunk-cnn-headlines.png" width="250" /></a>
