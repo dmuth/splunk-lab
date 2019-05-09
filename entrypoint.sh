@@ -92,6 +92,17 @@ popd > /dev/null
 #
 /opt/splunk/bin/splunk start --accept-license
 
+
+echo 
+echo "   ,---.     |              |        |         |    "
+echo "   \`---.,---.|    .   .,---.|__/     |    ,---.|---."
+echo "       ||   ||    |   ||   ||  \     |    ,---||   |"
+echo "   \`---'|---'\`---'\`---'\`   '\`   \`    \`---'\`---^\`---'"
+echo "        |                                           "
+echo
+
+echo "# "
+echo "# Welcome to Splunk Lab!"
 echo "# "
 echo "# "
 echo "# Here are some ways in which to run this container: "
@@ -101,10 +112,6 @@ echo "# 	docker run -p 8000:8000 -v \$(pwd)/data:/data dmuth1/splunk-lab "
 echo "# "
 echo "# Persist data, mount current directory as /mnt, and spawn an interactive shell: "
 echo "# 	docker run -p 8000:8000 -v \$(pwd)/data:/data -v \$(pwd):/mnt -it dmuth1/splunk-lab bash "
-echo "# "
-echo "# Persist data and ingest multiple directories:"
-echo "#     docker run -p 8000:8000 -v $(pwd)/data:/data -v /var/log:/logs/syslog -v /opt/log:/logs/opt/ dmuth1/splunk-lab"
-echo "# "
 echo "# "
 
 
