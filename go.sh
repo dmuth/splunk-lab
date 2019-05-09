@@ -198,10 +198,14 @@ then
 fi
 
 #
-# Always run in the background.  If we want the container in the 
-# foreground, run it by hand or use the devel script.
+# Only run in the foreground if devel mode is set.
+# Otherwise, giving users the option to run in foreground will only 
+# confuse those that are new to Docker.
 #
-CMD="${CMD} -d "
+if test ! "$SPLUNK_DEVEL"
+then
+	CMD="${CMD} -d "
+fi
 
 if test "$SPLUNK_START_ARGS" -a "$SPLUNK_START_ARGS" != 0
 then
@@ -321,7 +325,11 @@ echo "# "
 echo "# Launching container..."
 echo "# "
 
-if test ! "$DOCKER_NAME"
+if test "$SPLUNK_DEVEL"
+then
+	$CMD
+
+elif test ! "$DOCKER_NAME"
 then
 	ID=$($CMD)
 	SHORT_ID=$(echo $ID | cut -c-4)
