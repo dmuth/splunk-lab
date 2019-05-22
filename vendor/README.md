@@ -12,12 +12,18 @@ may be included in this image:
 - <a href="https://splunkbase.splunk.com/app/3212/">Wordcloud Custom Visualization</a>
    - License: <a href="https://d38o4gzaohghws.cloudfront.net/static/misc/eula.html">End User License Agreement for Third-Party Content</a>
 - <a href="https://splunkbase.splunk.com/app/2878/">Slack Notification Alert</a>
-   - License: <a href="https://www.splunk.com/en_us/legal/splunk-software-license-agreement.html">Splunk Standard License Agreement</a>
+   - License: <a href="https://www.splunk.com/en_us/legal/splunk-software-license-agreement.html">Splunk Software License Agreement</a>
 - Machine Learning
    - <a href="https://splunkbase.splunk.com/app/2890/">Splunk Machine Learning Toolkit</a>
       - License: <a href="https://www.splunk.com/en_us/legal/splunk-software-license-agreement.html">Splunk Standard License Agreement</a>
    - <a href="https://splunkbase.splunk.com/app/2882/">Python for Scientific Computing (for Linux 64-bit)</a>
       - License: <a href="https://www.splunk.com/en_us/legal/splunk-software-license-agreement.html">Splunk Standard License Agreement</a>
+   - <a href="https://splunkbase.splunk.com/app/4066/">NLP Text Analytics</a>
+      - License: <a href="https://github.com/geekusa/nlp-text-analytics/blob/master/LICENSE/LICENSE.txt">MIT License</a>
+   - <a href="https://splunkbase.splunk.com/app/3514/">Halo - Custom Visualization</a>
+      - License: <a href="https://d38o4gzaohghws.cloudfront.net/static/misc/eula.html">End User License Agreement for Third-Party Content</a>
+   - <a href="https://splunkbase.splunk.com/app/3112/">Sankey Diagram - Custom Visualization</a>
+      - License: <a href="https://www.splunk.com/en_us/legal/splunk-software-license-agreement.html">Splunk Software License Agreement</a>
 
 
 If you use any of these apps, you are agreeing to be bound by those terms!

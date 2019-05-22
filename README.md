@@ -40,6 +40,11 @@ The following Splunk apps are included in this Docker image:
 - <a href="https://splunkbase.splunk.com/app/3212/">Wordcloud Custom Visualization</a>
 - <a href="https://splunkbase.splunk.com/app/2878/">Slack Notification Alert</a>
 - <a href="https://splunkbase.splunk.com/app/2890/">Splunk Machine Learning Toolkit</a>
+   - <a href="https://splunkbase.splunk.com/app/2882/">Python for Scientific Computing (for Linux 64-bit)</a>
+   - <a href="https://splunkbase.splunk.com/app/4066/">NLP Text Analytics</a>
+   - <a href="https://splunkbase.splunk.com/app/3514/">Halo - Custom Visualization</a>
+   - <a href="https://splunkbase.splunk.com/app/3112/">Sankey Diagram - Custom Visualization</a>
+
 
 All apps are covered under their own license.  Please check <a href="vendor/README.md">the Apps page</a>
 for more info.

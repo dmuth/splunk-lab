@@ -15,7 +15,22 @@ RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/python-for-scientific-computi
 	&& wget https://s3.amazonaws.com/dmuth-splunk-lab/splunk-machine-learning-toolkit_420.tgz \
 	&& tar xfvz splunk-machine-learning-toolkit_420.tgz \
 	&& mv Splunk_ML_Toolkit /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-machine-learning-toolkit_420.tgz 
+	&& rm -fv /tmp/splunk-machine-learning-toolkit_420.tgz \
+
+	&& wget https://s3.amazonaws.com/dmuth-splunk-lab/nlp-text-analytics_102.tgz \
+	&& tar xfvz nlp-text-analytics_102.tgz \
+	&& mv nlp-text-analytics /opt/splunk/etc/apps/ \
+	&& rm -fv /tmp/nlp-text-analytics_102.tgz \
+
+	&& wget https://s3.amazonaws.com/dmuth-splunk-lab/halo-custom-visualization_113.tgz \
+	&& tar xfvz halo-custom-visualization_113.tgz \
+	&& mv viz_halo /opt/splunk/etc/apps \
+	&& rm -fv /tmp/halo-custom-visualization_113.tgz \
+
+	&& wget https://s3.amazonaws.com/dmuth-splunk-lab/sankey-diagram-custom-visualization_130.tgz \
+	&& tar xfvz sankey-diagram-custom-visualization_130.tgz \
+	&& mv sankey_diagram_app /opt/splunk/etc/apps \
+	&& rm -fv /tmp/sankey-diagram-custom-visualization_130.tgz
 
 
 #####
