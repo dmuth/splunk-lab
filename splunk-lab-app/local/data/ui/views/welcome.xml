@@ -27,8 +27,26 @@ Splunk Lab is the quick and easy way to spin up an instance of Splunk in Docker 
             <a href="/manager/splunk-lab/data/inputs/rest">Rest Data Endpoints</a> - Turn these on to get current BitCoin prices, stock prices, Philly Weather, and more!</li>
   <li>
             <a href="/manager/splunk-lab/data/inputs/syndication">Syndication Feed</a> - Turn these on to get RSS feeds from places like CNN, Flickr, and Splunk Questions</li>
-  <li>
-            <a href="/app/Splunk_ML_Toolkit/contents">Splunk ML Toolkit</a> - If the <tt>splunk-lab-ml</tt> image was used, Machine Learning will be available.</li>
+  <li>If the <tt>splunk-lab-ml</tt> Docker image was used, these following modules will be available:</li>
+  <ul>
+     <li>
+              <a href="/app/Splunk_ML_Toolkit/contents">Splunk ML Toolkit</a>
+            </li>
+     <li>
+              <a href="/app/nlp-text-analytics/welcome">NLP Text Analytics</a>
+            </li>
+     <li>
+              <a href="/app/viz_halo/halo_doc">Halo Visualization</a>
+            </li>
+     <li>
+              <a href="/app/sankey_diagram_app/gallery">Sankey Diagram Gallery</a>
+            </li>
+     <ul>
+       <li>
+                <a href="https://docs.splunk.com/Documentation/SankeyDiagram/1.1.0/SankeyDiagramViz/SankeyIntro">Sankey diagram documentation</a>
+              </li>
+     </ul>
+  </ul>
 </ul>
 
   </html>
