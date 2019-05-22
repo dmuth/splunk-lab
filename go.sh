@@ -340,13 +340,20 @@ else
 
 fi
 
-echo "#"
-echo "# Running Docker container with ID: ${ID}"
-echo "#"
-echo "# Inspect container logs with: docker logs ${SHORT_ID}"
-echo "#"
-echo "# Kill container with: docker kill ${SHORT_ID}"
-echo "#"
+if test ! "$SPLUNK_DEVEL"
+then
+	echo "#"
+	echo "# Running Docker container with ID: ${ID}"
+	echo "#"
+	echo "# Inspect container logs with: docker logs ${SHORT_ID}"
+	echo "#"
+	echo "# Kill container with: docker kill ${SHORT_ID}"
+	echo "#"
+
+else
+	echo "# All done!"
+
+fi
 
 
 
