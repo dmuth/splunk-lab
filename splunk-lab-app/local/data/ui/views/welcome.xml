@@ -12,13 +12,17 @@ Splunk Lab is the quick and easy way to spin up an instance of Splunk in Docker 
 
 <ul>
   <li>
-            <a href="/app/search/search">Search existing events</a>
+            <a href="/app/splunk-lab/search">Search existing events</a>
           </li>
   <ul>
     <li>
-              <a href="/app/search/search?q=search%20index%3D_internal%20earliest%3D-1h&amp;display.page.search.mode=smart&amp;dispatch.sample_ratio=1&amp;workload_pool=&amp;earliest=-1h&amp;latest=now">Search "_internal" Index over the last hour</a> - This is guaranteed to have data from Splunk itself</li>
+              <a href="/app/splunk-lab/search?q=search%20index%3D_internal%20earliest%3D-1h&amp;display.page.search.mode=smart&amp;dispatch.sample_ratio=1&amp;workload_pool=&amp;earliest=-1h&amp;latest=now">Search "_internal" Index over the last hour</a> - This is guaranteed to have data from Splunk itself</li>
     <li>
-              <a href="/app/search/search?q=search%20index%3Dmain%20earliest%3D-1d&amp;display.page.search.mode=smart&amp;dispatch.sample_ratio=1&amp;workload_pool=&amp;earliest=-1h&amp;latest=now">Search "main" Index over the last day</a> - This will not have data unless there are files in your logs/ directory or you have turned on HTTP or REST data ingestion.</li>
+              <a href="/app/splunk-lab/search?q=search%20index%3Dmain%20earliest%3D-1d&amp;display.page.search.mode=smart&amp;dispatch.sample_ratio=1&amp;workload_pool=&amp;earliest=-1h&amp;latest=now">Search "main" Index over the last day</a> - This will not have data unless there are files in your logs/ directory or you have turned on HTTP or REST data ingestion.</li>
+  </ul>
+  <li><a href="/app/splunk-lab/dashboards">Dashboards</a></li>
+  <ul>
+    <li>Dashboards that are saved will persist outside of Splunk Lab (default is <tt>app/</tt> directory...)</li>
   </ul>
   <li>
             <a href="/app/wordcloud_app/wordcloud_gallery">Wordcloud App</a>
