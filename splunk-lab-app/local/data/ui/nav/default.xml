@@ -1,9 +1,0 @@
-<nav search_view="search">
-  <view name="welcome" default='true' />
-  <view name="search"  />
-  <view name="dashboards" />
-  <view name="analysis_workspace" />
-  <view name="datasets" />
-  <view name="reports" />
-  <view name="alerts" />
-</nav>
