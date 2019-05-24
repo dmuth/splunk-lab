@@ -10,5 +10,5 @@ logs/
 .DS_Store
 
 !splunk-lab-app/default/data
-!splunk-lab-app/local/data
+splunk-lab-app/local
 

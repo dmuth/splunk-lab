@@ -117,40 +117,12 @@ fi
 
 
 #
-# Now create our props.conf if it doesn't exist...
-#
-if test ! -f ${SPLUNK_APP}/props.conf
-then
-	echo "# ${SPLUNK_APP}/props.conf does not exist!  Creating it..."
-	mkdir -p ${SPLUNK_APP}
-	cat << EOF > $SPLUNK_APP/props.conf
-#
-# Apply this to everything in /logs/
-#
-[source::/logs/*]
-#
-# We have one record per line.
-#
-SHOULD_LINEMERGE = false
-
-#
-# Allow events as old as 30 years in the past.
-#
-MAX_DAYS_AGO=10951
-
-EOF
-
-fi
-
-
-#
 # Start forming our command
 #
 CMD="docker run \
 	-p ${SPLUNK_PORT}:8000 \
 	-e SPLUNK_PASSWORD=${SPLUNK_PASSWORD} \
-	-v $(pwd)/${SPLUNK_DATA}:/data \
-	-v $(pwd)/${SPLUNK_APP}:/app "
+	-v $(pwd)/${SPLUNK_DATA}:/data "
 
 
 #
@@ -197,6 +169,12 @@ then
 	CMD="${CMD} --rm"
 fi
 
+if test "$SPLUNK_START_ARGS" -a "$SPLUNK_START_ARGS" != 0
+then
+	CMD="${CMD} -e SPLUNK_START_ARGS=${SPLUNK_START_ARGS}"
+fi
+
+
 #
 # Only run in the foreground if devel mode is set.
 # Otherwise, giving users the option to run in foreground will only 
@@ -205,19 +183,24 @@ fi
 if test ! "$SPLUNK_DEVEL"
 then
 	CMD="${CMD} -d "
-fi
+	CMD="${CMD} -v $(pwd)/${SPLUNK_APP}:/opt/splunk/etc/apps/splunk-lab/local "
 
-if test "$SPLUNK_START_ARGS" -a "$SPLUNK_START_ARGS" != 0
-then
-	CMD="${CMD} -e SPLUNK_START_ARGS=${SPLUNK_START_ARGS}"
-fi
-
-if test "$SPLUNK_DEVEL"
-then
+else 
 	CMD="${CMD} -it"
+	#
+	# Utility mount :-)
+	#
 	CMD="${CMD} -v $(pwd):/mnt "
+	#
+	# In devel mode, we'll mount the splunk-lab/ directory to the app directory
+	# here, and the entrypoint.sh script will create the local/ symlink
+	# (with build.sh removing said symlink before building any images)
+	#
 	CMD="${CMD} -v $(pwd)/splunk-lab-app:/opt/splunk/etc/apps/splunk-lab "
+	CMD="${CMD} -e SPLUNK_DEVEL=${SPLUNK_DEVEL} "
+
 fi
+
 
 if test "$DOCKER_CMD"
 then

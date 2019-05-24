@@ -87,6 +87,20 @@ fi
 
 popd > /dev/null
 
+
+#
+# If we're running in devel mode, link local to default so that any
+# changes we make to the app in Splunk go straight into default and
+# I don't have to move them by hand.
+#
+if test "$SPLUNK_DEVEL"
+then
+	pushd /opt/splunk/etc/apps/splunk-lab >/dev/null
+	ln -sfv default local
+	popd > /dev/null
+fi
+
+
 #
 # Start Splunk
 #

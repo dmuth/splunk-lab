@@ -48,10 +48,16 @@ RUN apt-get update && apt-get install -y wget procps fping less iptables \
 
 
 #
-# Link to our data directory and search app so that any data we create gets exported.
+# Link to our data directory and search app.
+# 
+# The /data/ directory is used in a volume mount but /app/ is not.
+# The reason I still have it is because it will be helpful for
+# anything who may be exploring the container. 
+#
+# (Yes, that means *you*, Chris in Seattle)
 #
 RUN ln -s /opt/splunk/var/lib/splunk/ /data \
-	&& ln -s /opt/splunk/etc/apps/search/local /app 
+	&& ln -s /opt/splunk/etc/apps/splunk-lab/local /app 
 
 WORKDIR /tmp
 
