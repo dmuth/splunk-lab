@@ -88,11 +88,11 @@ Splunk Lab is the quick and easy way to spin up an instance of Splunk in Docker 
           </li>
           
           <li>
-          <a href="https://api.flickr.com/services/feeds/photos_public.gne">CNN Headlines</a>
+          <a href="http://www.cnn.com/services/rss/">CNN Headlines</a>
           </li>
           
           <li>
-          <a href="https://api.flickr.com/services/feeds/photos_public.gne?tags=cheetah">Flickr's Public Feed</a>(), or perhaps just <a href="https://api.flickr.com/services/feeds/photos_public.gne?tags=cheetah">Photos Tagged "cheetah"</a>
+          <a href="https://api.flickr.com/services/feeds/photos_public.gne?tags=cheetah">Flickr's Public Feed</a>, or perhaps just <a href="https://api.flickr.com/services/feeds/photos_public.gne?tags=cheetah">Photos Tagged "cheetah"</a>
           </li>
           
           <li>
