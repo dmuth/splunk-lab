@@ -78,4 +78,72 @@ Splunk Lab is the quick and easy way to spin up an instance of Splunk in Docker 
   </html>
     </panel>
   </row>
+  <row>
+    <panel>
+      <title>Data Sources included in Splunk Lab</title>
+      <html>
+        <ul>
+          <li>
+          <a href="https://answers.splunk.com/feed/questions.rss">Recent Questions Posted to Splunk Answers</a>
+          </li>
+          
+          <li>
+          <a href="https://api.flickr.com/services/feeds/photos_public.gne">CNN Headlines</a>
+          </li>
+          
+          <li>
+          <a href="https://api.flickr.com/services/feeds/photos_public.gne?tags=cheetah">Flickr's Public Feed</a>(), or perhaps just <a href="https://api.flickr.com/services/feeds/photos_public.gne?tags=cheetah">Photos Tagged "cheetah"</a>
+          </li>
+          
+          <li>
+          <a href="http://www3.septa.org/hackathon/TrainView/">Philadelphia Regional Rail Train Data</a>
+          </li>
+          
+          <li>
+          <a href="https://developers.coinbase.com/docs/wallet/guides/price-data">Real-time BitCoin Price</a>            
+          </li>
+
+          <li>
+          <a href="https://api.weather.gov/gridpoints/PHI/49,75/forecast">Philadelphia Forecast</a> from <a href="https://www.weather.gov/documentation/services-web-api">The National Weather Service</a>  
+          </li>
+          
+          <li>
+          <a href="https://www.alphavantage.co/">Stock Quotes</a>            
+          </li>
+
+          <li>
+          <a href="https://www.meetup.com/meetup_api/docs/stream/2/rsvps/">Meetup RSVPs</a>
+          </li>
+
+        </ul>
+        
+        To get started with these, head over to <a href="/manager/splunk-lab/data/inputs/syndication">Syndication</a> or <a href="/manager/splunk-lab/data/inputs/rest">REST</a>
+        under Settings -&gt; Data Inputs
+        
+
+      </html>
+    </panel>
+    <panel>
+      <title>Apps built with Splunk Lab</title>
+      <html>
+        <ul>
+          <li>
+          <a href="https://github.com/dmuth/splunk-yelp-reviews">Splunk Yelp Reviews</a> - Lets you pull down Yelp reviews for venues and view visualizations and wordclouds of positive/negative reviews in a Splunk dashboard            
+          </li>
+          <li>
+          <a href="https://github.com/dmuth/splunk-telegram">Splunk Telegram</a> - This app lets you run Splunk against messages from Telegram groups and generate graphs and word clouds based on the activity in them.
+          </li>
+          <li>
+          <a href="https://github.com/dmuth/splunk-network-health-check">Splunk Network Health Check</a> - Pings 1 or more hosts and graphs the results in Splunk so you can monitor network connectivity over time.
+          </li>
+          <li>
+            ...plus a few other things that I'm not quite ready to release yet. :-)          
+          </li>
+        </ul>
+
+
+        
+      </html>
+    </panel>
+  </row>
 </dashboard>
