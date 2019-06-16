@@ -125,6 +125,21 @@ I wrote a series of helper scripts in `bin/` to make the process easier:
 - `./bin/clean.sh` - Remove logs/ and/or data/ directories.
 
 
+### A word on default/ and local/ directories
+
+I had to struggled with this for awhile, so I'm mostly documenting it here.
+
+When in devel mode, /opt/splunk/etc/apps/splunk-lab/ is mounted to `./splunk-app/` via `go.sh`
+and the entrypoint script inside of the container smylinks `local/` to `default/`.
+This way, any changes that are made to dashboards will be propagated outside of
+the container and can be checked in to Git.
+
+When in production mode (e.g. running `./go.sh` directly), no symlink is created,
+instead `local/` is mounted by whatever `$SPLUNK_APP` is pointing to, so that any
+changes made by the user will show up on their host, with Splunk Lab's `default/`
+directory being untouched.
+
+
 ## Additional Reading
 
 - <a href="https://github.com/dmuth/splunk-network-health-check">Splunk Network Health Check</a>
