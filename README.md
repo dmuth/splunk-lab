@@ -127,7 +127,7 @@ I wrote a series of helper scripts in `bin/` to make the process easier:
 
 ### A word on default/ and local/ directories
 
-I had to struggled with this for awhile, so I'm mostly documenting it here.
+I had to struggle with this for awhile, so I'm mostly documenting it here.
 
 When in devel mode, /opt/splunk/etc/apps/splunk-lab/ is mounted to `./splunk-app/` via `go.sh`
 and the entrypoint script inside of the container smylinks `local/` to `default/`.
