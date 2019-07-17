@@ -30,7 +30,7 @@ cd logs
 echo "# "
 echo "# Removing any previous test files..."
 echo "# "
-rm -fv test-events-*.txt
+find . -name 'test-events-*' -delete
 
 echo "# "
 echo "# Creating ${NUM} new files..."
