@@ -147,6 +147,11 @@ directory being untouched.
 - <a href="https://github.com/dmuth/splunk-network-health-check">Splunk Network Health Check</a>
 
 
+## Bugs
+
+- If I run `./bin/create-test-logfiles.sh 10000` and then start Splunk Lab on a Mac, all of the files will be Indexed without any major issues, but then the CPU will spin, and not from Splunk. This may be a filesystem issue in Docker on the Mac.  More investigation needs to be done.
+
+
 ## Credits
 
 - <a href="https://github.com/mhassan2/splunk-n-box">Splunk N' Box</a> - Splunk N' Box is used to create entire Splunk clusters in Docker.  It was the first actual use of Splunk I saw in Docker, and gave me the idea that hey, maybe I could run a stand-alone Splunk instance in Docker for ad-hoc data analysis!
