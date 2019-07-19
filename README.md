@@ -149,7 +149,9 @@ directory being untouched.
 
 ## Bugs
 
-- If I run `./bin/create-test-logfiles.sh 10000` and then start Splunk Lab on a Mac, all of the files will be Indexed without any major issues, but then the CPU will spin, and not from Splunk. This may be a filesystem issue in Docker on the Mac.  More investigation needs to be done.
+- If I run `./bin/create-test-logfiles.sh 10000` and then start Splunk Lab on a Mac, all of the files will be Indexed without any major issues, but then the CPU will spin, and not from Splunk. 
+   - After experimenting in a Vagrant instance, this appears to be due to how Docker on OS/X handles files.  Anything over a few hundred files in the `logs/` directory is probably not a good idea. For that, a Vagrant instance doing the same workload will provide far superior performance, being able to ingest 10,000 files created in the above method in maybe 10 seconds, versus taking closer to a minute in OS/X.
+
 
 
 ## Credits
