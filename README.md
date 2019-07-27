@@ -12,24 +12,9 @@ Paste this in on the command line:
 
 `SPLUNK_START_ARGS=--accept-license bash <(curl -s https://raw.githubusercontent.com/dmuth/splunk-lab/master/go.sh)`
 
-...and the script will print up what directory it will ingest logs from, etc.  Follow the on-screen
-instructions for setting environment variables and you'll be up and running in no time!
-
-
-## Apps Built With Splunk Lab
-
-Since building Splunk Lab, I have used it as the basis for building other projects:
-
-- <a href="https://github.com/dmuth/splunk-yelp-reviews">Splunk Yelp Reviews</a>
-   - This project lets you pull down Yelp reviews for venues and view visualizations and wordclouds of positive/negative reviews in a Splunk dashboard.
-- <a href="https://github.com/dmuth/splunk-glassdoor">Splunk Glassdoor Reviews</a>
-   - Similar to Splunk Yelp, this project lets you pull down company reviews from Glassdoor and Splunk them
-- <a href="https://github.com/dmuth/splunk-telegram">Splunk Telegram</a>
-   - This app lets you run Splunk against messages from Telegram groups and generate graphs and word clouds based on the activity in them.
-- <a href="https://github.com/dmuth/splunk-network-health-check">Splunk Network Health Check</a>
-   - Pings 1 or more hosts and graphs the results in Splunk so you can monitor network connectivity over time.
-- <a href="https://github.com/dmuth/splunk-fitbit">Splunk Fitbit</a>
-   - Analyzes data from your Fitbit
+...and the script will print up what directory it will ingest logs from, your password, etc.  Follow the on-screen
+instructions for setting environment variables and you'll be up and running in no time!  You can find your
+logs with the search `index=main`.
 
 
 ## Screenshots
@@ -84,23 +69,22 @@ via one of the includes apps:
              - <a href="http://stream.meetup.com/2/rsvps">RSVP Endpoint</a>
 
 
-## Common Uses
+## Apps Built With Splunk Lab
 
-**If you are having a system issue, and want to ingest your logs, persist the ingested data between Splunk runs, and persist 
-created dashboards as well:**
+Since building Splunk Lab, I have used it as the basis for building other projects:
 
-`docker run -p 8000:8000 bash -e SPLUNK_PASSWORD=password -e SPLUNK_START_ARGS=--accept-license -v /var/log:/logs -v $(pwd)/data:/data -v $(pwd)/app:/app -d dmuth1/splunk-lab`
+- <a href="https://github.com/dmuth/splunk-yelp-reviews">Splunk Yelp Reviews</a>
+   - This project lets you pull down Yelp reviews for venues and view visualizations and wordclouds of positive/negative reviews in a Splunk dashboard.
+- <a href="https://github.com/dmuth/splunk-glassdoor">Splunk Glassdoor Reviews</a>
+   - Similar to Splunk Yelp, this project lets you pull down company reviews from Glassdoor and Splunk them
+- <a href="https://github.com/dmuth/splunk-telegram">Splunk Telegram</a>
+   - This app lets you run Splunk against messages from Telegram groups and generate graphs and word clouds based on the activity in them.
+- <a href="https://github.com/dmuth/splunk-network-health-check">Splunk Network Health Check</a>
+   - Pings 1 or more hosts and graphs the results in Splunk so you can monitor network connectivity over time.
+- <a href="https://github.com/dmuth/splunk-fitbit">Splunk Fitbit</a>
+   - Analyzes data from your Fitbit
 
-**If you want to do data analytics on files in the logs/ directory, and persist the ingested data between Splunk runs, and
-persist created dashboards as well:**
 
-`docker run -p 8000:8000 -e SPLUNK_PASSWORD=password -e SPLUNK_START_ARGS=--accept-license -v $(pwd)/logs:/logs -v $(pwd)/data:/data -v $(pwd)/app:/app -d dmuth1/splunk-lab`
-
-
-Once Splunk is running, you can log in with the `admin` user and password you specified, 
-and doing a query for `index=main` should show your logs.
-
-BTW, your password will be sanity checked.  Don't use `password` as your password. ;-)
 
 
 ## A Word About Security
@@ -109,6 +93,8 @@ HTTPS is turned on by default.  Passwords such as `password` and <a href="https:
 
 Please, <a href="https://diceware.dmuth.org/">use a strong password</a> if you are deploying
 this on a public-facing machine.
+
+BTW, your password will be sanity checked.  Don't use `password` as your password. ;-)
 
 
 ## FAQ
