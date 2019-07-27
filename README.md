@@ -28,6 +28,8 @@ Since building Splunk Lab, I have used it as the basis for building other projec
    - This app lets you run Splunk against messages from Telegram groups and generate graphs and word clouds based on the activity in them.
 - <a href="https://github.com/dmuth/splunk-network-health-check">Splunk Network Health Check</a>
    - Pings 1 or more hosts and graphs the results in Splunk so you can monitor network connectivity over time.
+- <a href="https://github.com/dmuth/splunk-fitbit">Splunk Fitbit</a>
+   - Analyzes data from your Fitbit
 
 
 ## Screenshots
