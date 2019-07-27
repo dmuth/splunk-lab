@@ -94,8 +94,6 @@ HTTPS is turned on by default.  Passwords such as `password` and <a href="https:
 Please, <a href="https://diceware.dmuth.org/">use a strong password</a> if you are deploying
 this on a public-facing machine.
 
-BTW, your password will be sanity checked.  Don't use `password` as your password. ;-)
-
 
 ## FAQ
 
