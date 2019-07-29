@@ -1,0 +1,35 @@
+
+
+# 
+# Create at https://dreampuf.github.io/GraphvizOnline/
+#
+digraph G {
+
+subgraph cluster_splunk_lab {
+  "Splunk\nLab" -> "Splunk\nTelegram";
+  "Splunk\nLab" -> "Splunk Network\nHealth Check";
+  "Splunk\nLab" -> "Splunk\nFitbit";
+}
+
+subgraph cluster_splunk_lab_ml {
+  "Splunk\nLab ML" -> "Splunk\nYelp";
+  "Splunk\nLab ML" -> "Splunk\nGlassdoor";
+}
+
+"Splunk\nLab Core" -> "Splunk\nLab";
+"Splunk\nLab Core" -> "Splunk\nLab ML";
+
+
+"Splunk\nLab" [shape=diamond]
+"Splunk\nLab ML" [shape=diamond]
+
+"Splunk\nTelegram" [shape=square]
+"Splunk Network\nHealth Check" [shape=rectangle]
+"Splunk\nFitbit" [shape=square]
+
+"Splunk\nYelp" [shape=square]
+"Splunk\nGlassdoor" [shape=square]
+
+}
+
+
