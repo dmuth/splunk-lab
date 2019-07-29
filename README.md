@@ -19,7 +19,20 @@ logs with the search `index=main`.
 
 ## Screenshots
 
-<a href="./img/splunk-rest-api-input.png"><img src="./img/splunk-rest-api-input.png" width="250" /></a> <a href="./img/splunk-syndication-feed.png"><img src="./img/splunk-syndication-feed.png" width="250" /></a> <a href="./img/splunk-cnn-headlines.png"><img src="./img/splunk-cnn-headlines.png" width="250" /></a>
+These are screenshots with actual data from production apps which I built on top of Splunk LAb:
+
+<a href="img/bella-italia.png">
+<img src="img/bella-italia.png" width="250" /></a>
+<a href="img/facebook-glassdoor.png">
+<img src="img/facebook-glassdoor.png" width="250" /></a>
+<a href="img/pa-furry-stats.jpg">
+<img src="img/pa-furry-stats.jpg" width="250" /></a>
+<a href="img/network-huge-outage.png">
+<img src="img/network-huge-outage.png" width="250" /></a>
+<a href="img/fitbit-sleep-dashboard.png">
+<img src="img/fitbit-sleep-dashboard.png" width="250" /></a>
+<a href="img/snepchat-tag-cloud.jpg">
+<img src="img/snepchat-tag-cloud.jpg" width="250" /></a>
 
 
 ## Splunk Apps Included
@@ -88,8 +101,6 @@ Since building Splunk Lab, I have used it as the basis for building other projec
 Here's all of the above, presented as a graph:
 
 <img src="img/app-tree.png" width="500" />
-
-
 
 
 ## A Word About Security
