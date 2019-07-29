@@ -85,6 +85,11 @@ Since building Splunk Lab, I have used it as the basis for building other projec
    - Analyzes data from your Fitbit
 
 
+Here's all of the above, presented as a graph:
+
+<img src="img/app-tree.png" width="500" />
+
+
 
 
 ## A Word About Security
