@@ -10,7 +10,7 @@ This project lets you stand up a Splunk instance in Docker on a quick and dirty 
 
 Paste this in on the command line:
 
-`SPLUNK_START_ARGS=--accept-license bash <(curl -s https://raw.githubusercontent.com/dmuth/splunk-lab/master/go.sh)`
+`bash <(curl -s https://raw.githubusercontent.com/dmuth/splunk-lab/master/go.sh)`
 
 ...and the script will print up what directory it will ingest logs from, your password, etc.  Follow the on-screen
 instructions for setting environment variables and you'll be up and running in no time!  You can find your
