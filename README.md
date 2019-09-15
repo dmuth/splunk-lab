@@ -96,6 +96,8 @@ Since building Splunk Lab, I have used it as the basis for building other projec
    - Pings 1 or more hosts and graphs the results in Splunk so you can monitor network connectivity over time.
 - <a href="https://github.com/dmuth/splunk-fitbit">Splunk Fitbit</a>
    - Analyzes data from your Fitbit
+- <a href="https://github.com/dmuth/splunk-aws-s3-server-accesslogs">Splunk for AWS S3 Server Access Logs</a>
+   - App to analyize AWS S3 Access Logs
 
 
 Here's all of the above, presented as a graph:
