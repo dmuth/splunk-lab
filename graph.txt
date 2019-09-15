@@ -9,6 +9,7 @@ subgraph cluster_splunk_lab {
   "Splunk\nLab" -> "Splunk\nTelegram";
   "Splunk\nLab" -> "Splunk Network\nHealth Check";
   "Splunk\nLab" -> "Splunk\nFitbit";
+  "Splunk\nLab" -> "Splunk AWS S3 Logs";
 }
 
 subgraph cluster_splunk_lab_ml {
