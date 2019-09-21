@@ -20,6 +20,11 @@ cd ..
 #
 rm -fv splunk-lab-app/local
 
+#
+# Download our packages from the Splunk Lab S3 bucket
+#
+./bin/download-from-s3.sh
+
 echo "# "
 echo "# Building Docker container..."
 echo "# "

@@ -7,30 +7,28 @@ FROM splunk-lab-core
 #
 # Install Python for Scientific computing and Splunk ML Toolkit
 #
-RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/python-for-scientific-computing-for-linux-64-bit_14.tgz \
-	&& tar xfvz python-for-scientific-computing-for-linux-64-bit_14.tgz \
+RUN \
+	tar xfvz /tmp/splunk-packages/python-for-scientific-computing-for-linux-64-bit_14.tgz \
 	&& mv Splunk_SA_Scientific_Python_linux_x86_64 /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_14.tgz \
+	&& rm -fv /tmp/splunk-packages/python-for-scientific-computing-for-linux-64-bit_14.tgz \
 
-	&& wget https://s3.amazonaws.com/dmuth-splunk-lab/splunk-machine-learning-toolkit_420.tgz \
-	&& tar xfvz splunk-machine-learning-toolkit_420.tgz \
+	&& tar xfvz /tmp/splunk-packages/splunk-machine-learning-toolkit_420.tgz \
 	&& mv Splunk_ML_Toolkit /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-machine-learning-toolkit_420.tgz \
+	&& rm -fv /tmp/splunk-packages/splunk-machine-learning-toolkit_420.tgz \
 
-	&& wget https://s3.amazonaws.com/dmuth-splunk-lab/nlp-text-analytics_102.tgz \
-	&& tar xfvz nlp-text-analytics_102.tgz \
+	&& tar xfvz /tmp/splunk-packages/nlp-text-analytics_102.tgz \
 	&& mv nlp-text-analytics /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/nlp-text-analytics_102.tgz \
+	&& rm -fv /tmp/splunk-packages/nlp-text-analytics_102.tgz \
 
-	&& wget https://s3.amazonaws.com/dmuth-splunk-lab/halo-custom-visualization_113.tgz \
-	&& tar xfvz halo-custom-visualization_113.tgz \
+	&& tar xfvz /tmp/splunk-packages/halo-custom-visualization_113.tgz \
 	&& mv viz_halo /opt/splunk/etc/apps \
-	&& rm -fv /tmp/halo-custom-visualization_113.tgz \
+	&& rm -fv /tmp/splunk-packages/halo-custom-visualization_113.tgz \
 
-	&& wget https://s3.amazonaws.com/dmuth-splunk-lab/sankey-diagram-custom-visualization_130.tgz \
-	&& tar xfvz sankey-diagram-custom-visualization_130.tgz \
+	&& tar xfvz /tmp/splunk-packages/sankey-diagram-custom-visualization_130.tgz \
 	&& mv sankey_diagram_app /opt/splunk/etc/apps \
-	&& rm -fv /tmp/sankey-diagram-custom-visualization_130.tgz
+	&& rm -fv /tmp/splunk-packages/sankey-diagram-custom-visualization_130.tgz
+
+
 
 
 #####

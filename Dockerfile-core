@@ -61,41 +61,43 @@ RUN ln -s /opt/splunk/var/lib/splunk/ /data \
 
 WORKDIR /tmp
 
+# TEST
+# Splunk-lab: 1.04GB
+# Splunk-lab-ml: 1.77 GB
+COPY splunk-packages-from-s3/* /tmp/splunk-packages/
+
 #
 # Install Syndication app
 # https://splunkbase.splunk.com/app/2646/
 #
-RUN wget https://s3.amazonaws.com/dmuth-splunk-lab/syndication-input-rssatomrdf_12.tgz \
-	&& tar xfvz syndication-input-rssatomrdf_12.tgz \
+RUN \
+	tar xfvz /tmp/splunk-packages/syndication-input-rssatomrdf_12.tgz \
 	&& mv syndication /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/syndication-input-rssatomrdf_12.tgz \
+	&& rm -fv /tmp/splunk-packages/syndication-input-rssatomrdf_12.tgz \
 
 #
 # Install Rest API Modular Input
 # https://splunkbase.splunk.com/app/1546/#/details
 #
-	&& wget https://s3.amazonaws.com/dmuth-splunk-lab/rest-api-modular-input_154.tgz \
-	&& tar xfvz rest-api-modular-input_154.tgz \
+	&& tar xfvz /tmp/splunk-packages/rest-api-modular-input_154.tgz \
 	&& mv rest_ta /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/rest-api-modular-input_154.tgz \
+	&& rm -fv /tmp/splunk-packages/rest-api-modular-input_154.tgz \
 
 #
 # Install Wordcloud app
 # https://splunkbase.splunk.com/app/3212/
 #
-	&& wget https://s3.amazonaws.com/dmuth-splunk-lab/wordcloud-custom-visualization_111.tgz \
-	&& tar xfvz wordcloud-custom-visualization_111.tgz \
+	&& tar xfvz /tmp/splunk-packages/wordcloud-custom-visualization_111.tgz \
 	&& mv wordcloud_app /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/wordcloud-custom-visualization_111.tgz \
+	&& rm -fv /tmp/splunk-packages/wordcloud-custom-visualization_111.tgz \
 
 #
 # Install Slack Notification Alert
 # https://splunkbase.splunk.com/app/2878/
 #
-	&& wget https://s3.amazonaws.com/dmuth-splunk-lab/slack-notification-alert_203.tgz \
-	&& tar xfvz slack-notification-alert_203.tgz \
+	&& tar xfvz /tmp/splunk-packages/slack-notification-alert_203.tgz \
 	&& mv slack_alerts /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/slack-notification-alert_203.tgz
+	&& rm -fv /tmp/splunk-packages/slack-notification-alert_203.tgz
 
 
 
