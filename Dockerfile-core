@@ -61,9 +61,6 @@ RUN ln -s /opt/splunk/var/lib/splunk/ /data \
 
 WORKDIR /tmp
 
-# TEST
-# Splunk-lab: 1.04GB
-# Splunk-lab-ml: 1.77 GB
 COPY splunk-packages-from-s3/* /tmp/splunk-packages/
 
 #
