@@ -18,7 +18,37 @@ pushd splunk-packages-from-s3 >/dev/null
 echo "# "
 echo "# Downloading packages from S3..."
 echo "# "
-aws s3 sync s3://dmuth-splunk-lab/ .
 
+FILES="halo-custom-visualization_113.tgz
+	nlp-text-analytics_102.tgz
+	python-for-scientific-computing-for-linux-64-bit_14.tgz
+	rest-api-modular-input_154.tgz
+	sankey-diagram-custom-visualization_130.tgz
+	slack-notification-alert_203.tgz
+	splunk-machine-learning-toolkit_420.tgz
+	syndication-input-rssatomrdf_12.tgz
+	wordcloud-custom-visualization_111.tgz
+	"
 
+for FILE in $FILES
+do
+	if test -f $FILE
+	then
+		echo "# File '${FILE}' exists, skipping!"
+		continue
+	fi
+
+	echo "# Downloading file '${FILE}'..."
+
+	TMP=$(mktemp -t splunk-lab)
+	aws s3api get-object \
+		--bucket dmuth-splunk-lab \
+		--key ${FILE} \
+		--request-payer requestor \
+		${TMP}
+	mv $TMP $FILE
+
+done
+
+echo "# Done downloading packages!"
 
