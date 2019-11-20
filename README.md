@@ -86,6 +86,8 @@ via one of the includes apps:
 
 Since building Splunk Lab, I have used it as the basis for building other projects:
 
+- <a href="https://github.com/twintproject/twint-splunk">Splunk Twint</a>
+   - Splunk dashboards for Twitter timelines downloaded by Twint.  This now a part of the <a href="https://github.com/twintproject">TWINT Project</a>.
 - <a href="https://github.com/dmuth/splunk-yelp-reviews">Splunk Yelp Reviews</a>
    - This project lets you pull down Yelp reviews for venues and view visualizations and wordclouds of positive/negative reviews in a Splunk dashboard.
 - <a href="https://github.com/dmuth/splunk-glassdoor">Splunk Glassdoor Reviews</a>
