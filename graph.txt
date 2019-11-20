@@ -15,6 +15,7 @@ subgraph cluster_splunk_lab {
 subgraph cluster_splunk_lab_ml {
   "Splunk\nLab ML" -> "Splunk\nYelp";
   "Splunk\nLab ML" -> "Splunk\nGlassdoor";
+  "Splunk\nLab ML" -> "Splunk\nTwint";
 }
 
 "Splunk\nLab Core" -> "Splunk\nLab";
@@ -30,6 +31,7 @@ subgraph cluster_splunk_lab_ml {
 
 "Splunk\nYelp" [shape=square]
 "Splunk\nGlassdoor" [shape=square]
+"Splunk\nTwint" [shape=square]
 
 }
 
