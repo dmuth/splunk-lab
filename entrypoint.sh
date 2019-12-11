@@ -143,11 +143,18 @@ then
 
 fi
 
+#
+# Loop forever so that the container keeps running
+#
+# I used to tail splunk's stderr file, but it turns out that trying to use SmartStore
+# keeps the file from being created.  Yikes!
+#
+echo "Now going into an endless loop so that the container keeps running..."
+while true
+do
+	sleep 99999
+done
 
-#
-# Tail this file so that Splunk keeps running
-#
-tail -f /opt/splunk/var/log/splunk/splunkd_stderr.log
 
 
 
