@@ -121,8 +121,18 @@ fi
 #
 CMD="docker run \
 	-p ${SPLUNK_PORT}:8000 \
-	-e SPLUNK_PASSWORD=${SPLUNK_PASSWORD} \
-	-v $(pwd)/${SPLUNK_DATA}:/data "
+	-e SPLUNK_PASSWORD=${SPLUNK_PASSWORD} "
+
+#
+# If SPLUNK_DATA is no, we're not exporting it. 
+# Useful for re-importing everything every time.
+#
+if test "${SPLUNK_DATA}" != "no"
+then
+	CMD="$CMD -v $(pwd)/${SPLUNK_DATA}:/data "
+fi
+
+#echo "CMD: $CMD" # Debugging
 
 
 #
@@ -247,7 +257,7 @@ echo "# Login/password:                    admin/${SPLUNK_PASSWORD} (Change with
 echo "# "
 echo "# Logs will be read from:            ${SPLUNK_LOGS} (Change with \$SPLUNK_LOGS)"
 echo "# App dashboards will be stored in:  ${SPLUNK_APP} (Change with \$SPLUNK_APP)"
-echo "# Indexed data will be stored in:    ${SPLUNK_DATA} (Change with \$SPLUNK_DATA)"
+echo "# Indexed data will be stored in:    ${SPLUNK_DATA} (Change with \$SPLUNK_DATA, disable with SPLUNK_DATA=no)"
 if test "$REST_KEY"
 then
 	echo "# Rest API Modular Input key:        ${REST_KEY}"
