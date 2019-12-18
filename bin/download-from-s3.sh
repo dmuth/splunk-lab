@@ -44,7 +44,7 @@ do
 	aws s3api get-object \
 		--bucket dmuth-splunk-lab \
 		--key ${FILE} \
-		--request-payer requestor \
+		--request-payer requester \
 		${TMP}
 	mv $TMP $FILE
 
