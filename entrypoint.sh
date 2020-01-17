@@ -3,6 +3,8 @@
 # Script to run from Splunk
 #
 
+# Errors are fatal
+set -e
 
 SPLUNK_PASSWORD="${SPLUNK_PASSWORD:=password}"
 
@@ -71,6 +73,7 @@ pushd /opt/splunk/etc/system/local/ >/dev/null
 
 cat user-seed.conf.in | sed -e "s/%password%/${SPLUNK_PASSWORD}/" > user-seed.conf
 cat web.conf.in | sed -e "s/%password%/${SPLUNK_PASSWORD}/" > web.conf
+cat inputs.conf.in | sed -e "s/%DATE%/$(date +%Y%m%d-%H%M%S)/" > inputs.conf
 
 
 #

@@ -1,4 +1,11 @@
 
+[default]
+#
+# This is the equivilent of "splunk set default-hostname" on the CLI
+#
+host = splunk-lab-%DATE%
+
+
 [monitor:///logs]
 recursive = true
 sourcetype = logs
