@@ -14,9 +14,8 @@
 FROM debian:stretch
 
 ENV SPLUNK_PRODUCT splunk
-ENV SPLUNK_VERSION 7.3.1.1
-ENV SPLUNK_BUILD 7651b7244cf2
-
+ENV SPLUNK_VERSION 8.0.1
+ENV SPLUNK_BUILD 6db836e2fb9e
 ENV SPLUNK_FILENAME splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz
 
 ENV SPLUNK_HOME /opt/splunk
@@ -67,11 +66,10 @@ COPY splunk-packages-from-s3/* /tmp/splunk-packages/
 # Install Syndication app
 # https://splunkbase.splunk.com/app/2646/
 #
-RUN \
+RUN	\
 	tar xfvz /tmp/splunk-packages/syndication-input-rssatomrdf_12.tgz \
 	&& mv syndication /opt/splunk/etc/apps/ \
 	&& rm -fv /tmp/splunk-packages/syndication-input-rssatomrdf_12.tgz \
-
 #
 # Install Rest API Modular Input
 # https://splunkbase.splunk.com/app/1546/#/details
@@ -79,7 +77,6 @@ RUN \
 	&& tar xfvz /tmp/splunk-packages/rest-api-modular-input_154.tgz \
 	&& mv rest_ta /opt/splunk/etc/apps/ \
 	&& rm -fv /tmp/splunk-packages/rest-api-modular-input_154.tgz \
-
 #
 # Install Wordcloud app
 # https://splunkbase.splunk.com/app/3212/
@@ -87,7 +84,6 @@ RUN \
 	&& tar xfvz /tmp/splunk-packages/wordcloud-custom-visualization_111.tgz \
 	&& mv wordcloud_app /opt/splunk/etc/apps/ \
 	&& rm -fv /tmp/splunk-packages/wordcloud-custom-visualization_111.tgz \
-
 #
 # Install Slack Notification Alert
 # https://splunkbase.splunk.com/app/2878/
