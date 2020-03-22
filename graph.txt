@@ -6,6 +6,7 @@
 digraph G {
 
 subgraph cluster_splunk_lab {
+  "Splunk\nLab" -> "SEPTA Stats";
   "Splunk\nLab" -> "Splunk\nTelegram";
   "Splunk\nLab" -> "Splunk Network\nHealth Check";
   "Splunk\nLab" -> "Splunk\nFitbit";
