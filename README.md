@@ -17,6 +17,16 @@ instructions for setting environment variables and you'll be up and running in n
 logs with the search `index=main`.
 
 
+## Features
+
+- App databoards can be stored in the local filesystem (they don't dissappear when the container exits)
+- Ingested data can be stored in the local filesystem
+- Multiple REST and RSS endpoints "built in" to provide sources of data ingestion
+- Integration with <a href="https://www.baboonbones.com/#activation">REST API Modular Input</a>
+- Splunk Machine Learning Toolkit included
+- `/etc/hosts` can be appended to with local settings
+
+
 ## Screenshots
 
 These are screenshots with actual data from production apps which I built on top of Splunk LAb:
