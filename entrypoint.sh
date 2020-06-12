@@ -76,6 +76,13 @@ cat web.conf.in | sed -e "s/%password%/${SPLUNK_PASSWORD}/" > web.conf
 cat inputs.conf.in | sed -e "s/%DATE%/$(date +%Y%m%d-%H%M%S)/" > inputs.conf
 
 
+if test -f /etc/hosts.extra
+then
+	echo "We found /etc/hosts.extra, concatenating it into /etc/hosts..."
+	cat /etc/hosts.extra >> /etc/hosts
+fi
+
+
 #
 # If a Rest Modular API key was specified, add it in.
 #
