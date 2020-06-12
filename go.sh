@@ -26,7 +26,7 @@ SPLUNK_PORT=${SPLUNK_PORT:-8000}
 SPLUNK_APP="app"
 SPLUNK_ML=${SPLUNK_ML:--1}
 SPLUNK_DEVEL=${SPLUNK_DEVEL:-}
-SPLUNK_ETC=${SPLUNK_ETC:-no}
+ETC_HOSTS=${ETC_HOSTS:-no}
 REST_KEY=${REST_KEY:-}
 DOCKER_NAME=${DOCKER_NAME:-splunk-lab}
 DOCKER_RM=${DOCKER_RM:-1}
@@ -120,11 +120,11 @@ fi
 #
 # Sanity check
 #
-if test "$SPLUNK_ETC" != "no"
+if test "$ETC_HOSTS" != "no"
 then
-	if test ! -f ${SPLUNK_ETC}
+	if test ! -f ${ETC_HOSTS}
 	then
-		echo "! Unable to read file '${SPLUNK_ETC}' specfied in \$SPLUNK_ETC!"
+		echo "! Unable to read file '${ETC_HOSTS}' specfied in \$ETC_HOSTS!"
 		exit 1
 	fi
 fi
@@ -164,9 +164,9 @@ then
 	CMD="${CMD} -e REST_KEY=${REST_KEY}"
 fi
 
-if test "${SPLUNK_ETC}" != "no"
+if test "${ETC_HOSTS}" != "no"
 then
-	CMD="$CMD -v $(pwd)/${SPLUNK_ETC}:/etc/hosts.extra "
+	CMD="$CMD -v $(pwd)/${ETC_HOSTS}:/etc/hosts.extra "
 fi
 
 #
@@ -304,11 +304,11 @@ else
 	echo "# Docker command injection:          (Feel free to set with \$DOCKER_CMD)"
 fi
 
-if test "$SPLUNK_ETC" != "no"
+if test "$ETC_HOSTS" != "no"
 then
-	echo "# /etc/hosts addition:               ${SPLUNK_ETC} (Disable with \$SPLUNK_ETC=no)"
+	echo "# /etc/hosts addition:               ${ETC_HOSTS} (Disable with \$ETC_HOSTS=no)"
 else
-	echo "# /etc/hosts addition:               NO (Set with \$SPLUNK_ETC=filename)"
+	echo "# /etc/hosts addition:               NO (Set with \$ETC_HOSTS=filename)"
 fi
 
 echo "# "
