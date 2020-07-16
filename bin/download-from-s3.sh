@@ -28,6 +28,7 @@ FILES="halo-custom-visualization_113.tgz
 	splunk-machine-learning-toolkit_420.tgz
 	syndication-input-rssatomrdf_12.tgz
 	wordcloud-custom-visualization_111.tgz
+	splunk-dashboard-examples_800.tgz
 	"
 
 for FILE in $FILES
