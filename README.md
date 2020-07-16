@@ -49,6 +49,7 @@ These are screenshots with actual data from production apps which I built on top
 
 The following Splunk apps are included in this Docker image:
 
+- <a href="https://splunkbase.splunk.com/app/1603/">Splunk Dashboard Examples</a>
 - <a href="https://splunkbase.splunk.com/app/2646/">Syndication Input</a>
 - <a href="https://splunkbase.splunk.com/app/1546/">REST API Modular Input</a> (requires registration)
 - <a href="https://splunkbase.splunk.com/app/3212/">Wordcloud Custom Visualization</a>
