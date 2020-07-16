@@ -47,9 +47,10 @@ RUN \
 
 
 #
-# Copy in vendor/README.md, which contains license info on the various apps.
+# Copy in our READMEs
 #
-COPY vendor/README.md /README.md
+COPY vendor/README.md /README-vendor.md
+COPY README.md /README.md
 
 
 #
