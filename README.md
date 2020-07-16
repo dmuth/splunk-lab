@@ -183,6 +183,11 @@ directory being untouched.
 - <a href="http://patorjk.com/software/taag/#p=display&h=0&v=0&f=Standard&t=Splunk%20Lab">This text to ASCII art generator</a>, for the logo I used in the script.
 
 
+## Copyrights
+
+- Splunk is copyright by Splunk, Inc.  Please stay within the confines of the 500 MB/day free license when using Splunk Lab, unless you brought your own license along.
+- The various apps are copyright by the creators of those apps.
+
 
 ## Contact
 
