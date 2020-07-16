@@ -17,6 +17,12 @@ instructions for setting environment variables and you'll be up and running in n
 logs with the search `index=main`.
 
 
+### Useful links after starting
+
+- [https://localhost:8000/](https://localhost:8000/) - Default port to log into the local instance.  Username is `admin`, password is what was set when starting Splunk Lab.
+- [Splunk Dashboard Examples](https://localhost:8000/en-US/app/simple_xml_examples/contents) - Wanna see what you can do with Splunk?  Here are some example dashboards.
+
+
 ## Features
 
 - App databoards can be stored in the local filesystem (they don't dissappear when the container exits)
