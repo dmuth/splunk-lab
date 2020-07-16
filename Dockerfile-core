@@ -90,7 +90,13 @@ RUN	\
 #
 	&& tar xfvz /tmp/splunk-packages/slack-notification-alert_203.tgz \
 	&& mv slack_alerts /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/slack-notification-alert_203.tgz
-
+	&& rm -fv /tmp/splunk-packages/slack-notification-alert_203.tgz \
+#
+# Install Splunk Dashboard Examples
+# https://splunkbase.splunk.com/app/1603/
+#
+	&& tar xfvz /tmp/splunk-packages/splunk-dashboard-examples_800.tgz \
+	&& mv simple_xml_examples /opt/splunk/etc/apps/ \
+	&& rm -fv /tmp/splunk-packages/splunk-dashboard-examples_800.tgz
 
 
