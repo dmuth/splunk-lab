@@ -178,8 +178,7 @@ directory being untouched.
 
 - The Docker containers are **dmuth1/splunk-lab** and **dmuth1/splunk-lab-ml**.  The latter has all of the Machine Learning apps built in to the image.  Feel free to extend those for your own projects.
 - If I run `./bin/create-test-logfiles.sh 10000` and then start Splunk Lab on a Mac, all of the files will be Indexed without any major issues, but then the CPU will spin, and not from Splunk. 
-   - After experimenting in a Vagrant instance, this appears to be due to how Docker on OS/X handles files.  Anything over a few hundred files in the `logs/` directory is probably not a good idea. For that, a Vagrant instance doing the same workload will provide far superior performance, being able to ingest 10,000 files created in the above method in maybe 10 seconds, versus taking closer to a minute in OS/X.
-
+   - The root cause is that the filesystem code for Docker volume mappings on OS/X's Docker implementation is VERY inefficient in terms of both CPU and memory usage, especially when there are 10,000 files involved.  The overhead is just crazy.  When reading events from a directory mounted through Docker, I see about 100 events/sec.  When the directory is local to the container, I see about 1,000 events/sec, for a 10x difference.
 
 
 ## Credits
