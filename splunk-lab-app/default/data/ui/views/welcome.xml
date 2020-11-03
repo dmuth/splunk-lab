@@ -4,9 +4,12 @@
     <panel>
       <html>
 
+<img src="/static/app/splunk-lab/splunk-lab.png" align="right" />
+
 <h1>Welcome to Splunk Lab!</h1>
 
 <h2>About</h2>
+
 
 <p>
 <a href="https://github.com/dmuth/splunk-lab">Splunk Lab</a> is the quick and easy way to spin up an instance of Splunk in Docker to perform ad-hoc data analysis on one or more logfiles or REST/RSS endpoints!
