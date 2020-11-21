@@ -14,3 +14,9 @@ modtime = 1604447185.494287000
 [nav/default]
 version = 7.2.5
 modtime = 1558665628.774204000
+
+[]
+access = read : [ * ], write : [ admin, power ]
+export = system
+version = 8.0.1
+modtime = 1606002449.098386000
