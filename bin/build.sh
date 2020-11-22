@@ -28,7 +28,7 @@ rm -fv splunk-lab-app/local
 echo "# "
 echo "# Building Docker container..."
 echo "# "
-docker build . -f docker/Dockerfile-core -t splunk-lab-core
+docker build . -f docker/core -t splunk-lab-core
 docker build . -f docker/Dockerfile -t splunk-lab
 docker build . -f docker/Dockerfile-ml -t splunk-lab-ml
 
