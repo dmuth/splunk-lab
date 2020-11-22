@@ -12,6 +12,8 @@ set -e
 # Change to our parent directory
 pushd $(dirname $0)/.. > /dev/null
 
+BUCKET="dmuth-splunk-lab"
+
 mkdir -p splunk-packages-from-s3
 pushd splunk-packages-from-s3 >/dev/null
 
@@ -29,6 +31,7 @@ FILES="halo-custom-visualization_113.tgz
 	syndication-input-rssatomrdf_12.tgz
 	wordcloud-custom-visualization_111.tgz
 	splunk-dashboard-examples_800.tgz
+        eventgen_653.tgz
 	"
 
 for FILE in $FILES
@@ -43,7 +46,7 @@ do
 
 	TMP=$(mktemp -t splunk-lab)
 	aws s3api get-object \
-		--bucket dmuth-splunk-lab \
+		--bucket ${BUCKET} \
 		--key ${FILE} \
 		--request-payer requester \
 		${TMP}

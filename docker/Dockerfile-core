@@ -97,6 +97,14 @@ RUN	\
 #
 	&& tar xfvz /tmp/splunk-packages/splunk-dashboard-examples_800.tgz \
 	&& mv simple_xml_examples /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/splunk-dashboard-examples_800.tgz
+	&& rm -fv /tmp/splunk-packages/splunk-dashboard-examples_800.tgz \
+#
+# Install Eventgen
+# https://splunkbase.splunk.com/app/1924
+#
+	&& tar xfvz /tmp/splunk-packages/eventgen_653.tgz \
+	&& mv SA-Eventgen /opt/splunk/etc/apps/ \
+	&& rm -fv /tmp/splunk-packages/eventgen_653.tgz
+
 
 
