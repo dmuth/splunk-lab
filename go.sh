@@ -26,6 +26,7 @@ SPLUNK_PORT=${SPLUNK_PORT:-8000}
 SPLUNK_APP="app"
 SPLUNK_ML=${SPLUNK_ML:--1}
 SPLUNK_DEVEL=${SPLUNK_DEVEL:-}
+SPLUNK_EVENTGEN=${SPLUNK_EVENTGEN:-}
 ETC_HOSTS=${ETC_HOSTS:-no}
 REST_KEY=${REST_KEY:-}
 DOCKER_NAME=${DOCKER_NAME:-splunk-lab}
@@ -169,6 +170,11 @@ then
 	CMD="$CMD -v $(pwd)/${ETC_HOSTS}:/etc/hosts.extra "
 fi
 
+if test "${SPLUNK_EVENTGEN}"
+then
+	CMD="${CMD} -e SPLUNK_EVENTGEN=${SPLUNK_EVENTGEN}"
+fi
+
 #
 # Again, doing the same unusual stuff that we are with DOCKER_RM,
 # since the default is to hvae a name.
@@ -309,6 +315,13 @@ then
 	echo "# /etc/hosts addition:               ${ETC_HOSTS} (Disable with \$ETC_HOSTS=no)"
 else
 	echo "# /etc/hosts addition:               NO (Set with \$ETC_HOSTS=filename)"
+fi
+
+if test "$SPLUNK_EVENTGEN"
+then
+	echo "# Fake HTTP Event Generation:        YES (index=main sourcetype=nginx to view)"
+else
+	echo "# Fake HTTP Event Generation:        NO (Feel free to set with \$SPLUNK_EVENTGEN)"
 fi
 
 echo "# "

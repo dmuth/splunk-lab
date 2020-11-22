@@ -65,17 +65,36 @@ then
 	exit 1
 fi
 
+#
+# Set out $SPLUNK_EVENTGEN_DISABLED value to a 1 or 0.
+#
+if test "${SPLUNK_EVENTGEN}"
+then
+	SPLUNK_EVENTGEN_DISABLED=0
+else
+	SPLUNK_EVENTGEN_DISABLED=1
+fi
 
 #
 # Set our default password
 #
 pushd /opt/splunk/etc/system/local/ >/dev/null
 
+
 cat user-seed.conf.in | sed -e "s/%password%/${SPLUNK_PASSWORD}/" > user-seed.conf
 cat web.conf.in | sed -e "s/%password%/${SPLUNK_PASSWORD}/" > web.conf
-cat inputs.conf.in | sed -e "s/%DATE%/$(date +%Y%m%d-%H%M%S)/" > inputs.conf
+cat inputs.conf.in \
+	| sed -e "s/%DATE%/$(date +%Y%m%d-%H%M%S)/" \
+	| sed -e "s/%EVENTGEN%/${SPLUNK_EVENTGEN_DISABLED}/" \
+	> inputs.conf
+#echo "TEST: ${SPLUNK_EVENTGEN}"
+#exec "$@"
+#exit
 
 
+#
+# If we have a hosts file, append it to our /etc/hosts file.
+#
 if test -f /etc/hosts.extra
 then
 	echo "We found /etc/hosts.extra, concatenating it into /etc/hosts..."
