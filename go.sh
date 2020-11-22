@@ -32,6 +32,7 @@ REST_KEY=${REST_KEY:-}
 DOCKER_NAME=${DOCKER_NAME:-splunk-lab}
 DOCKER_RM=${DOCKER_RM:-1}
 DOCKER_CMD=${DOCKER_CMD:-}
+PRINT_DOCKER_CMD=${PRINT_DOCKER_CMD:-}
 
 
 if test "$SPLUNK_START_ARGS" != "--accept-license"
@@ -256,6 +257,15 @@ CMD="${CMD} ${IMAGE}"
 if test "$SPLUNK_DEVEL"
 then
 	CMD="${CMD} bash"
+fi
+
+#
+# If $PRINT_DOCKER_CMD is set, print out the Docker command that would be run then exit.
+#
+if test "${PRINT_DOCKER_CMD}"
+then
+	echo "$CMD"
+	exit
 fi
 
 echo
