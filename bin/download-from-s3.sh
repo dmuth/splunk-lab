@@ -28,7 +28,7 @@ FILES="halo-custom-visualization_113.tgz
 	sankey-diagram-custom-visualization_130.tgz
 	slack-notification-alert_203.tgz
 	splunk-machine-learning-toolkit_420.tgz
-	syndication-input-rssatomrdf_12.tgz
+        syndication-input-rssatomrdf_124.tgz
 	wordcloud-custom-visualization_111.tgz
 	splunk-dashboard-examples_800.tgz
         eventgen_720.tgz
