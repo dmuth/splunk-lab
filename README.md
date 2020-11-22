@@ -8,13 +8,17 @@ This project lets you stand up a Splunk instance in Docker on a quick and dirty 
 
 ## Quick Start!
 
-Paste this in on the command line:
+Paste either of these on the command line:
 
 `bash <(curl -s https://raw.githubusercontent.com/dmuth/splunk-lab/master/go.sh)`
+
+`bash <(curl -Ls https://bit.ly/splunklab)`
 
 ...and the script will print up what directory it will ingest logs from, your password, etc.  Follow the on-screen
 instructions for setting environment variables and you'll be up and running in no time!  You can find your
 logs with the search `index=main`.
+
+If you want to see neat things you can do in Splunk Lab, check out <a href="#cookbook">the Cookbook section</a>.
 
 
 ### Useful links after starting
@@ -52,6 +56,40 @@ These are screenshots with actual data from production apps which I built on top
 <img src="img/fitbit-sleep-dashboard.png" width="250" /></a>
 <a href="img/snepchat-tag-cloud.jpg">
 <img src="img/snepchat-tag-cloud.jpg" width="250" /></a>
+
+
+<a name="cookbook"></a>
+## Splunk Lab Cookbook
+
+What can you do with Splunk Lab?  Here are a few examples of ways you can use Splunk Lab:
+
+### Ingest some logs for viewing, searching, and analysis
+
+- Drop your logs into the `logs/` directory.
+- `bash <(curl -Ls https://bit.ly/splunklab)`
+- Go to https://localhost:8000/
+- Ingsted data will be written to `data/` which will persist between runs.
+
+### Ingest some logs for viewing, searching, and analysis but DON'T keep ingested data between runs
+
+- `SPLUNK_DATA=no bash <(curl -Ls https://bit.ly/splunklab)`
+- Note that `data/` will not be written to and launching a new container will cause `logs/` to be indexed again.
+   - This will increase ingestion rate on Docker for OS/X, as there are some issues with the filesystem driver in OS/X Docker.
+
+### Play around with synthetic webserver data
+
+- `SPLUNK_EVENTGEN=1 bash <(curl -Ls https://bit.ly/splunklab)`
+- Fake webserver logs will be written every 10 seconds and can be viewed with the query `index=main sourcetype=nginx`
+ 
+### Adding Hostnames into /etc/hosts
+
+- Edit a local hosts file
+- `ETC_HOSTS=./hosts bash <(curl -Ls https://bit.ly/splunklab)`
+- This can be used in conjunction with something like <a href="https://github.com/dmuth/splunk-network-health-check">Splunk Network Monitor</a> to ping hosts that don't have DNS names, such as your home's webcam. :-)
+
+### Get the Docker command line for any of the above
+
+- Run any of the above with `PRINT_DOCKER_CMD=1` set, and the Docker command line that's used will be written to stdout.
 
 
 ## Splunk Apps Included
