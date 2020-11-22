@@ -5,6 +5,11 @@
 #
 host = splunk-lab-%DATE%
 
+#
+# Turn on Eventgen.
+#
+[modinput_eventgen://default]
+disabled = %EVENTGEN%
 
 [monitor:///logs]
 recursive = true
