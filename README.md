@@ -78,7 +78,7 @@ Splunk has its own license.  Please abide by it.
 ## Free Sources of Data
 
 I put together this curated list of free sources of data which can be pulled into Splunk
-via one of the includes apps:
+via one of the included apps:
 
 - Free
     - RSS
