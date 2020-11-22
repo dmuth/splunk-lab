@@ -8,15 +8,15 @@ FROM splunk-lab-core
 # Install Python for Scientific computing and Splunk ML Toolkit
 #
 RUN \
-	tar xfvz /tmp/splunk-packages/python-for-scientific-computing-for-linux-64-bit_14.tgz \
+	tar xfvz /tmp/splunk-packages/python-for-scientific-computing-for-linux-64-bit_202.tgz \
 	&& mv Splunk_SA_Scientific_Python_linux_x86_64 /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/python-for-scientific-computing-for-linux-64-bit_14.tgz \
+	&& rm -fv /tmp/splunk-packages/python-for-scientific-computing-for-linux-64-bit_202.tgz \
 #
 # Machine Learning toolkit
 #
-	&& tar xfvz /tmp/splunk-packages/splunk-machine-learning-toolkit_420.tgz \
+	&& tar xfvz /tmp/splunk-packages/splunk-machine-learning-toolkit_520.tgz \
 	&& mv Splunk_ML_Toolkit /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/splunk-machine-learning-toolkit_420.tgz \
+	&& rm -fv /tmp/splunk-packages/splunk-machine-learning-toolkit_520.tgz \
 #
 # NLP text analytics
 #
