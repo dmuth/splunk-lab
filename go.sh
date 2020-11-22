@@ -292,13 +292,20 @@ echo "# Login/password:                    admin/${SPLUNK_PASSWORD} (Change with
 echo "# "
 echo "# Logs will be read from:            ${SPLUNK_LOGS} (Change with \$SPLUNK_LOGS)"
 echo "# App dashboards will be stored in:  ${SPLUNK_APP} (Change with \$SPLUNK_APP)"
-echo "# Indexed data will be stored in:    ${SPLUNK_DATA} (Change with \$SPLUNK_DATA, disable with SPLUNK_DATA=no)"
 #if test "$REST_KEY"
 #then
 #	echo "# Rest API Modular Input key:        ${REST_KEY}"
 #else
 #	echo "# Rest API Modular Input key:        (Get yours at https://www.baboonbones.com/#activation and set with \$REST_KEY)"
 #fi
+
+if test "${SPLUNK_DATA}" != "no"
+then
+	echo "# Indexed data will be stored in:    ${SPLUNK_DATA} (Change with \$SPLUNK_DATA, disable with SPLUNK_DATA=no)"
+else
+	echo "# Indexed data WILL NOT persist.     (Change by setting \$SPLUNK_DATA)"
+fi
+
 if test "$DOCKER_NAME"
 then
 	echo "# Docker container name:             ${DOCKER_NAME} (Disable automatic name with \$DOCKER_NAME=no)"
