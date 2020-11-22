@@ -24,7 +24,7 @@ echo "# "
 FILES="halo-custom-visualization_113.tgz
 	nlp-text-analytics_102.tgz
 	python-for-scientific-computing-for-linux-64-bit_14.tgz
-	rest-api-modular-input_154.tgz
+	rest-api-modular-input_198.tgz
 	sankey-diagram-custom-visualization_130.tgz
 	slack-notification-alert_203.tgz
 	splunk-machine-learning-toolkit_420.tgz

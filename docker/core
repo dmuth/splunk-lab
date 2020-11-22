@@ -70,17 +70,20 @@ RUN	\
 #	&& mv syndication /opt/splunk/etc/apps/ \
 #	&& rm -fv /tmp/splunk-packages/syndication-input-rssatomrdf_12.tgz \
 #
+#
+# 22 Nov 2020: Keeping rest out for now until https://github.com/dmuth/splunk-lab/issues/5 is fixed...
+#
 # Install Rest API Modular Input
 # https://splunkbase.splunk.com/app/1546/#/details
 #
-	tar xfvz /tmp/splunk-packages/rest-api-modular-input_154.tgz \
-	&& mv rest_ta /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/rest-api-modular-input_154.tgz \
+#	tar xfvz /tmp/splunk-packages/rest-api-modular-input_154.tgz \
+#	&& mv rest_ta /opt/splunk/etc/apps/ \
+#	&& rm -fv /tmp/splunk-packages/rest-api-modular-input_154.tgz \
 #
 # Install Wordcloud app
 # https://splunkbase.splunk.com/app/3212/
 #
-	&& tar xfvz /tmp/splunk-packages/wordcloud-custom-visualization_111.tgz \
+	tar xfvz /tmp/splunk-packages/wordcloud-custom-visualization_111.tgz \
 	&& mv wordcloud_app /opt/splunk/etc/apps/ \
 	&& rm -fv /tmp/splunk-packages/wordcloud-custom-visualization_111.tgz \
 #
