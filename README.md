@@ -31,11 +31,12 @@ logs with the search `index=main`.
 - Integration with <a href="https://www.baboonbones.com/#activation">REST API Modular Input</a>
 - Splunk Machine Learning Toolkit included
 - `/etc/hosts` can be appended to with local ip/hostname entries
+- Ships with Eventgen to populate your index with fake webserver events for testing.
 
 
 ## Screenshots
 
-These are screenshots with actual data from production apps which I built on top of Splunk LAb:
+These are screenshots with actual data from production apps which I built on top of Splunk Lab:
 
 <a href="img/bella-italia.png">
 <img src="img/bella-italia.png" width="250" /></a>
@@ -55,6 +56,7 @@ These are screenshots with actual data from production apps which I built on top
 
 The following Splunk apps are included in this Docker image:
 
+- <a href="https://splunkbase.splunk.com/app/1924">Eventgen</a>
 - <a href="https://splunkbase.splunk.com/app/1603/">Splunk Dashboard Examples</a>
 - <a href="https://splunkbase.splunk.com/app/2646/">Syndication Input</a>
 - <a href="https://splunkbase.splunk.com/app/1546/">REST API Modular Input</a> (requires registration)
@@ -186,6 +188,7 @@ directory being untouched.
 
 - <a href="https://github.com/mhassan2/splunk-n-box">Splunk N' Box</a> - Splunk N' Box is used to create entire Splunk clusters in Docker.  It was the first actual use of Splunk I saw in Docker, and gave me the idea that hey, maybe I could run a stand-alone Splunk instance in Docker for ad-hoc data analysis!
 - <a href="http://www.splunk.com/">Splunk</a>, for having such a fantastic product which is also a great example of Operational Excellence!
+- <a href="https://splunkbase.splunk.com/app/1924">Eventgen</a> is a super cool way of generating simulating real data that can be used to generate dashboards for testing and training purposes.
 - <a href="http://patorjk.com/software/taag/#p=display&h=0&v=0&f=Standard&t=Splunk%20Lab">This text to ASCII art generator</a>, for the logo I used in the script.
 - The logo was made over at https://www.freelogodesign.org/
 
