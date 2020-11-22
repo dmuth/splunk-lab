@@ -20,3 +20,16 @@ access = read : [ * ], write : [ admin, power ]
 export = system
 version = 8.0.1
 modtime = 1606002449.098386000
+
+[props/nginx/EXTRACT-src%2Chttp_method%2Curi_path%2Cstatus%2Cbytes_out%2Chttp_user_agent]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.0.1
+modtime = 1606012450.513383000
+
+[props/nginx/FIELDALIAS-ip]
+export = none
+owner = admin
+version = 8.0.1
+modtime = 1606012526.404080000
