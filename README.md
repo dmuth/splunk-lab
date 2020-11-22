@@ -27,7 +27,7 @@ logs with the search `index=main`.
 
 - App databoards can be stored in the local filesystem (they don't dissappear when the container exits)
 - Ingested data can be stored in the local filesystem
-- Multiple REST and RSS endpoints "built in" to provide sources of data ingestion
+- Multiple REST <!-- and RSS --> endpoints "built in" to provide sources of data ingestion
 - Integration with <a href="https://www.baboonbones.com/#activation">REST API Modular Input</a>
 - Splunk Machine Learning Toolkit included
 - `/etc/hosts` can be appended to with local ip/hostname entries
@@ -58,7 +58,9 @@ The following Splunk apps are included in this Docker image:
 
 - <a href="https://splunkbase.splunk.com/app/1924">Eventgen</a>
 - <a href="https://splunkbase.splunk.com/app/1603/">Splunk Dashboard Examples</a>
+<!--
 - <a href="https://splunkbase.splunk.com/app/2646/">Syndication Input</a>
+-->
 - <a href="https://splunkbase.splunk.com/app/1546/">REST API Modular Input</a> (requires registration)
 - <a href="https://splunkbase.splunk.com/app/3212/">Wordcloud Custom Visualization</a>
 - <a href="https://splunkbase.splunk.com/app/2878/">Slack Notification Alert</a>
@@ -80,13 +82,15 @@ Splunk has its own license.  Please abide by it.
 I put together this curated list of free sources of data which can be pulled into Splunk
 via one of the included apps:
 
-- Free
+<!--
     - RSS
        - <a href="https://answers.splunk.com/feed/questions.rss">Recent questions posted to Splunk Answers</a>
        - <a href="http://www.cnn.com/services/rss/">CNN RSS feeds</a>
        - <a href="https://www.flickr.com/services/feeds/docs/photos_public/">Flickr's Public feed</a>
           - <a href="https://api.flickr.com/services/feeds/photos_public.gne">Public Photos</a>
           - <a href="https://api.flickr.com/services/feeds/photos_public.gne?tags=cheetah">Public photos tagged "cheetah"</a>
+-->
+- Free
     - Non-RSS (you will need to set `$REST_KEY` when starting Splunk Lab)
        - Non-streaming
           - <a href="http://www3.septa.org/hackathon/">Philadelphia Public Transit API</a>
