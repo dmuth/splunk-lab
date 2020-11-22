@@ -30,7 +30,7 @@ logs with the search `index=main`.
 - Multiple REST and RSS endpoints "built in" to provide sources of data ingestion
 - Integration with <a href="https://www.baboonbones.com/#activation">REST API Modular Input</a>
 - Splunk Machine Learning Toolkit included
-- `/etc/hosts` can be appended to with local settings
+- `/etc/hosts` can be appended to with local ip/hostname entries
 
 
 ## Screenshots
