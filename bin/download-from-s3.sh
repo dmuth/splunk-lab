@@ -31,7 +31,7 @@ FILES="halo-custom-visualization_113.tgz
 	syndication-input-rssatomrdf_12.tgz
 	wordcloud-custom-visualization_111.tgz
 	splunk-dashboard-examples_800.tgz
-        eventgen_653.tgz
+        eventgen_720.tgz
 	"
 
 for FILE in $FILES
