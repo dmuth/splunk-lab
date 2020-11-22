@@ -87,7 +87,7 @@ via one of the included apps:
        - <a href="https://www.flickr.com/services/feeds/docs/photos_public/">Flickr's Public feed</a>
           - <a href="https://api.flickr.com/services/feeds/photos_public.gne">Public Photos</a>
           - <a href="https://api.flickr.com/services/feeds/photos_public.gne?tags=cheetah">Public photos tagged "cheetah"</a>
-    - Non-RSS
+    - Non-RSS (you will need to set `$REST_KEY` when starting Splunk Lab)
        - Non-streaming
           - <a href="http://www3.septa.org/hackathon/">Philadelphia Public Transit API</a>
              - <a href="http://www3.septa.org/hackathon/TrainView/">Regional Rail Train Data</a>
