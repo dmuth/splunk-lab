@@ -319,9 +319,9 @@ fi
 
 if test "$SPLUNK_EVENTGEN"
 then
-	echo "# Fake HTTP Event Generation:        YES (index=main sourcetype=nginx to view)"
+	echo "# Fake Webserver Event Generation:   YES (index=main sourcetype=nginx to view)"
 else
-	echo "# Fake HTTP Event Generation:        NO (Feel free to set with \$SPLUNK_EVENTGEN)"
+	echo "# Fake Webserver Event Generation:   NO (Feel free to set with \$SPLUNK_EVENTGEN)"
 fi
 
 echo "# "
