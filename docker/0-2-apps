@@ -7,6 +7,7 @@ COPY splunk-package-cache/s3/wordcloud-custom-visualization_111.tgz /tmp/splunk-
 COPY splunk-package-cache/s3/slack-notification-alert_203.tgz /tmp/splunk-packages/
 COPY splunk-package-cache/s3/splunk-dashboard-examples_800.tgz /tmp/splunk-packages/
 COPY splunk-package-cache/s3/eventgen_720.tgz /tmp/splunk-packages/
+COPY splunk-package-cache/s3/rest-api-modular-input_198.tgz /tmp/splunk-packages/
 
 
 #
@@ -20,14 +21,12 @@ COPY splunk-package-cache/s3/eventgen_720.tgz /tmp/splunk-packages/
 #	&& rm -fv /tmp/splunk-packages/syndication-input-rssatomrdf_12.tgz \
 
 #
-# 22 Nov 2020: Keeping rest out for now until https://github.com/dmuth/splunk-lab/issues/5 is fixed...
-#
 # Install Rest API Modular Input
 # https://splunkbase.splunk.com/app/1546/#/details
 #
-#RUN	tar xfvz /tmp/splunk-packages/rest-api-modular-input_154.tgz \
-#	&& mv rest_ta /opt/splunk/etc/apps/ \
-#	&& rm -fv /tmp/splunk-packages/rest-api-modular-input_154.tgz \
+RUN tar xfvz /tmp/splunk-packages/rest-api-modular-input_198.tgz \
+	&& mv rest_ta /opt/splunk/etc/apps/ \
+	&& rm -fv /tmp/splunk-packages/rest-api-modular-input_198.tgz 
 
 #
 # Install Wordcloud app

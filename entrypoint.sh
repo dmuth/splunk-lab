@@ -103,14 +103,15 @@ fi
 
 
 #
-# If a Rest Modular API key was specified, add it in.
+# If a Rest Modular API key was specified, add the key into the REST sources
+# and append them to inputs.conf.
 #
 if test "$REST_KEY"
 then
 	SRC="activation_key = Visit https://www.baboonbones.com/#activation"
 	REPLACE="activation_key = ${REST_KEY}"
 
-	sed -i "s|${SRC}|${REPLACE}|" ${FILE} /opt/splunk/etc/system/local/inputs.conf
+	cat inputs.conf.in.rest | sed -e "s|${SRC}|${REPLACE}|" >> /opt/splunk/etc/system/local/inputs.conf
 
 fi
 

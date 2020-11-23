@@ -33,3 +33,13 @@ export = none
 owner = admin
 version = 8.0.1
 modtime = 1606012526.404080000
+
+[inputs/rest%3A%2F%2FTEST]
+owner = admin
+version = 8.1.0.1
+modtime = 1606101676.205723000
+
+[inputs/rest%3A%2F%2FTEST3]
+owner = admin
+version = 8.1.0.1
+modtime = 1606101377.467165000
