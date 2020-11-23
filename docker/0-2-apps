@@ -3,6 +3,7 @@ FROM splunk-lab-core-1
 
 WORKDIR /tmp
 
+COPY splunk-package-cache/s3/syndication-input-rssatomrdf_124.tgz /tmp/splunk-packages/
 COPY splunk-package-cache/s3/wordcloud-custom-visualization_111.tgz /tmp/splunk-packages/
 COPY splunk-package-cache/s3/slack-notification-alert_203.tgz /tmp/splunk-packages/
 COPY splunk-package-cache/s3/splunk-dashboard-examples_800.tgz /tmp/splunk-packages/
@@ -11,14 +12,12 @@ COPY splunk-package-cache/s3/rest-api-modular-input_198.tgz /tmp/splunk-packages
 
 
 #
-# 22 Nov 2020: Keeping syndication out for now until https://github.com/dmuth/splunk-lab/issues/4 is fixed...
-#
 # Install Syndication app
 # https://splunkbase.splunk.com/app/2646/
 #
-#RUN	tar xfvz /tmp/splunk-packages/syndication-input-rssatomrdf_12.tgz \
-#	&& mv syndication /opt/splunk/etc/apps/ \
-#	&& rm -fv /tmp/splunk-packages/syndication-input-rssatomrdf_12.tgz \
+RUN tar xfvz /tmp/splunk-packages/syndication-input-rssatomrdf_124.tgz \
+	&& mv syndication /opt/splunk/etc/apps/ \
+	&& rm -fv /tmp/splunk-packages/syndication-input-rssatomrdf_124.tgz
 
 #
 # Install Rest API Modular Input

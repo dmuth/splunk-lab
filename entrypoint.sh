@@ -115,6 +115,14 @@ then
 
 fi
 
+#
+# Are we using the RSS Syndication module?
+#
+if test "$RSS"
+then
+	cat inputs.conf.in.syndication >> /opt/splunk/etc/system/local/inputs.conf
+fi
+
 popd > /dev/null
 
 

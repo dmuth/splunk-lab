@@ -29,6 +29,7 @@ SPLUNK_DEVEL=${SPLUNK_DEVEL:-}
 SPLUNK_EVENTGEN=${SPLUNK_EVENTGEN:-}
 ETC_HOSTS=${ETC_HOSTS:-no}
 REST_KEY=${REST_KEY:-}
+RSS=${RSS:-}
 DOCKER_NAME=${DOCKER_NAME:-splunk-lab}
 DOCKER_RM=${DOCKER_RM:-1}
 DOCKER_CMD=${DOCKER_CMD:-}
@@ -166,6 +167,11 @@ then
 	CMD="${CMD} -e REST_KEY=${REST_KEY}"
 fi
 
+if test "${RSS}"
+then
+	CMD="${CMD} -e RSS=${RSS}"
+fi
+
 if test "${ETC_HOSTS}" != "no"
 then
 	CMD="$CMD -v $(pwd)/${ETC_HOSTS}:/etc/hosts.extra "
@@ -297,6 +303,13 @@ then
 	echo "# REST API Modular Input key:        ${REST_KEY}"
 else
 	echo "# REST API Modular Input key:        (Get yours at https://www.baboonbones.com/#activation and set with \$REST_KEY)"
+fi
+
+if test "$RSS"
+then
+	echo "# Synication of RSS feeds?:          YES"
+else
+	echo "# Synication of RSS feeds?:          NO (Enabled with \$RSS=yes)"
 fi
 
 if test "${SPLUNK_DATA}" != "no"

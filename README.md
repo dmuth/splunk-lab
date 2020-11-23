@@ -120,27 +120,24 @@ Splunk has its own license.  Please abide by it.
 I put together this curated list of free sources of data which can be pulled into Splunk
 via one of the included apps:
 
-<!--
-    - RSS
-       - <a href="https://answers.splunk.com/feed/questions.rss">Recent questions posted to Splunk Answers</a>
-       - <a href="http://www.cnn.com/services/rss/">CNN RSS feeds</a>
-       - <a href="https://www.flickr.com/services/feeds/docs/photos_public/">Flickr's Public feed</a>
-          - <a href="https://api.flickr.com/services/feeds/photos_public.gne">Public Photos</a>
-          - <a href="https://api.flickr.com/services/feeds/photos_public.gne?tags=cheetah">Public photos tagged "cheetah"</a>
--->
-- Free
-    - REST (you will need to set `$REST_KEY` when starting Splunk Lab)
-       - Non-streaming
-          - <a href="http://www3.septa.org/hackathon/">Philadelphia Public Transit API</a>
-             - <a href="http://www3.septa.org/hackathon/TrainView/">Regional Rail Train Data</a>
-          - <a href="https://developers.coinbase.com/docs/wallet/guides/price-data">Coinbase API</a>
-         - <a href="https://www.weather.gov/documentation/services-web-api">National Weather Service</a>
-            - <a href="https://api.weather.gov/gridpoints/PHI/49,75/forecast">Philadelphia Forecast</a>
-            - <a href="https://api.weather.gov/gridpoints/PHI/49,75/forecast/hourly">Philadelphia Hourly Forecast</a>
-         - <a href="https://www.alphavantage.co/">Alpha Vantage</a> - Free stock quotes
-       - Streaming
-          - <a href="https://www.meetup.com/meetup_api/docs/stream/2/rsvps/">Meetup RSVPs</a>
-             - <a href="http://stream.meetup.com/2/rsvps">RSVP Endpoint</a>
+- RSS
+   - <a href="https://answers.splunk.com/feed/questions.rss">Recent questions posted to Splunk Answers</a>
+   - <a href="http://www.cnn.com/services/rss/">CNN RSS feeds</a>
+   - <a href="https://www.flickr.com/services/feeds/docs/photos_public/">Flickr's Public feed</a>
+      - <a href="https://api.flickr.com/services/feeds/photos_public.gne">Public Photos</a>
+      - <a href="https://api.flickr.com/services/feeds/photos_public.gne?tags=cheetah">Public photos tagged "cheetah"</a>
+- REST (you will need to set `$REST_KEY` when starting Splunk Lab)
+   - Non-streaming
+      - <a href="http://www3.septa.org/hackathon/">Philadelphia Public Transit API</a>
+         - <a href="http://www3.septa.org/hackathon/TrainView/">Regional Rail Train Data</a>
+      - <a href="https://developers.coinbase.com/docs/wallet/guides/price-data">Coinbase API</a>
+      - <a href="https://www.weather.gov/documentation/services-web-api">National Weather Service</a>
+      - <a href="https://api.weather.gov/gridpoints/PHI/49,75/forecast">Philadelphia Forecast</a>
+      - <a href="https://api.weather.gov/gridpoints/PHI/49,75/forecast/hourly">Philadelphia Hourly Forecast</a>
+      - <a href="https://www.alphavantage.co/">Alpha Vantage</a> - Free stock quotes
+   - Streaming
+      - <a href="https://www.meetup.com/meetup_api/docs/stream/2/rsvps/">Meetup RSVPs</a>
+      - <a href="http://stream.meetup.com/2/rsvps">RSVP Endpoint</a>
 
 
 ## Apps Built With Splunk Lab
