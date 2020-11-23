@@ -1,0 +1,31 @@
+
+#
+# Build splunk-lab-core, which is used as a base for splunk-lab and splunk-lab-ml
+#
+# The reason for this architecture is so that changes to things like config files
+# can be done AFTER the apps in each image are installed, so I don't have to keep
+# reinstalling the apps when I'm just tweaking a config file.
+#
+# Based on https://github.com/splunk/docker-splunk/blob/master/enterprise/Dockerfile
+#
+# I slimmed this down, as I have no desire to run as a separate user, set up a Deployment
+# Server, generate PDFs, etc.  All I want to do is run a this single app.
+#
+FROM debian:stretch
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+ENV LANG en_US.utf8 
+
+#
+# make the "en_US.UTF-8" locale so splunk will be utf-8 enabled by default
+#
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends apt-utils \
+	&& apt-get install -y locales \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
+	&& apt-get update \
+	&& apt-get install -y wget procps less
+
+

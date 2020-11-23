@@ -12,5 +12,5 @@ logs/
 !splunk-lab-app/default/data
 splunk-lab-app/local
 
-splunk-packages-from-s3
+splunk-package-cache/
 

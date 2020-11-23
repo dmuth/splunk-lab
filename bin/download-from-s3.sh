@@ -14,8 +14,10 @@ pushd $(dirname $0)/.. > /dev/null
 
 BUCKET="dmuth-splunk-lab"
 
-mkdir -p splunk-packages-from-s3
-pushd splunk-packages-from-s3 >/dev/null
+CACHE="splunk-package-cache/s3"
+
+mkdir -p ${CACHE}
+pushd ${CACHE} >/dev/null > /dev/null
 
 echo "# "
 echo "# Downloading packages from S3..."

@@ -1,0 +1,31 @@
+
+FROM splunk-lab-core-0
+
+
+#
+# These are passed in with --build-args
+#
+ARG SPLUNK_HOME
+ARG CACHE_FILENAME
+
+COPY ${CACHE_FILENAME} /tmp/splunk.tgz
+
+#
+# Download official Splunk release and unzip in /opt/splunk
+#
+RUN mkdir -p ${SPLUNK_HOME} \
+	&& tar xzf /tmp/splunk.tgz --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk.tgz \
+#
+# Link to our data directory and search app.
+# 
+# The /data/ directory is used in a volume mount but /app/ is not.
+# The reason I still have it is because it will be helpful for
+# anything who may be exploring the container. 
+#
+# (Yes, that means *you*, Chris in Seattle)
+#
+	&& ln -s /opt/splunk/var/lib/splunk/ /data \
+	&& ln -s /opt/splunk/etc/apps/splunk-lab/local /app 
+
+

@@ -4,6 +4,13 @@
 #
 FROM splunk-lab-core
 
+COPY splunk-package-cache/s3/python-for-scientific-computing-for-linux-64-bit_202.tgz /tmp/splunk-packages/
+COPY splunk-package-cache/s3/splunk-machine-learning-toolkit_520.tgz /tmp/splunk-packages/
+COPY splunk-package-cache/s3/nlp-text-analytics_102.tgz /tmp/splunk-packages/
+COPY splunk-package-cache/s3/halo-custom-visualization_113.tgz /tmp/splunk-packages/
+COPY splunk-package-cache/s3/sankey-diagram-custom-visualization_130.tgz /tmp/splunk-packages/
+
+
 #
 # Install Python for Scientific computing and Splunk ML Toolkit
 #
@@ -34,7 +41,11 @@ RUN \
 #
 	&& tar xfvz /tmp/splunk-packages/sankey-diagram-custom-visualization_130.tgz \
 	&& mv sankey_diagram_app /opt/splunk/etc/apps \
-	&& rm -fv /tmp/splunk-packages/sankey-diagram-custom-visualization_130.tgz
+	&& rm -fv /tmp/splunk-packages/sankey-diagram-custom-visualization_130.tgz \
+#
+# Remove our package installation files
+#
+	&& rm -rfv /tmp/splunk-packages/
 
 
 
