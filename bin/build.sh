@@ -63,9 +63,9 @@ docker build \
 	. -f docker/0-1-splunk -t splunk-lab-core-1
 docker build . -f docker/0-2-apps -t splunk-lab-core
 
-docker build . -f docker/1-main -t splunk-lab
+docker build . -f docker/1-splunk-lab -t splunk-lab
 
-docker build . -f docker/ml -t splunk-lab-ml
+docker build . -f docker/1-splunk-lab-ml -t splunk-lab-ml
 
 echo "# "
 echo "# Tagging Docker containers..."

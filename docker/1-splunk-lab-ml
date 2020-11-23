@@ -14,40 +14,37 @@ COPY splunk-package-cache/s3/sankey-diagram-custom-visualization_130.tgz /tmp/sp
 #
 # Install Python for Scientific computing and Splunk ML Toolkit
 #
-RUN \
-	tar xfvz /tmp/splunk-packages/python-for-scientific-computing-for-linux-64-bit_202.tgz \
+RUN tar xfvz /tmp/splunk-packages/python-for-scientific-computing-for-linux-64-bit_202.tgz \
 	&& mv Splunk_SA_Scientific_Python_linux_x86_64 /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/python-for-scientific-computing-for-linux-64-bit_202.tgz \
+	&& rm -fv /tmp/splunk-packages/python-for-scientific-computing-for-linux-64-bit_202.tgz 
+
 #
 # Machine Learning toolkit
 #
-	&& tar xfvz /tmp/splunk-packages/splunk-machine-learning-toolkit_520.tgz \
+RUN tar xfvz /tmp/splunk-packages/splunk-machine-learning-toolkit_520.tgz \
 	&& mv Splunk_ML_Toolkit /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/splunk-machine-learning-toolkit_520.tgz \
+	&& rm -fv /tmp/splunk-packages/splunk-machine-learning-toolkit_520.tgz 
+
 #
 # NLP text analytics
 #
-	&& tar xfvz /tmp/splunk-packages/nlp-text-analytics_102.tgz \
+RUN tar xfvz /tmp/splunk-packages/nlp-text-analytics_102.tgz \
 	&& mv nlp-text-analytics /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/nlp-text-analytics_102.tgz \
+	&& rm -fv /tmp/splunk-packages/nlp-text-analytics_102.tgz 
+
 #
 # Halo custom visualization
 #
-	&& tar xfvz /tmp/splunk-packages/halo-custom-visualization_113.tgz \
+RUN tar xfvz /tmp/splunk-packages/halo-custom-visualization_113.tgz \
 	&& mv viz_halo /opt/splunk/etc/apps \
-	&& rm -fv /tmp/splunk-packages/halo-custom-visualization_113.tgz \
+	&& rm -fv /tmp/splunk-packages/halo-custom-visualization_113.tgz 
+
 #
 # Sankey custom visualization
 #
-	&& tar xfvz /tmp/splunk-packages/sankey-diagram-custom-visualization_130.tgz \
+RUN tar xfvz /tmp/splunk-packages/sankey-diagram-custom-visualization_130.tgz \
 	&& mv sankey_diagram_app /opt/splunk/etc/apps \
-	&& rm -fv /tmp/splunk-packages/sankey-diagram-custom-visualization_130.tgz \
-#
-# Remove our package installation files
-#
-	&& rm -rfv /tmp/splunk-packages/
-
-
+	&& rm -fv /tmp/splunk-packages/sankey-diagram-custom-visualization_130.tgz 
 
 
 #####
@@ -88,6 +85,5 @@ EXPOSE 8000/tcp
 COPY entrypoint.sh /
 
 ENTRYPOINT ["/entrypoint.sh"]
-
 
 

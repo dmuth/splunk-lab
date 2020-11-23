@@ -15,51 +15,50 @@ COPY splunk-package-cache/s3/eventgen_720.tgz /tmp/splunk-packages/
 # Install Syndication app
 # https://splunkbase.splunk.com/app/2646/
 #
-RUN	\
-#	tar xfvz /tmp/splunk-packages/syndication-input-rssatomrdf_12.tgz \
+#RUN	tar xfvz /tmp/splunk-packages/syndication-input-rssatomrdf_12.tgz \
 #	&& mv syndication /opt/splunk/etc/apps/ \
 #	&& rm -fv /tmp/splunk-packages/syndication-input-rssatomrdf_12.tgz \
-#
+
 #
 # 22 Nov 2020: Keeping rest out for now until https://github.com/dmuth/splunk-lab/issues/5 is fixed...
 #
 # Install Rest API Modular Input
 # https://splunkbase.splunk.com/app/1546/#/details
 #
-#	tar xfvz /tmp/splunk-packages/rest-api-modular-input_154.tgz \
+#RUN	tar xfvz /tmp/splunk-packages/rest-api-modular-input_154.tgz \
 #	&& mv rest_ta /opt/splunk/etc/apps/ \
 #	&& rm -fv /tmp/splunk-packages/rest-api-modular-input_154.tgz \
+
 #
 # Install Wordcloud app
 # https://splunkbase.splunk.com/app/3212/
 #
-	tar xfvz /tmp/splunk-packages/wordcloud-custom-visualization_111.tgz \
+RUN tar xfvz /tmp/splunk-packages/wordcloud-custom-visualization_111.tgz \
 	&& mv wordcloud_app /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/wordcloud-custom-visualization_111.tgz \
+	&& rm -fv /tmp/splunk-packages/wordcloud-custom-visualization_111.tgz
+
 #
 # Install Slack Notification Alert
 # https://splunkbase.splunk.com/app/2878/
 #
-	&& tar xfvz /tmp/splunk-packages/slack-notification-alert_203.tgz \
+RUN tar xfvz /tmp/splunk-packages/slack-notification-alert_203.tgz \
 	&& mv slack_alerts /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/slack-notification-alert_203.tgz \
+	&& rm -fv /tmp/splunk-packages/slack-notification-alert_203.tgz 
+
 #
 # Install Splunk Dashboard Examples
 # https://splunkbase.splunk.com/app/1603/
 #
-	&& tar xfvz /tmp/splunk-packages/splunk-dashboard-examples_800.tgz \
+RUN tar xfvz /tmp/splunk-packages/splunk-dashboard-examples_800.tgz \
 	&& mv simple_xml_examples /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/splunk-dashboard-examples_800.tgz \
+	&& rm -fv /tmp/splunk-packages/splunk-dashboard-examples_800.tgz 
+
 #
 # Install Eventgen
 # https://splunkbase.splunk.com/app/1924
 #
-	&& tar xfvz /tmp/splunk-packages/eventgen_720.tgz \
+RUN tar xfvz /tmp/splunk-packages/eventgen_720.tgz \
 	&& mv SA-Eventgen /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/eventgen_720.tgz \
-#
-# Remove our package installation files
-#
-	&& rm -rfv /tmp/splunk-packages/
+	&& rm -fv /tmp/splunk-packages/eventgen_720.tgz 
 
 
