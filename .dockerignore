@@ -11,3 +11,6 @@ logs/
 
 devel/*
 
+cache/
+!cache/deploy/
+

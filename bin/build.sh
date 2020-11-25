@@ -4,6 +4,7 @@
 set -e
 
 CACHE="cache"
+DEPLOY="cache/deploy"
 
 SPLUNK_PRODUCT="splunk"
 SPLUNK_HOME="/opt/splunk"
@@ -23,7 +24,7 @@ cd ..
 #
 # Download and cache local copy of Splunk to speed up future builds.
 #
-mkdir -p ${CACHE}
+mkdir -p ${CACHE} ${DEPLOY}
 
 #ls -ltrh $CACHE # Debugging
 if test ! -f "${CACHE_FILENAME}"
@@ -57,15 +58,39 @@ echo "# Building Docker containers..."
 echo "# "
 
 docker build . -f docker/0-0-core -t splunk-lab-core-0
+
+#
+# Link in whatever files we need in the deploy directory before building
+#
+ln -f ${CACHE}/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz ${DEPLOY} 
 docker build \
 	--build-arg SPLUNK_HOME=${SPLUNK_HOME} \
-	--build-arg CACHE_FILENAME=${CACHE_FILENAME} \
+	--build-arg CACHE_FILENAME=${DEPLOY}/${SPLUNK_FILENAME} \
 	. -f docker/0-1-splunk -t splunk-lab-core-1
-docker build . -f docker/0-2-apps -t splunk-lab-core
+rm -f ${DEPLOY}/*
+
+ln -f ${CACHE}/syndication-input-rssatomrdf_124.tgz ${DEPLOY} 
+ln -f ${CACHE}/wordcloud-custom-visualization_111.tgz ${DEPLOY} 
+ln -f ${CACHE}/slack-notification-alert_203.tgz ${DEPLOY} 
+ln -f ${CACHE}/splunk-dashboard-examples_800.tgz ${DEPLOY} 
+ln -f ${CACHE}/eventgen_720.tgz ${DEPLOY} 
+ln -f ${CACHE}/rest-api-modular-input_198.tgz ${DEPLOY} 
+docker build \
+	--build-arg DEPLOY=${DEPLOY} \
+	. -f docker/0-2-apps -t splunk-lab-core
+rm -f ${DEPLOY}/*
 
 docker build . -f docker/1-splunk-lab -t splunk-lab
 
-docker build . -f docker/1-splunk-lab-ml -t splunk-lab-ml
+ln -f ${CACHE}/python-for-scientific-computing-for-linux-64-bit_202.tgz ${DEPLOY} 
+ln -f ${CACHE}/splunk-machine-learning-toolkit_520.tgz ${DEPLOY} 
+ln -f ${CACHE}/nlp-text-analytics_102.tgz ${DEPLOY} 
+ln -f ${CACHE}/halo-custom-visualization_113.tgz ${DEPLOY} 
+ln -f ${CACHE}/sankey-diagram-custom-visualization_130.tgz ${DEPLOY} 
+docker build \
+	--build-arg DEPLOY=${DEPLOY} \
+	. -f docker/1-splunk-lab-ml -t splunk-lab-ml
+rm -f ${DEPLOY}/*
 
 echo "# "
 echo "# Tagging Docker containers..."
