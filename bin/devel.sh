@@ -3,13 +3,16 @@
 # Errors are fatal
 set -e
 
+CACHE="cache"
+BUILD="${CACHE}/build"
+
 #
 # Change to the parent of this script
 #
 pushd $(dirname $0) > /dev/null
 cd ..
 
-./bin/build.sh
+./bin/build.sh $@
 
 echo "# "
 echo "# Tagging container..."
