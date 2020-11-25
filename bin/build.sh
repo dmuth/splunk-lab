@@ -16,6 +16,12 @@ SPLUNK_URL="https://download.splunk.com/products/${SPLUNK_PRODUCT}/releases/${SP
 CACHE_FILENAME="${CACHE}/${SPLUNK_FILENAME}"
 
 #
+# This is set to true if we build even a single container, and subsequent
+# containers will ignore the build file and instead force being built.
+#
+BUILDING=""
+
+#
 # Change to the parent of this script
 #
 pushd $(dirname $0) > /dev/null
@@ -87,11 +93,14 @@ DOCKER="0-0-core"
 if test ${BUILD}/${DOCKER} -nt docker/${DOCKER}
 then
 	echo "# File '${BUILD}/${DOCKER}' is newer than our Dockerfile, we don't need to build anything!"
-
 else
+	BUILDING=1
+fi
+
+if test "${BUILDING}"
+then
 	docker build . -f docker/${DOCKER} -t splunk-lab-core-0
 	touch ${BUILD}/${DOCKER}
-
 fi
 
 
@@ -99,8 +108,12 @@ DOCKER="0-1-splunk"
 if test ${BUILD}/${DOCKER} -nt docker/${DOCKER}
 then
 	echo "# File '${BUILD}/${DOCKER}' is newer than our Dockerfile, we don't need to build anything!"
-
 else
+	BUILDING=1
+fi
+
+if test "${BUILDING}"
+then
 	ln -f ${CACHE}/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz ${DEPLOY} 
 	docker build \
 		--build-arg SPLUNK_HOME=${SPLUNK_HOME} \
@@ -108,7 +121,6 @@ else
 		. -f docker/${DOCKER} -t splunk-lab-core-1
 	rm -f ${DEPLOY}/*
 	touch ${BUILD}/${DOCKER}
-
 fi
 
 
@@ -116,8 +128,12 @@ DOCKER="0-2-apps"
 if test ${BUILD}/${DOCKER} -nt docker/${DOCKER}
 then
 	echo "# File '${BUILD}/${DOCKER}' is newer than our Dockerfile, we don't need to build anything!"
-
 else
+	BUILDING=1
+fi
+
+if test "${BUILDING}"
+then
 	ln -f ${CACHE}/syndication-input-rssatomrdf_124.tgz ${DEPLOY} 
 	ln -f ${CACHE}/wordcloud-custom-visualization_111.tgz ${DEPLOY} 
 	ln -f ${CACHE}/slack-notification-alert_203.tgz ${DEPLOY} 
@@ -136,11 +152,14 @@ DOCKER="1-splunk-lab"
 if test ${BUILD}/${DOCKER} -nt docker/${DOCKER}
 then
 	echo "# File '${BUILD}/${DOCKER}' is newer than our Dockerfile, we don't need to build anything!"
-
 else
+	BUILDING=1
+fi
+
+if test "${BUILDING}"
+then
 	docker build . -f docker/${DOCKER} -t splunk-lab
 	touch ${BUILD}/${DOCKER}
-
 fi
 
 
@@ -148,8 +167,12 @@ DOCKER="1-splunk-lab-ml"
 if test ${BUILD}/${DOCKER} -nt docker/${DOCKER}
 then
 	echo "# File '${BUILD}/${DOCKER}' is newer than our Dockerfile, we don't need to build anything!"
-
 else
+	BUILDING=1
+fi
+
+if test "${BUILDING}"
+then
 	ln -f ${CACHE}/python-for-scientific-computing-for-linux-64-bit_202.tgz ${DEPLOY} 
 	ln -f ${CACHE}/splunk-machine-learning-toolkit_520.tgz ${DEPLOY} 
 	ln -f ${CACHE}/nlp-text-analytics_102.tgz ${DEPLOY} 
