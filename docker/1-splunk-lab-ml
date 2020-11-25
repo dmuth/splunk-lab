@@ -4,11 +4,11 @@
 #
 FROM splunk-lab-core
 
-COPY splunk-package-cache/s3/python-for-scientific-computing-for-linux-64-bit_202.tgz /tmp/splunk-packages/
-COPY splunk-package-cache/s3/splunk-machine-learning-toolkit_520.tgz /tmp/splunk-packages/
-COPY splunk-package-cache/s3/nlp-text-analytics_102.tgz /tmp/splunk-packages/
-COPY splunk-package-cache/s3/halo-custom-visualization_113.tgz /tmp/splunk-packages/
-COPY splunk-package-cache/s3/sankey-diagram-custom-visualization_130.tgz /tmp/splunk-packages/
+COPY cache/python-for-scientific-computing-for-linux-64-bit_202.tgz /tmp/splunk-packages/
+COPY cache/splunk-machine-learning-toolkit_520.tgz /tmp/splunk-packages/
+COPY cache/nlp-text-analytics_102.tgz /tmp/splunk-packages/
+COPY cache/halo-custom-visualization_113.tgz /tmp/splunk-packages/
+COPY cache/sankey-diagram-custom-visualization_130.tgz /tmp/splunk-packages/
 
 
 #

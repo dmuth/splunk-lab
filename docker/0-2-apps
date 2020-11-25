@@ -3,12 +3,12 @@ FROM splunk-lab-core-1
 
 WORKDIR /tmp
 
-COPY splunk-package-cache/s3/syndication-input-rssatomrdf_124.tgz /tmp/splunk-packages/
-COPY splunk-package-cache/s3/wordcloud-custom-visualization_111.tgz /tmp/splunk-packages/
-COPY splunk-package-cache/s3/slack-notification-alert_203.tgz /tmp/splunk-packages/
-COPY splunk-package-cache/s3/splunk-dashboard-examples_800.tgz /tmp/splunk-packages/
-COPY splunk-package-cache/s3/eventgen_720.tgz /tmp/splunk-packages/
-COPY splunk-package-cache/s3/rest-api-modular-input_198.tgz /tmp/splunk-packages/
+COPY cache/syndication-input-rssatomrdf_124.tgz /tmp/splunk-packages/
+COPY cache/wordcloud-custom-visualization_111.tgz /tmp/splunk-packages/
+COPY cache/slack-notification-alert_203.tgz /tmp/splunk-packages/
+COPY cache/splunk-dashboard-examples_800.tgz /tmp/splunk-packages/
+COPY cache/eventgen_720.tgz /tmp/splunk-packages/
+COPY cache/rest-api-modular-input_198.tgz /tmp/splunk-packages/
 
 
 #

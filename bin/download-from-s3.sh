@@ -14,7 +14,7 @@ pushd $(dirname $0)/.. > /dev/null
 
 BUCKET="dmuth-splunk-lab"
 
-CACHE="splunk-package-cache/s3"
+CACHE="cache"
 
 mkdir -p ${CACHE}
 pushd ${CACHE} >/dev/null > /dev/null

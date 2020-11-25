@@ -3,7 +3,7 @@
 # Errors are fatal
 set -e
 
-CACHE="splunk-package-cache"
+CACHE="cache"
 
 SPLUNK_PRODUCT="splunk"
 SPLUNK_HOME="/opt/splunk"
