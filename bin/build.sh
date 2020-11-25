@@ -84,7 +84,7 @@ echo "# "
 
 
 DOCKER="0-0-core"
-if test ${BUILD}/${DOCKER} -nt ${DOCKER}
+if test ${BUILD}/${DOCKER} -nt docker/${DOCKER}
 then
 	echo "# File '${BUILD}/${DOCKER}' is newer than our Dockerfile, we don't need to build anything!"
 
@@ -96,7 +96,7 @@ fi
 
 
 DOCKER="0-1-splunk"
-if test ${BUILD}/${DOCKER} -nt ${DOCKER}
+if test ${BUILD}/${DOCKER} -nt docker/${DOCKER}
 then
 	echo "# File '${BUILD}/${DOCKER}' is newer than our Dockerfile, we don't need to build anything!"
 
@@ -113,7 +113,7 @@ fi
 
 
 DOCKER="0-2-apps"
-if test ${BUILD}/${DOCKER} -nt ${DOCKER}
+if test ${BUILD}/${DOCKER} -nt docker/${DOCKER}
 then
 	echo "# File '${BUILD}/${DOCKER}' is newer than our Dockerfile, we don't need to build anything!"
 
@@ -133,7 +133,7 @@ else
 fi
 
 DOCKER="1-splunk-lab"
-if test ${BUILD}/${DOCKER} -nt ${DOCKER}
+if test ${BUILD}/${DOCKER} -nt docker/${DOCKER}
 then
 	echo "# File '${BUILD}/${DOCKER}' is newer than our Dockerfile, we don't need to build anything!"
 
@@ -145,7 +145,7 @@ fi
 
 
 DOCKER="1-splunk-lab-ml"
-if test ${BUILD}/${DOCKER} -nt ${DOCKER}
+if test ${BUILD}/${DOCKER} -nt docker/${DOCKER}
 then
 	echo "# File '${BUILD}/${DOCKER}' is newer than our Dockerfile, we don't need to build anything!"
 
