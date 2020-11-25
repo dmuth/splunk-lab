@@ -187,13 +187,23 @@ Sure does!  I built this on a Mac. :-)
 
 I wrote a series of helper scripts in `bin/` to make the process easier:
 
-- `./bin/build.sh` - Build the container.
+- `./bin/build.sh` - Build the containers.
    - Note that this downloads packages from an AWS S3 bucket that I created.  This bucket is set to "requestor pays", so you'll need to make sure the `aws` CLI app set up.
-   - A note for me: the S3 bucket is `dmuth-splunk-lab`.
+- `./bin/download.sh` - Download tarballs of various apps and splits some of them into chunks
+- `./bin/upload-file-to-s3.sh` - Upload a specific file to S3.  For rolling out new versions of apps
 - `./bin/push.sh` - Tag and push the container.
 - `./bin/devel.sh` - Build and tag the container, then start it with an interactive bash shell.
    - This is a wrapper for the above-mentioned `go.sh` script. Any environment variables that work there will work here.
 - `./bin/clean.sh` - Remove logs/ and/or data/ directories.
+- `./bin/tarsplit` - Local copy of my pacakge from https://github.com/dmuth/tarsplit
+
+
+### Building Container Internals
+
+- Here's the layout of the `cache/` directory
+   - `cache/` - Where tarballs for various apps hang out.
+   - `cache/deploy/` - When creating a specific Docker image, files are copied here so the Dockerfile can ingest them.  Or technically hardlinked.
+   - `cache/build/` - 0-byte files are written here when a specific container is built, and on future builds, the age of that file is checked against the Dockerfile.  If the Dockerfile is newer, then the container is (re-)built.  Otherwise, it is skipped.  This shortens a run of `bin/devel.sh` where no containers need to be built from 12 seconds on my 2020 iMac to 0.2 seconds.
 
 
 ### A word on default/ and local/ directories
