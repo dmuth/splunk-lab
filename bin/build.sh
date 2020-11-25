@@ -13,7 +13,7 @@ SPLUNK_VERSION="8.1.0.1"
 SPLUNK_BUILD="24fd52428b5a"
 SPLUNK_FILENAME="splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz"
 SPLUNK_URL="https://download.splunk.com/products/${SPLUNK_PRODUCT}/releases/${SPLUNK_VERSION}/linux/${SPLUNK_FILENAME}"
-CACHE_FILENAME="${CACHE}/${SPLUNK_FILENAME}"
+SPLUNK_CACHE_FILENAME="${CACHE}/${SPLUNK_FILENAME}"
 
 #
 # This is set to true if we build even a single container, and subsequent
@@ -58,16 +58,6 @@ fi
 #
 mkdir -p ${CACHE} ${DEPLOY} ${BUILD}
 
-#ls -ltrh $CACHE # Debugging
-if test ! -f "${CACHE_FILENAME}"
-then
-	echo "# "
-	echo "# Caching copy of ${SPLUNK_FILENAME}..."
-	echo "# "
-	wget -O ${CACHE_FILENAME} ${SPLUNK_URL}
-fi
-
-
 #
 # Remove this local/ symlink in case it happens to exist from 
 # a previous run with devel.sh.  Otherwise, it will make it into
@@ -82,7 +72,7 @@ rm -fv splunk-lab-app/local
 #
 # Download our packages from the Splunk Lab S3 bucket
 #
-./bin/download-from-s3.sh
+./bin/download.sh
 
 echo "# "
 echo "# Building Docker containers..."
@@ -114,10 +104,15 @@ fi
 
 if test "${BUILDING}"
 then
-	ln -f ${CACHE}/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz ${DEPLOY} 
+	for I in $(seq -w 10)
+	do
+        	ln -f ${CACHE}/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-${I}-of-10 ${DEPLOY}
+	done
+
 	docker build \
 		--build-arg SPLUNK_HOME=${SPLUNK_HOME} \
-		--build-arg CACHE_FILENAME=${DEPLOY}/${SPLUNK_FILENAME} \
+		--build-arg DEPLOY_SPLUNK_FILENAME=${DEPLOY}/${SPLUNK_FILENAME} \
+		--build-arg DEPLOY=${DEPLOY} \
 		. -f docker/${DOCKER} -t splunk-lab-core-1
 	rm -f ${DEPLOY}/*
 	touch ${BUILD}/${DOCKER}

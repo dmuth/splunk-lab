@@ -13,11 +13,34 @@ set -e
 pushd $(dirname $0)/.. > /dev/null
 
 BUCKET="dmuth-splunk-lab"
-
 CACHE="cache"
+
+SPLUNK_PRODUCT="splunk"
+SPLUNK_VERSION="8.1.0.1"
+SPLUNK_BUILD="24fd52428b5a"
+SPLUNK_FILENAME="splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz"
+SPLUNK_URL="https://download.splunk.com/products/${SPLUNK_PRODUCT}/releases/${SPLUNK_VERSION}/linux/${SPLUNK_FILENAME}"
+SPLUNK_CACHE_FILENAME="${CACHE}/${SPLUNK_FILENAME}"
 
 mkdir -p ${CACHE}
 pushd ${CACHE} >/dev/null > /dev/null
+
+echo "# "
+echo "# Downloading Splunk..."
+echo "# "
+if test ! -f "${SPLUNK_FILENAME}"
+then
+	wget -O ${SPLUNK_FILENAME}.tmp ${SPLUNK_URL}
+	mv ${SPLUNK_FILENAME}.tmp ${SPLUNK_FILENAME}
+fi
+
+echo "# "
+echo "# Splitting up the Splunk tarball into 10 separate pieces..."
+echo "# "
+if test ! -f "splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-10-of-10"
+then
+	../bin/tarsplit ${SPLUNK_FILENAME} 10
+fi
 
 echo "# "
 echo "# Downloading packages from S3..."

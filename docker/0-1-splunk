@@ -6,16 +6,52 @@ FROM splunk-lab-core-0
 # These are passed in with --build-args
 #
 ARG SPLUNK_HOME
-ARG CACHE_FILENAME
+ARG DEPLOY
 
-COPY ${CACHE_FILENAME} /tmp/splunk.tgz
+#
+# I know that at first glance, this looks kinda crazy.
+# The reason for all these files is because the Splunk tarball is HUGE, and breaking it
+# up into smaller pieces keeps individual Docker layers from getting too big.
+# I'm not thrilled with this approach either, it's the best I can do for now, though.
+#
+COPY ${DEPLOY}/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-01-of-10 /tmp
+COPY ${DEPLOY}/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-02-of-10 /tmp
+COPY ${DEPLOY}/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-03-of-10 /tmp
+COPY ${DEPLOY}/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-04-of-10 /tmp
+COPY ${DEPLOY}/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-05-of-10 /tmp
+COPY ${DEPLOY}/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-06-of-10 /tmp
+COPY ${DEPLOY}/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-07-of-10 /tmp
+COPY ${DEPLOY}/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-08-of-10 /tmp
+COPY ${DEPLOY}/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-09-of-10 /tmp
+COPY ${DEPLOY}/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-10-of-10 /tmp
 
 #
 # Download official Splunk release and unzip in /opt/splunk
 #
-RUN mkdir -p ${SPLUNK_HOME} \
-	&& tar xzf /tmp/splunk.tgz --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk.tgz \
+RUN mkdir -p ${SPLUNK_HOME}
+
+RUN tar xzf /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-01-of-10 --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-01-of-10
+RUN tar xzf /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-02-of-10 --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-02-of-10
+RUN tar xzf /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-03-of-10 --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-03-of-10
+RUN tar xzf /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-04-of-10 --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-04-of-10
+RUN tar xzf /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-05-of-10 --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-05-of-10
+RUN tar xzf /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-06-of-10 --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-06-of-10
+RUN tar xzf /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-07-of-10 --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-07-of-10
+RUN tar xzf /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-08-of-10 --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-08-of-10
+RUN tar xzf /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-09-of-10 --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-09-of-10
+RUN tar xzf /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-10-of-10 --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-10-of-10
+
+
 #
 # Link to our data directory and search app.
 # 
@@ -25,7 +61,7 @@ RUN mkdir -p ${SPLUNK_HOME} \
 #
 # (Yes, that means *you*, Chris in Seattle)
 #
-	&& ln -s /opt/splunk/var/lib/splunk/ /data \
+RUN ln -s /opt/splunk/var/lib/splunk/ /data \
 	&& ln -s /opt/splunk/etc/apps/splunk-lab/local /app 
 
 
