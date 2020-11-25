@@ -6,19 +6,63 @@ FROM splunk-lab-core
 
 ARG DEPLOY
 
-COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz /tmp/splunk-packages/
 COPY ${DEPLOY}/splunk-machine-learning-toolkit_520.tgz /tmp/splunk-packages/
 COPY ${DEPLOY}/nlp-text-analytics_102.tgz /tmp/splunk-packages/
 COPY ${DEPLOY}/halo-custom-visualization_113.tgz /tmp/splunk-packages/
 COPY ${DEPLOY}/sankey-diagram-custom-visualization_130.tgz /tmp/splunk-packages/
 
+#
+# I know that at first glance, this looks kinda crazy.
+# The reason for all these files is because the Splunk tarball is HUGE, and breaking it
+# up into smaller pieces keeps individual Docker layers from getting too big.
+# I'm not thrilled with this approach either, it's the best I can do for now, though.
+#
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-01-of-10 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-02-of-10 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-03-of-10 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-04-of-10 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-05-of-10 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-06-of-10 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-07-of-10 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-08-of-10 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-09-of-10 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-10-of-10 /tmp/
 
 #
 # Install Python for Scientific computing and Splunk ML Toolkit
 #
-RUN tar xfvz /tmp/splunk-packages/python-for-scientific-computing-for-linux-64-bit_202.tgz \
-	&& mv Splunk_SA_Scientific_Python_linux_x86_64 /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/python-for-scientific-computing-for-linux-64-bit_202.tgz 
+RUN mkdir -p /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-01-of-10 \
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-01-of-10.tgz 
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-02-of-10 \
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-02-of-10.tgz 
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-03-of-10 \
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-03-of-10.tgz 
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-04-of-10 \
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-04-of-10.tgz 
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-05-of-10 \
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-05-of-10.tgz 
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-06-of-10 \
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-06-of-10.tgz 
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-07-of-10 \
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-07-of-10.tgz 
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-08-of-10 \
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-08-of-10.tgz 
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-09-of-10 \
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-09-of-10.tgz 
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-10-of-10 \
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-10-of-10.tgz 
+
 
 #
 # Machine Learning toolkit

@@ -168,7 +168,11 @@ fi
 
 if test "${BUILDING}"
 then
-	ln -f ${CACHE}/python-for-scientific-computing-for-linux-64-bit_202.tgz ${DEPLOY} 
+	for I in $(seq -w 10)
+	do
+		ln -f ${CACHE}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-${I}-of-10 ${DEPLOY} 
+	done
+
 	ln -f ${CACHE}/splunk-machine-learning-toolkit_520.tgz ${DEPLOY} 
 	ln -f ${CACHE}/nlp-text-analytics_102.tgz ${DEPLOY} 
 	ln -f ${CACHE}/halo-custom-visualization_113.tgz ${DEPLOY} 

@@ -79,5 +79,14 @@ do
 
 done
 
+echo "# "
+echo "# Splitting up Python package into 10 separate pieces..."
+echo "# "
+if test ! -f "python-for-scientific-computing-for-linux-64-bit_202.tgz-part-10-of-10"
+then
+	../bin/tarsplit "python-for-scientific-computing-for-linux-64-bit_202.tgz" 10
+fi
+
+
 echo "# Done downloading packages!"
 
