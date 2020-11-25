@@ -87,9 +87,6 @@ cat inputs.conf.in \
 	| sed -e "s/%DATE%/$(date +%Y%m%d-%H%M%S)/" \
 	| sed -e "s/%EVENTGEN%/${SPLUNK_EVENTGEN_DISABLED}/" \
 	> inputs.conf
-#echo "TEST: ${SPLUNK_EVENTGEN}"
-#exec "$@"
-#exit
 
 
 #
