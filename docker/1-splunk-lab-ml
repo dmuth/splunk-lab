@@ -13,55 +13,47 @@ COPY ${DEPLOY}/sankey-diagram-custom-visualization_130.tgz /tmp/splunk-packages/
 
 #
 # I know that at first glance, this looks kinda crazy.
-# The reason for all these files is because the Splunk tarball is HUGE, and breaking it
+# The reason for all these files is because the Python tarball is HUGE, and breaking it
 # up into smaller pieces keeps individual Docker layers from getting too big.
 # I'm not thrilled with this approach either, it's the best I can do for now, though.
 #
-COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-01-of-10 /tmp/
-COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-02-of-10 /tmp/
-COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-03-of-10 /tmp/
-COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-04-of-10 /tmp/
-COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-05-of-10 /tmp/
-COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-06-of-10 /tmp/
-COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-07-of-10 /tmp/
-COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-08-of-10 /tmp/
-COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-09-of-10 /tmp/
-COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-10-of-10 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-1-of-8 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-2-of-8 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-3-of-8 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-4-of-8 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-5-of-8 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-6-of-8 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-7-of-8 /tmp/
+COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-8-of-8 /tmp/
 
 #
 # Install Python for Scientific computing and Splunk ML Toolkit
 #
 RUN mkdir -p /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64
-RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-01-of-10 \
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-1-of-8 \
 	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-01-of-10.tgz 
-RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-02-of-10 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-1-of-8.tgz 
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-2-of-8 \
 	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-02-of-10.tgz 
-RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-03-of-10 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-2-of-8.tgz 
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-3-of-8 \
 	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-03-of-10.tgz 
-RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-04-of-10 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-3-of-8.tgz 
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-4-of-8 \
 	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-04-of-10.tgz 
-RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-05-of-10 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-4-of-8.tgz 
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-5-of-8 \
 	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-05-of-10.tgz 
-RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-06-of-10 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-5-of-8.tgz 
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-6-of-8 \
 	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-06-of-10.tgz 
-RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-07-of-10 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-6-of-8.tgz 
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-7-of-8 \
 	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-07-of-10.tgz 
-RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-08-of-10 \
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-7-of-8.tgz 
+RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-8-of-8 \
 	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-08-of-10.tgz 
-RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-09-of-10 \
-	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-09-of-10.tgz 
-RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-10-of-10 \
-	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-10-of-10.tgz 
+	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-8-of-8.tgz 
 
 
 #

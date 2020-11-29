@@ -34,12 +34,13 @@ then
 	mv ${SPLUNK_FILENAME}.tmp ${SPLUNK_FILENAME}
 fi
 
-echo "# "
-echo "# Splitting up the Splunk tarball into 10 separate pieces..."
-echo "# "
-if test ! -f "splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-10-of-10"
+NUM_PARTS=10
+if test ! -f "splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-${NUM_PARTS}-of-${NUM_PARTS}"
 then
-	../bin/tarsplit ${SPLUNK_FILENAME} 10
+	echo "# "
+	echo "# Splitting up the Splunk tarball into ${NUM_PARTS} separate pieces..."
+	echo "# "
+	../bin/tarsplit ${SPLUNK_FILENAME} ${NUM_PARTS}
 fi
 
 echo "# "
@@ -79,12 +80,13 @@ do
 
 done
 
-echo "# "
-echo "# Splitting up Python package into 10 separate pieces..."
-echo "# "
-if test ! -f "python-for-scientific-computing-for-linux-64-bit_202.tgz-part-10-of-10"
+NUM_PARTS=8
+if test ! -f "python-for-scientific-computing-for-linux-64-bit_202.tgz-part-${NUM_PARTS}-of-${NUM_PARTS}"
 then
-	../bin/tarsplit "python-for-scientific-computing-for-linux-64-bit_202.tgz" 10
+	echo "# "
+	echo "# Splitting up Python package into ${NUM_PARTS} separate pieces..."
+	echo "# "
+	../bin/tarsplit "python-for-scientific-computing-for-linux-64-bit_202.tgz" ${NUM_PARTS}
 fi
 
 

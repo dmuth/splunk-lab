@@ -166,11 +166,12 @@ else
 	BUILDING=1
 fi
 
+NUM_PARTS=8
 if test "${BUILDING}"
 then
-	for I in $(seq -w 10)
+	for I in $(seq -w ${NUM_PARTS})
 	do
-		ln -f ${CACHE}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-${I}-of-10 ${DEPLOY} 
+		ln -f ${CACHE}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-${I}-of-${NUM_PARTS} ${DEPLOY} 
 	done
 
 	ln -f ${CACHE}/splunk-machine-learning-toolkit_520.tgz ${DEPLOY} 
