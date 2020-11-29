@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env python3
 #
 # https://github.com/dmuth/tarsplit
 #
@@ -11,122 +11,140 @@
 # now be broken down into smaller layers, which each layer extracting a subset
 # of the original tarball's directory structure.
 #
+#
 
 
-# Errors are fatal
-set -e
+import argparse
+import os
+import tarfile
 
-# Note our starting directory
-DIR=$(pwd)
 
-# Create a temp directory and a temp file
-TMP=$(mktemp -d)
-FILELIST=$(mktemp)
+parser = argparse.ArgumentParser(description = "Split up a tarball into 2 more chunks of roughly equal size.")
+parser.add_argument("file", type = str,
+	help = "The tarball to split up")
+parser.add_argument("num", type = int, 
+	help = "How many chunks to split into?")
+parser.add_argument("--dry-run", action = "store_true",
+	help = "Perform a dry run and tell what we WOULD do.")
+
+args = parser.parse_args()
+#print(args) # Debugging
 
 #
-# Print our syntax and exit with an error.
+# Check our arguments.
 #
-function print_syntax() {
-	echo "! "
-	echo "! Syntax: $0 tarball num"
-	echo "! "
-	echo "! Split a tarball into a number of smaller parts, along file boundaries."
-	echo "! "
-	exit 1
-}
+def check_args(args):
+	if args.num < 2:
+		raise ValueError("Number of chunks cannot be less than 2!")
 
-if test ! "$2"
-then
-	print_syntax
-fi
-
-if test "$1" == "-h" -o "$1" == "--help"
-then
-	print_syntax
-fi
-
-FILE=$1
-FILE_BASE=$(basename $FILE)
-NUM_PARTS=$2
-
-if test "${NUM_PARTS}" -lt 2
-then
-	echo "! "
-	echo "! Nunber of parts must be at least 2! (You said: ${NUM_PARTS})"
-	echo "! "
-	exit 1
-fi
 
 #
-# If our file doesn't start with a /, we'll need to prepend the starting directory.
+# Calculate the size per chunk.
+# This is based on uncompressed values, the resulting tarballs may vary in size.
 #
-TAR=${FILE}
-if test ${TAR:0:1} != "/"
-then
-	TAR=${DIR}/${TAR}
-fi
+def get_chunk_size(t, num):
 
-if test ! -f "${TAR}"
-then
-	echo "! "
-	echo "! File not found: ${TAR}"
-	echo "! "
-	exit 1
-fi
+	total_file_size = 0
+	for f in t.getmembers():
+		total_file_size += f.size
+
+	retval = (total_file_size, int(total_file_size / args.num))
+
+	return(retval)
+
 
 #
-# Change to our temp directory for all work
+# Get our filename for a specific part.
 #
-pushd ${TMP} > /dev/null
-#echo "Temp directory: ${TMP}" # Debugging
+def open_chunkfile(file, part, num, dry_run = False):
 
-NUM_FILES=$(tar tfvz ${TAR} | wc -l | awk '{print $1}' )
-echo "# Number of files in ${FILE}: $NUM_FILES"
-echo "# Number of parts requested: ${NUM_PARTS}"
-NUM_FILES_PER_PART=$(( ${NUM_FILES} / ${NUM_PARTS} ))
-echo "# Number of files per part: ${NUM_FILES_PER_PART} (last part rounds up)"
+	out = None
 
-echo "# Extracting file '${FILE}' so that we can then build parts from that directory.."
-tar xfz ${TAR}
+	num_len = len(str(num))
+	part_formatted = str(part).zfill(num_len)
 
-START=""
-END=""
-for PART in $(seq -w $NUM_PARTS)
-do
-	echo "# Generating part ${PART}/${NUM_PARTS}..."
+	filename = f"{os.path.basename(file)}-part-{part_formatted}-of-{num}"
+	if not dry_run:
+		out = tarfile.open(filename, "w:gz")
 
-	if test ! "${START}"
-	then
-		START=1
-		END=${NUM_FILES_PER_PART}
-	else
-		START=$(( ${START} + ${NUM_FILES_PER_PART} ))
-		END=$(( ${START} + ${NUM_FILES_PER_PART} - 1 ))
-	fi
+	return(filename, out)
 
-	if test "${PART}" == "${NUM_PARTS}"
-	then
-		echo "# We're on the last part, so file Index is set to \$ for sed..."
-		END="$"
-	fi
 
-	echo "# Starting file index: ${START}, ending file index: ${END}"
+#
+# Our main entrypoint.
+#
+def main(args):
 
-	#echo "tar tfz ${TAR} | sed -n ${START},${END}p > ${FILELIST}" # Degbugging
-	tar tfz ${TAR} | sed -n ${START},${END}p > ${FILELIST}
-	#cat ${FILELIST} # Debugging
+	check_args(args)
 
-	PART_FILE="${FILE}-part-${PART}-of-${NUM_PARTS}"
-	PART_FILE="${DIR}/${FILE_BASE}-part-${PART}-of-${NUM_PARTS}"
+	t = tarfile.open(args.file, "r")
 
-	echo "# Building part '${PART_FILE}'..."
+	print(f"Welcome to Tarsplit! Reading file {args.file}...")
+	(total_file_size, chunk_size) = get_chunk_size(t, args.num)
 
-	#echo tar cfz ${PART_FILE} --files-from ${FILELIST} --no-recursion # Debugging
-	tar cfz ${PART_FILE} --files-from ${FILELIST} --no-recursion
+	print(f"Total uncompressed file size: {total_file_size} bytes, "
+		+ f"num chunks: {args.num}, chunk size: {chunk_size} bytes")
 
-done
+	(filename, out) = open_chunkfile(args.file, 1, args.num, dry_run = args.dry_run)
 
-# Cleanup
-rm -rf ${TMP} ${FILELIST}
+	size = 0
+	current_chunk = 1
+	num_files_in_current_chunk = 0
+
+	#
+	# Loop through are files, and write them out to separate tarballs.
+	#
+	for f in t.getmembers():
+
+		name = f.name
+		size += f.size
+
+		f = t.extractfile(name)
+		info = t.getmember(name)
+		if not args.dry_run:
+			out.addfile(info, f)
+
+		num_files_in_current_chunk += 1
+		write_status = False
+		if num_files_in_current_chunk < 100:
+			if num_files_in_current_chunk % 10 == 0:
+				write_status = True
+		elif num_files_in_current_chunk < 1000:
+			if num_files_in_current_chunk % 100 == 0:
+				write_status = True
+		else:
+			if num_files_in_current_chunk % 1000 == 0:
+				write_status = True
+
+		if write_status:
+			print(f"{num_files_in_current_chunk} files written to {filename}")
+
+		if current_chunk < args.num:
+			if size >= chunk_size:
+
+				if not args.dry_run:
+					out.close()
+					print(f"Successfully wrote {size} bytes in {num_files_in_current_chunk} files to {filename}")
+				else:
+					print(f"Would have written {size} bytes in {num_files_in_current_chunk} files to {filename}")
+
+				size = 0
+				current_chunk += 1
+				num_files_in_current_chunk = 0
+
+				(filename, out) = open_chunkfile(args.file, current_chunk, args.num, 
+					dry_run = args.dry_run)
+
+	t.close()
+
+	if not args.dry_run:
+		print(f"Successfully wrote {size} bytes in {num_files_in_current_chunk} files to {filename}")
+		out.close()
+	else:
+		print(f"Would have written {size} bytes in {num_files_in_current_chunk} files to {filename}")
+
+
+
+main(args)
 
 
