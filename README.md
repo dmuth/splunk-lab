@@ -202,7 +202,7 @@ I wrote a series of helper scripts in `bin/` to make the process easier:
 
 - Here's the layout of the `cache/` directory
    - `cache/` - Where tarballs for various apps hang out.
-   - `cache/deploy/` - When creating a specific Docker image, files are copied here so the Dockerfile can ingest them.  Or technically hardlinked.
+   - `cache/deploy/` - When creating a specific Docker image, files are copied here so the Dockerfile can ingest them.  (Or rather hardlinked to the files in the parent directory.)
    - `cache/build/` - 0-byte files are written here when a specific container is built, and on future builds, the age of that file is checked against the Dockerfile.  If the Dockerfile is newer, then the container is (re-)built.  Otherwise, it is skipped.  This shortens a run of `bin/devel.sh` where no containers need to be built from 12 seconds on my 2020 iMac to 0.2 seconds.
 
 
