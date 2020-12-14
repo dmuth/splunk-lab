@@ -89,6 +89,16 @@ What can you do with Splunk Lab?  Here are a few examples of ways you can use Sp
 
 - Run any of the above with `PRINT_DOCKER_CMD=1` set, and the Docker command line that's used will be written to stdout.
 
+### Run Splunk Lab in Development Mode with a bash Shell
+
+This would normally be done with the script `./bin/devel.sh` when running from the repo, 
+but if you're running Splunk Lab just with the Docker image, here's how to do it:
+
+`docker run -p 8000:8000 -e SPLUNK_PASSWORD=password1 -v $(pwd)/data:/data -v $(pwd)/logs:/logs --name splunk-lab --rm -it -v $(pwd):/mnt -e SPLUNK_DEVEL=1 dmuth1/splunk-lab bash`
+
+This is useful mainly if you want to poke around in Splunk Lab while it's running.  Note that you 
+could always just run `docker exec splunk-lab bash` instead of doing all of the above. :-)
+
 
 ## Splunk Apps Included
 
