@@ -77,7 +77,7 @@ What can you do with Splunk Lab?  Here are a few examples of ways you can use Sp
 ### Play around with synthetic webserver data
 
 - `SPLUNK_EVENTGEN=1 bash <(curl -Ls https://bit.ly/splunklab)`
-- Fake webserver logs will be written every 10 seconds and can be viewed with the query `index=main sourcetype=nginx`
+- Fake webserver logs will be written every 10 seconds and can be viewed with the query `index=main sourcetype=nginx`.  The logs are based on actual HTTP requests which have come into the <a href="https://www.dmuth.org/">webserver hosting my blog</a>.
  
 ### Adding Hostnames into /etc/hosts
 
