@@ -241,6 +241,8 @@ directory being untouched.
 - The Docker containers are **dmuth1/splunk-lab** and **dmuth1/splunk-lab-ml**.  The latter has all of the Machine Learning apps built in to the image.  Feel free to extend those for your own projects.
 - If I run `./bin/create-test-logfiles.sh 10000` and then start Splunk Lab on a Mac, all of the files will be Indexed without any major issues, but then the CPU will spin, and not from Splunk. 
    - The root cause is that the filesystem code for Docker volume mappings on OS/X's Docker implementation is VERY inefficient in terms of both CPU and memory usage, especially when there are 10,000 files involved.  The overhead is just crazy.  When reading events from a directory mounted through Docker, I see about 100 events/sec.  When the directory is local to the container, I see about 1,000 events/sec, for a 10x difference.
+- The HTTPS cert is self-signed with Splunk's own CA.  If you're tired of seeing a Certificate Error every time you try connecting to Splunk, you can follow the instructions at https://stackoverflow.com/a/31900210/196073 to allow self-signed certificates for `localhost` in Google Chrome.
+   - Please understand the implications before you do this.
 
 
 ## Credits
