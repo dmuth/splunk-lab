@@ -21,6 +21,9 @@ SPLUNK_CACHE_FILENAME="${CACHE}/${SPLUNK_FILENAME}"
 #
 BUILDING=""
 
+# This will be set to --no-cache if we are ignoring Docker's cache
+NO_CACHE=""
+
 #
 # Change to the parent of this script
 #
@@ -30,9 +33,10 @@ cd ..
 
 function print_syntax() {
 	echo "! "
-	echo "! Syntax: $0 [ --force ]"
+	echo "! Syntax: $0 [ --force | --no-cache ]"
 	echo "! "
 	echo "! --force force rebuilding of cached containers"
+	echo "! --no-cache Forces building and ignores the Docker cache, to ensure a clean rebuild."
 	echo "! "
 	exit 1
 } # print_syntax()
@@ -46,6 +50,12 @@ elif test "$1" == "--force"
 then
 	echo "# Removing build files..."
 	rm -fv ${BUILD}/*
+
+elif test "$1" == "--no-cache"
+then
+	echo "# Removing build files..."
+	rm -fv ${BUILD}/*
+	NO_CACHE="--no-cache"
 
 elif test "$1"
 then
@@ -89,7 +99,7 @@ fi
 
 if test "${BUILDING}"
 then
-	docker build . -f docker/${DOCKER} -t splunk-lab-core-0
+	docker build ${NO_CACHE} . -f docker/${DOCKER} -t splunk-lab-core-0
 	touch ${BUILD}/${DOCKER}
 fi
 
@@ -109,7 +119,7 @@ then
         	ln -f ${CACHE}/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-${I}-of-10 ${DEPLOY}
 	done
 
-	docker build \
+	docker build ${NO_CACHE} \
 		--build-arg SPLUNK_HOME=${SPLUNK_HOME} \
 		--build-arg DEPLOY_SPLUNK_FILENAME=${DEPLOY}/${SPLUNK_FILENAME} \
 		--build-arg DEPLOY=${DEPLOY} \
@@ -135,7 +145,7 @@ then
 	ln -f ${CACHE}/splunk-dashboard-examples_800.tgz ${DEPLOY} 
 	ln -f ${CACHE}/eventgen_720.tgz ${DEPLOY} 
 	ln -f ${CACHE}/rest-api-modular-input_198.tgz ${DEPLOY} 
-	docker build \
+	docker build ${NO_CACHE} \
 		--build-arg DEPLOY=${DEPLOY} \
 		. -f docker/${DOCKER} -t splunk-lab-core
 	rm -f ${DEPLOY}/*
@@ -153,7 +163,7 @@ fi
 
 if test "${BUILDING}"
 then
-	docker build . -f docker/${DOCKER} -t splunk-lab
+	docker build ${NO_CACHE} . -f docker/${DOCKER} -t splunk-lab
 	touch ${BUILD}/${DOCKER}
 fi
 
@@ -178,7 +188,7 @@ then
 	ln -f ${CACHE}/nlp-text-analytics_102.tgz ${DEPLOY} 
 	ln -f ${CACHE}/halo-custom-visualization_113.tgz ${DEPLOY} 
 	ln -f ${CACHE}/sankey-diagram-custom-visualization_130.tgz ${DEPLOY} 
-	docker build \
+	docker build ${NO_CACHE} \
 		--build-arg DEPLOY=${DEPLOY} \
 		. -f docker/${DOCKER} -t splunk-lab-ml
 	rm -f ${DEPLOY}/*
