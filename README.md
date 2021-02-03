@@ -205,6 +205,7 @@ I wrote a series of helper scripts in `bin/` to make the process easier:
 - `./bin/devel.sh` - Build and tag the container, then start it with an interactive bash shell.
    - This is a wrapper for the above-mentioned `go.sh` script. Any environment variables that work there will work here.
 - `./bin/kill.sh` - Kill a running `splunk-lab` container.
+- `./bin/attach.sh` - Attach to a running `splunk-lab` container.
 - `./bin/clean.sh` - Remove logs/ and/or data/ directories.
 - `./bin/tarsplit` - Local copy of my pacakge from https://github.com/dmuth/tarsplit
 
