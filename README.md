@@ -204,6 +204,8 @@ I wrote a series of helper scripts in `bin/` to make the process easier:
 - `./bin/push.sh` - Tag and push the container.
 - `./bin/devel.sh` - Build and tag the container, then start it with an interactive bash shell.
    - This is a wrapper for the above-mentioned `go.sh` script. Any environment variables that work there will work here.
+- `./bin/create-1-million-events.py` - Create 1 million events in the file `1-million-events.txt` in the current directory.
+   - If not in `logs/` but reachable from the Docker container, the file can then be oneshotted into Splunk with the following command: `/opt/splunk/bin/splunk add oneshot ./1-million-events.txt -index main -sourcetype oneshot1`
 - `./bin/kill.sh` - Kill a running `splunk-lab` container.
 - `./bin/attach.sh` - Attach to a running `splunk-lab` container.
 - `./bin/clean.sh` - Remove `logs/` and/or `data/` directories.
