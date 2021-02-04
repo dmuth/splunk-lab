@@ -156,7 +156,7 @@ Since building Splunk Lab, I have used it as the basis for building other projec
 
 - <a href="https://github.com/dmuth/SeptaStats/tree/master">SEPTA Stats</a>
    - Website with real-time stats on <a href="http://www.septa.org/service/rail/">Philadelphia Regional Rail</a>.
-   - Pulled down over 60 million traind data points over 4 years using Splunk.
+   - Pulled down over 60 million train data points over 4 years using Splunk.
 - <a href="https://github.com/twintproject/twint-splunk">Splunk Twint</a>
    - Splunk dashboards for Twitter timelines downloaded by Twint.  This now a part of the <a href="https://github.com/twintproject">TWINT Project</a>.
 - <a href="https://github.com/dmuth/splunk-yelp-reviews">Splunk Yelp Reviews</a>
