@@ -9,8 +9,8 @@ BUILD="${CACHE}/build"
 
 SPLUNK_PRODUCT="splunk"
 SPLUNK_HOME="/opt/splunk"
-SPLUNK_VERSION="8.1.0.1"
-SPLUNK_BUILD="24fd52428b5a"
+SPLUNK_VERSION="8.1.3"
+SPLUNK_BUILD="63079c59e632"
 SPLUNK_FILENAME="splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz"
 SPLUNK_URL="https://download.splunk.com/products/${SPLUNK_PRODUCT}/releases/${SPLUNK_VERSION}/linux/${SPLUNK_FILENAME}"
 SPLUNK_CACHE_FILENAME="${CACHE}/${SPLUNK_FILENAME}"
@@ -116,7 +116,7 @@ if test "${BUILDING}"
 then
 	for I in $(seq -w 10)
 	do
-        	ln -f ${CACHE}/splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-${I}-of-10 ${DEPLOY}
+        	ln -f ${CACHE}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-${I}-of-10 ${DEPLOY}
 	done
 
 	docker build ${NO_CACHE} \

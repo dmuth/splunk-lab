@@ -16,8 +16,8 @@ BUCKET="dmuth-splunk-lab"
 CACHE="cache"
 
 SPLUNK_PRODUCT="splunk"
-SPLUNK_VERSION="8.1.0.1"
-SPLUNK_BUILD="24fd52428b5a"
+SPLUNK_VERSION="8.1.3"
+SPLUNK_BUILD="63079c59e632"
 SPLUNK_FILENAME="splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz"
 SPLUNK_URL="https://download.splunk.com/products/${SPLUNK_PRODUCT}/releases/${SPLUNK_VERSION}/linux/${SPLUNK_FILENAME}"
 SPLUNK_CACHE_FILENAME="${CACHE}/${SPLUNK_FILENAME}"
@@ -32,15 +32,23 @@ if test ! -f "${SPLUNK_FILENAME}"
 then
 	wget -O ${SPLUNK_FILENAME}.tmp ${SPLUNK_URL}
 	mv ${SPLUNK_FILENAME}.tmp ${SPLUNK_FILENAME}
+
+else
+	echo "# Oh, ${SPLUNK_FILENAME} already exists, skipping!"
+
 fi
 
 NUM_PARTS=10
-if test ! -f "splunk-8.1.0.1-24fd52428b5a-Linux-x86_64.tgz-part-${NUM_PARTS}-of-${NUM_PARTS}"
+if test ! -f "splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-${NUM_PARTS}-of-${NUM_PARTS}"
 then
 	echo "# "
 	echo "# Splitting up the Splunk tarball into ${NUM_PARTS} separate pieces..."
 	echo "# "
 	../bin/tarsplit ${SPLUNK_FILENAME} ${NUM_PARTS}
+
+else
+	echo "# Oh, splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-${NUM_PARTS}-of-${NUM_PARTS} already exists, skipping!"
+
 fi
 
 echo "# "
