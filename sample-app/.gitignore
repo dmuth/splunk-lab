@@ -1,0 +1,14 @@
+
+# Vim
+*.swp
+*~
+
+data/
+logs/
+
+# Steve Jobs
+.DS_Store
+
+!sample-app/default/data
+
+
