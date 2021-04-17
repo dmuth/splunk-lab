@@ -178,6 +178,13 @@ Here's all of the above, presented as a graph:
 <img src="img/app-tree.png" width="500" />
 
 
+## Building Your Own Apps Based on Splunk Lab
+
+A sample app (and instructions on how to use it) are in the 
+<a href="sample-app/">sample-app directory</a>.  
+Feel free to expand on that app for your own apps.
+
+
 ## A Word About Security
 
 HTTPS is turned on by default.  Passwords such as `password` and <a href="https://www.youtube.com/watch?v=a6iW-8xPw3k">12345</a> are not permitted.
