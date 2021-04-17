@@ -252,11 +252,13 @@ then
 fi
 
 
-IMAGE="dmuth1/splunk-lab"
+IMAGE="splunk-lab-sample-app"
+#IMAGE="dmuth1/splunk-lab" # Original Splunk Lab image
 #IMAGE="splunk-lab" # Debugging/testing
 if test "$SPLUNK_ML"
 then
-	IMAGE="dmuth1/splunk-lab-ml"
+	IMAGE="splunk-lab-sample-app"
+	#IMAGE="dmuth1/splunk-lab-ml" # Original Splunk Lab image
 	#IMAGE="splunk-lab-ml" # Debugging/testing
 fi
 
