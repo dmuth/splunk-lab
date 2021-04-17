@@ -224,8 +224,8 @@ I wrote a series of helper scripts in `bin/` to make the process easier:
 
 I had to struggle with this for awhile, so I'm mostly documenting it here.
 
-When in devel mode, /opt/splunk/etc/apps/splunk-lab/ is mounted to `./splunk-lab-app/` via `go.sh`
-and the entrypoint script inside of the container smylinks `local/` to `default/`.
+When in devel mode, `/opt/splunk/etc/apps/splunk-lab/` is mounted to `./splunk-lab-app/` via `go.sh`
+and the entrypoint script inside of the container symlinks `local/` to `default/`.
 This way, any changes that are made to dashboards will be propagated outside of
 the container and can be checked in to Git.
 
