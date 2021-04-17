@@ -15,8 +15,7 @@ Paste either of these on the command line:
 `bash <(curl -Ls https://bit.ly/splunklab)`
 
 ...and the script will print up what directory it will ingest logs from, your password, etc.  Follow the on-screen
-instructions for setting environment variables and you'll be up and running in no time!  You can find your
-logs with the search `index=main`.
+instructions for setting environment variables and you'll be up and running in no time!  Whatever logs you had sitting in your `logs/` directory will be searchable in Splunk with the search `index=main`.
 
 If you want to see neat things you can do in Splunk Lab, check out <a href="#cookbook">the Cookbook section</a>.
 
