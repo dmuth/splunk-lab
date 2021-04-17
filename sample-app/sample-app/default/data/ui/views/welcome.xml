@@ -1,0 +1,187 @@
+<dashboard>
+  <label>Welcome To The Splunk Lab Sample App!</label>
+  <row>
+    <panel>
+      <html>
+
+<img src="/static/app/splunk-lab/splunk-lab.png" align="right"/>
+
+<h1>Sample App</h1>
+
+<h2>Welcome!</h2>
+<p>
+  If you're seeing this, congratulations, you have successfully launched the sample app that ships with Splunk Lab.  You are well on your way to building your very first app based on Splunk Lab.
+</p>
+
+<h2>About</h2>
+
+<p>
+<a href="https://github.com/dmuth/splunk-lab">Splunk Lab</a> is the quick and easy way to spin up an instance of Splunk in Docker to perform ad-hoc data analysis on one or more logfiles or REST/RSS endpoints!
+</p>
+
+
+<h2>Documentation</h2>
+
+<ul>
+  <li>
+            <a href="https://docs.splunk.com/Documentation/Splunk">Splunk Documentation</a>
+          </li>
+  <li>
+            <a href="https://docs.splunk.com/Documentation/Splunk/8.0.4/SearchReference/WhatsInThisManual">Search Reference</a>
+          </li>
+  <li>
+            <a href="https://docs.splunk.com/Documentation/Splunk/8.0.5/SearchTutorial/WelcometotheSearchTutorial">Search Tutorial</a>
+          </li>
+</ul>
+
+<h2>Examples</h2>
+<ul>
+  <li>
+            <a href="/app/simple_xml_examples/contents">Sample Dashboards</a>
+          </li>
+</ul>
+
+<h2>Support</h2>
+<ul>
+  <li>
+            <a href="https://github.com/dmuth/splunk-lab">Splunk Lab on GitHub</a>
+          </li>
+  <li>
+            <a href="https://github.com/dmuth/splunk-lab/issues">Open an Issue in GitHub</a>
+          </li>
+  <li>
+            <a href="https://twitter.com/intent/tweet?text=Hey%20%40dmuth%2C%20I%20use%20%23SplunkLab%21">Say "hi" on Twitter!</a>
+          </li>
+</ul>
+
+
+
+  </html>
+    </panel>
+    <panel>
+      <html>
+
+<h1>Links of Interest</h1>
+
+<ul>
+  <li>
+            <a href="/app/splunk-lab/search">Search existing events</a>
+          </li>
+  <ul>
+    <li>
+              <a href="/app/splunk-lab/search?q=search%20index%3D_internal%20earliest%3D-1h&amp;display.page.search.mode=smart&amp;dispatch.sample_ratio=1&amp;workload_pool=&amp;earliest=-1h&amp;latest=now">Search "_internal" Index over the last hour</a> - This is guaranteed to have data from Splunk itself</li>
+    <li>
+              <a href="/app/splunk-lab/search?q=search%20index%3Dmain%20earliest%3D-1d&amp;display.page.search.mode=smart&amp;dispatch.sample_ratio=1&amp;workload_pool=&amp;earliest=-1h&amp;latest=now">Search "main" Index over the last day</a> - This will not have data unless there are files in your logs/ directory or you have turned on HTTP or REST data ingestion.</li>
+  </ul>
+  <li>
+            <a href="/app/splunk-lab/dashboards">Dashboards</a>
+          </li>
+  <ul>
+    <li>Dashboards that are saved will persist outside of Splunk Lab (default is <tt>app/</tt> directory...)</li>
+  </ul>
+  <li>
+            <a href="/app/wordcloud_app/wordcloud_gallery">Wordcloud App</a>
+          </li>
+  <li>
+            <a href="/manager/splunk-lab/data/inputs/rest">Rest Data Endpoints</a> - Turn these on to get current BitCoin prices, stock prices, Philly Weather, and more!</li>
+  <li>
+            <a href="/manager/splunk-lab/data/inputs/syndication">Syndication Feed</a> - Turn these on to get RSS feeds from places like CNN, Flickr, and Splunk Questions</li>
+  </ul>
+  
+<h2>Machine Learning</h2>  
+  
+<p>If the <tt>splunk-lab-ml</tt> Docker image was used, these following modules will be available:</p>
+
+  <ul>
+     <li>
+            <a href="/app/Splunk_ML_Toolkit/contents">Splunk ML Toolkit</a>
+          </li>
+     <li>
+            <a href="/app/nlp-text-analytics/welcome">NLP Text Analytics</a>
+          </li>
+     <li>
+            <a href="/app/viz_halo/halo_doc">Halo Visualization</a>
+          </li>
+     <li>
+            <a href="/app/sankey_diagram_app/gallery">Sankey Diagram Gallery</a>
+          </li>
+     <ul>
+       <li>
+              <a href="https://docs.splunk.com/Documentation/SankeyDiagram/1.1.0/SankeyDiagramViz/SankeyIntro">Sankey diagram documentation</a>
+            </li>
+     </ul>
+  </ul>
+
+  </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title></title>
+      <html>
+        
+        <h1>Data Sources included in Splunk Lab</h1>
+        <ul>
+          <li>
+            <a href="https://answers.splunk.com/feed/questions.rss">Recent Questions Posted to Splunk Answers</a>
+          </li>
+          <li>
+            <a href="http://www.cnn.com/services/rss/">CNN Headlines</a>
+          </li>
+          <li>
+            <a href="https://api.flickr.com/services/feeds/photos_public.gne?tags=cheetah">Flickr's Public Feed</a>, or perhaps just <a href="https://api.flickr.com/services/feeds/photos_public.gne?tags=cheetah">Photos Tagged "cheetah"</a>
+          </li>
+          <li>
+            <a href="http://www3.septa.org/hackathon/TrainView/">Philadelphia Regional Rail Train Data</a>
+          </li>
+          <li>
+            <a href="https://developers.coinbase.com/docs/wallet/guides/price-data">Real-time BitCoin Price</a>
+          </li>
+          <li>
+            <a href="https://api.weather.gov/gridpoints/PHI/49,75/forecast">Philadelphia Forecast</a> from <a href="https://www.weather.gov/documentation/services-web-api">The National Weather Service</a>
+          </li>
+          <li>
+            <a href="https://www.alphavantage.co/">Stock Quotes</a>
+          </li>
+          <li>
+            <a href="https://www.meetup.com/meetup_api/docs/stream/2/rsvps/">Meetup RSVPs</a>
+          </li>
+        </ul>
+        
+        To get started with these, head over to <a href="/manager/splunk-lab/data/inputs/syndication">Syndication</a> or <a href="/manager/splunk-lab/data/inputs/rest">REST</a>
+        under <b>Settings -&gt; Data Inputs</b>
+        
+      </html>
+    </panel>
+    <panel>
+      <title></title>
+      <html>
+        
+        <h1>Apps built with Splunk Lab</h1>
+        <ul>
+          <li>
+            <a href="https://github.com/dmuth/splunk-yelp-reviews">Splunk Yelp Reviews</a> - Lets you pull down Yelp reviews for venues and view visualizations and wordclouds of positive/negative reviews in a Splunk dashboard</li>
+          <li>
+            <a href="https://github.com/dmuth/splunk-telegram">Splunk Telegram</a> - This app lets you run Splunk against messages from Telegram groups and generate graphs and word clouds based on the activity in them.</li>
+          <li>
+            <a href="https://github.com/dmuth/splunk-network-health-check">Splunk Network Health Check</a> - Pings 1 or more hosts and graphs the results in Splunk so you can monitor network connectivity over time.</li>
+          <li>...plus a few other things that I'm not quite ready to release yet. :-)</li>
+        </ul>
+
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        <h1>Copyrights</h1>
+        
+        <ul>
+          <li>Splunk is copyright by Splunk, Inc. Please stay within the confines of the 500 MB/day free license when using Splunk Lab, unless you brought your own license along.</li>
+          <li>The various apps are copyright by the creators of those apps.</li>
+        </ul>
+
+      </html>
+    </panel>
+  </row>
+</dashboard>
