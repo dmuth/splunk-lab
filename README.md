@@ -194,6 +194,17 @@ this on a public-facing machine.
 
 ## FAQ
 
+### How do I get a valid SSL cert on localhost?
+
+Yes, you can! 
+
+First, install <a href="https://github.com/FiloSottile/mkcert">mkcert</a> and then run `mkcert -install && mkcert localhost 127.0.0.1 ::1` to generate a local CA and a cert/key combo for localhost.
+
+Then, when you run Splunk Lab, set the environment variables `SSL_KEY` and `SSL_CERT` and those files will be pulled into Splunk Lab.
+
+Example: `SSL_KEY=./localhost.key SSL_CERT=./localhost.pem ./go.sh`
+
+
 ### Does this work on Macs?
 
 Sure does!  I built this on a Mac. :-)
@@ -210,6 +221,7 @@ I wrote a series of helper scripts in `bin/` to make the process easier:
 - `./bin/push.sh` - Tag and push the container.
 - `./bin/devel.sh` - Build and tag the container, then start it with an interactive bash shell.
    - This is a wrapper for the above-mentioned `go.sh` script. Any environment variables that work there will work here.
+   - **To force rebuilding a container during development** touch the associated Dockerfile in `docker/`.  E.g. `touch docker/1-splunk-lab` to rebuild the contents of that container.
 - `./bin/create-1-million-events.py` - Create 1 million events in the file `1-million-events.txt` in the current directory.
    - If not in `logs/` but reachable from the Docker container, the file can then be oneshotted into Splunk with the following command: `/opt/splunk/bin/splunk add oneshot ./1-million-events.txt -index main -sourcetype oneshot-0001`
 - `./bin/kill.sh` - Kill a running `splunk-lab` container.

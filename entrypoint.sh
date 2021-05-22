@@ -82,12 +82,26 @@ pushd /opt/splunk/etc/system/local/ >/dev/null
 
 
 cat user-seed.conf.in | sed -e "s/%password%/${SPLUNK_PASSWORD}/" > user-seed.conf
-cat web.conf.in | sed -e "s/%password%/${SPLUNK_PASSWORD}/" > web.conf
 cat inputs.conf.in \
 	| sed -e "s/%DATE%/$(date +%Y%m%d-%H%M%S)/" \
 	| sed -e "s/%EVENTGEN%/${SPLUNK_EVENTGEN_DISABLED}/" \
 	> inputs.conf
 
+#
+# If we have an SSL cert and key, let's add those into the web.conf file
+#
+SSL_CERT=""
+SSL_KEY=""
+if test -r "/ssl.cert"
+then
+	SSL_KEY="privKeyPath = /ssl.key"
+	SSL_CERT="serverCert = /ssl.cert"
+fi
+
+cat web.conf.in \
+	| sed -e "s|%ssl_key%|${SSL_KEY}|" \
+	| sed -e "s|%ssl_cert%|${SSL_CERT}|" \
+	> web.conf
 
 #
 # If we have a hosts file, append it to our /etc/hosts file.

@@ -34,6 +34,8 @@ DOCKER_NAME=${DOCKER_NAME:-splunk-lab}
 DOCKER_RM=${DOCKER_RM:-1}
 DOCKER_CMD=${DOCKER_CMD:-}
 PRINT_DOCKER_CMD=${PRINT_DOCKER_CMD:-}
+SSL_CERT=${SSL_CERT:-}
+SSL_KEY=${SSL_KEY:-}
 
 
 if test "$SPLUNK_START_ARGS" != "--accept-license"
@@ -134,6 +136,56 @@ fi
 
 
 #
+# Sanity check to make sure that both SSL_CERT *and* SSL_KEY are specified.
+#
+if test "${SSL_CERT}"
+then
+	if test ! "${SSL_KEY}"
+	then
+		echo "! "
+		echo "! \$SSL_CERT is specified but not \$SSL_KEY!"
+		echo "! "
+		exit 1
+	fi
+
+elif test "${SSL_KEY}"
+then
+	if test ! "${SSL_CERT}"
+	then
+		echo "! "
+		echo "! \$SSL_KEY is specified but not \$SSL_CERT!"
+		echo "! "
+		exit 1
+	fi
+
+fi
+
+#
+# Sanity check to make sure that SSL cert and key are both readable
+#
+if test "${SSL_CERT}"
+then
+	if test ! -r "${SSL_CERT}"
+	then
+		echo "! "
+		echo "! SSL Cert File ${SSL_CERT} does not exist or is not readable!"
+		echo "! "
+		exit 1
+	fi
+
+	if test ! -r "${SSL_KEY}"
+	then
+		echo "! "
+		echo "! SSL Cert File ${SSL_KEY} does not exist or is not readable!"
+		echo "! "
+		exit 1
+	fi
+
+fi
+
+
+
+#
 # Start forming our command
 #
 CMD="docker run \
@@ -181,6 +233,27 @@ if test "${SPLUNK_EVENTGEN}"
 then
 	CMD="${CMD} -e SPLUNK_EVENTGEN=${SPLUNK_EVENTGEN}"
 fi
+
+#
+# If SSL files don't start with a leading slash, prefix with the full path
+#
+if test "${SSL_CERT}"
+then
+
+	if test ${SSL_CERT:0:1} != "/"
+	then
+		SSL_CERT="$(pwd)/${SSL_CERT}"
+	fi
+
+	if test ${SSL_KEY:0:1} != "/"
+	then
+		SSL_KEY="$(pwd)/${SSL_KEY}"
+	fi
+
+	CMD="${CMD} -v ${SSL_CERT}:/ssl.cert -v ${SSL_KEY}:/ssl.key"
+
+fi
+
 
 #
 # Again, doing the same unusual stuff that we are with DOCKER_RM,
@@ -352,6 +425,13 @@ then
 	echo "# Fake Webserver Event Generation:   YES (index=main sourcetype=nginx to view)"
 else
 	echo "# Fake Webserver Event Generation:   NO (Feel free to set with \$SPLUNK_EVENTGEN)"
+fi
+
+if test "${SSL_CERT}"
+then
+	echo "# SSL Cert and Key?                  YES (${SSL_CERT}, ${SSL_KEY})"	
+else
+	echo "# SSL Cert and Key?                  NO (Specify with \$SSL_CERT and \$SSL_KEY)"	
 fi
 
 echo "# "

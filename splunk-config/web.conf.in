@@ -12,4 +12,6 @@ enableSplunkWebSSL = true
 #
 tools.sessions.timeout = 10080
 
+%ssl_key%
+%ssl_cert%
 
