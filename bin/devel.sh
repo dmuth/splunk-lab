@@ -12,6 +12,10 @@ BUILD="${CACHE}/build"
 pushd $(dirname $0) > /dev/null
 cd ..
 
+echo "# "
+echo "# Starting Splunk Lab in Development Mode."
+echo "# "
+
 #
 # Skip our building if NO_BUILD is set.
 #
@@ -24,7 +28,7 @@ then
 else
 	echo "# "
 	echo "# Building containers..."
-	echo "# (Skip with setting \$NO_BUILD...)"
+	echo "# Set NO_BUILD=1 to skip building if you already have the container."
 	echo "# "
 	./bin/build.sh $@
 
