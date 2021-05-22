@@ -22,6 +22,10 @@ then
 	echo "# "
 
 else
+	echo "# "
+	echo "# Building containers..."
+	echo "# (Skip with setting \$NO_BUILD...)"
+	echo "# "
 	./bin/build.sh $@
 
 	echo "# "
