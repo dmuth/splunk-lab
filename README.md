@@ -5,6 +5,8 @@
 
 This project lets you stand up a Splunk instance in Docker on a quick and dirty basis.
 
+But what is Splunk?  <a href="https://www.splunk.com/">Splunk</a> is a platform for big data collection and analytics.  You feed your events from syslog, webserver logs, or application logs into Splunk, and can use queries to extract meaningful insights from that data.
+
 
 ## Quick Start!
 
@@ -273,7 +275,9 @@ directory being untouched.
 - <a href="http://www.splunk.com/">Splunk</a>, for having such a fantastic product which is also a great example of Operational Excellence!
 - <a href="https://splunkbase.splunk.com/app/1924">Eventgen</a> is a super cool way of generating simulating real data that can be used to generate dashboards for testing and training purposes.
 - <a href="http://patorjk.com/software/taag/#p=display&h=0&v=0&f=Standard&t=Splunk%20Lab">This text to ASCII art generator</a>, for the logo I used in the script.
-- The logo was made over at https://www.freelogodesign.org/
+- The logo was made over at <a href="https://www.freelogodesign.org/">https://www.freelogodesign.org/</a>
+- <a href="https://liw.fi/readme-review/">Lars Wirzenius</a> for a review of this README.
+
 
 
 
