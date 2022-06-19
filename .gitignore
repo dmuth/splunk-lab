@@ -14,3 +14,7 @@ splunk-lab-app/local
 
 cache/
 
+# SSL Certs
+*.pem
+*.key
+
