@@ -99,6 +99,10 @@ def main(args):
 		name = f.name
 		size += f.size
 
+		if name[len(name) - 1] == "/":
+			print(f"File {name} ends in Slash, skipping due to a bug in the tarfile module. (Directory will still be created by files within that directory)")
+			continue
+
 		f = t.extractfile(name)
 		info = t.getmember(name)
 		if not args.dry_run:
@@ -117,16 +121,18 @@ def main(args):
 				write_status = True
 
 		if write_status:
-			print(f"{num_files_in_current_chunk} files written to {filename}")
+			print(f"{num_files_in_current_chunk} files written to {filename}", flush = True)
 
 		if current_chunk < args.num:
 			if size >= chunk_size:
 
 				if not args.dry_run:
 					out.close()
-					print(f"Successfully wrote {size} bytes in {num_files_in_current_chunk} files to {filename}")
+					print(f"Successfully wrote {size} bytes in {num_files_in_current_chunk} files to {filename}", 
+						flush = True)
 				else:
-					print(f"Would have written {size} bytes in {num_files_in_current_chunk} files to {filename}")
+					print(f"Would have written {size} bytes in {num_files_in_current_chunk} files to {filename}", 
+						flush = True)
 
 				size = 0
 				current_chunk += 1
@@ -138,10 +144,12 @@ def main(args):
 	t.close()
 
 	if not args.dry_run:
-		print(f"Successfully wrote {size} bytes in {num_files_in_current_chunk} files to {filename}")
+		print(f"Successfully wrote {size} bytes in {num_files_in_current_chunk} files to {filename}", 
+			flush = True)
 		out.close()
 	else:
-		print(f"Would have written {size} bytes in {num_files_in_current_chunk} files to {filename}")
+		print(f"Would have written {size} bytes in {num_files_in_current_chunk} files to {filename}", 
+			flush = True)
 
 
 
