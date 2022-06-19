@@ -216,9 +216,9 @@ Sure does!  I built this on a Mac. :-)
 
 I wrote a series of helper scripts in `bin/` to make the process easier:
 
-- `./bin/build.sh` - Build the containers.
-   - Note that this downloads packages from an AWS S3 bucket that I created.  This bucket is set to "requestor pays", so you'll need to make sure the `aws` CLI app set up.
 - `./bin/download.sh` - Download tarballs of various apps and splits some of them into chunks
+- `./bin/build.sh [ --force ]` - Build the containers.
+   - Note that this downloads packages from an AWS S3 bucket that I created.  This bucket is set to "requestor pays", so you'll need to make sure the `aws` CLI app set up.
 - `./bin/upload-file-to-s3.sh` - Upload a specific file to S3.  For rolling out new versions of apps
 - `./bin/push.sh` - Tag and push the container.
 - `./bin/devel.sh` - Build and tag the container, then start it with an interactive bash shell.
@@ -230,6 +230,13 @@ I wrote a series of helper scripts in `bin/` to make the process easier:
 - `./bin/attach.sh` - Attach to a running `splunk-lab` container.
 - `./bin/clean.sh` - Remove `logs/` and/or `data/` directories.
 - `./bin/tarsplit` - Local copy of my pacakge from https://github.com/dmuth/tarsplit
+
+
+### Building a New Version of Splunk
+
+- Bump version number and build number in `bin/download.sh`
+- Bump version number and build number in `bin/build.sh`
+- Bump version number and build number in `docker/0-1-splunk`
 
 
 ### Building Container Internals
