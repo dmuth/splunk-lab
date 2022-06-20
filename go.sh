@@ -43,7 +43,7 @@ SSL_KEY=${SSL_KEY:-}
 #
 function download_helper_scripts() {
 
-	BASE_URL="https://raw.githubusercontent.com/dmuth/splunk-lab/master/"
+	BASE_URL="https://raw.githubusercontent.com/dmuth/splunk-lab/master"
 	#BASE_URL="http://localhost:8001"  # Debugging
 
 	if test ! $(type -P curl)
