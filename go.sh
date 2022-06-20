@@ -38,6 +38,64 @@ SSL_CERT=${SSL_CERT:-}
 SSL_KEY=${SSL_KEY:-}
 
 
+#
+# Download all of our helper scripts.
+#
+function download_helper_scripts() {
+
+	BASE_URL="https://raw.githubusercontent.com/dmuth/splunk-lab/master/"
+	#BASE_URL="http://localhost:8000"  # Debugging
+
+	if test ! $(type -P curl)
+	then
+		echo "! "
+		echo "! Curl needs to be installed on your system so that I can fetch helper scripts."
+		echo "! "
+		exit 1
+	fi
+
+	#
+	# Create our bin directory and copy down some helper scripts
+	#
+	mkdir -p bin
+	FILES=(
+		attach.sh
+		clean.sh
+		create-1-million-events.py
+		create-test-logfiles.sh
+		kill.sh
+		)
+
+	for FILE in ${FILES[@]}
+	do
+		URL=${BASE_URL}/bin/${FILE}
+		DEST=bin/${FILE}
+
+		if test -f ${DEST}
+		then
+			continue
+		fi
+
+		echo -n "# Downloading ${URL} to ${DEST}..."
+		curl -s --fail ${URL} > ${DEST} || true
+		if test ! -s ${DEST}
+		then
+			echo
+			echo "! Unable to find ${URL}"
+			rm -f ${DEST}
+			exit 1
+		fi
+
+		chmod 755 ${DEST}
+		echo "...done!"
+
+	done
+
+} # End of download_helper_scripts()
+
+download_helper_scripts
+
+
 if test "$SPLUNK_START_ARGS" != "--accept-license"
 then
 	echo "! "

@@ -21,6 +21,8 @@ instructions for setting environment variables and you'll be up and running in n
 
 If you want to see neat things you can do in Splunk Lab, check out <a href="#cookbook">the Cookbook section</a>.
 
+Also, the script will craete a directory called `bin/` with some helper scripts in it.  Be sure to check them out!
+
 
 ### Useful links after starting
 
