@@ -270,8 +270,6 @@ function create_docker_command() {
 		CMD="$CMD -v $(pwd)/${SPLUNK_DATA}:/data "
 	fi
 
-	#echo "CMD: $CMD" # Debugging
-
 	#
 	# If the logs value doesn't start with a leading slash, prefix it with the full path
 	#
@@ -404,6 +402,8 @@ function create_docker_command() {
 	then
 		CMD="${CMD} bash"
 	fi
+
+	#echo "CMD: $CMD" # Debugging
 
 } # End of create_docker_command()
 
