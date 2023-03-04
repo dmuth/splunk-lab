@@ -209,6 +209,21 @@ Then, when you run Splunk Lab, set the environment variables `SSL_KEY` and `SSL_
 Example: `SSL_KEY=./localhost.key SSL_CERT=./localhost.pem ./go.sh`
 
 
+### How do I get this to work in Vagrant?
+
+If you're running <a href="https://github.com/dmuth/docker-in-vagrant">Docker in Vagrant</a>, or just plain Vagrant, you'll run into issues because Splunk does some low-level stuff with its Vagrant directory that will result in errors like this:
+
+```
+11-15-2022 01:45:31.042 +0000 ERROR StreamGroup [217 IndexerTPoolWorker-0] - failed to drain remainder total_sz=24 bytes_freed=7977 avg_bytes_per_iv=332 sth=0x7fb586dfdba0: [1668476729, /opt/splunk/var/lib/splunk/_internaldb/db/hot_v1_1, 0x7fb587f7e840] reason=st_sync failed rc=-6 warm_rc=[-35,1]
+```
+
+To work around this, disable sharing of Splunk's data directory by setting `SPLUNK_DATA=no`, like this:
+
+`SPLUNK_DATA=no SPLUNK_EVENTGEN=yes ./go.sh`
+
+By doing this, any data ingested into Spunk will not persist between runs.  But to be fair, Splunk Lab is meant for development usage of Splunk, not long-term usage.
+
+
 ### Does this work on Macs?
 
 Sure does!  I built this on a Mac. :-)
