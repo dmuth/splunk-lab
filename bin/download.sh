@@ -15,12 +15,8 @@ pushd $(dirname $0)/.. > /dev/null
 BUCKET="dmuth-splunk-lab"
 CACHE="cache"
 
-SPLUNK_PRODUCT="splunk"
-SPLUNK_VERSION="8.2.6"
-SPLUNK_BUILD="a6fe1ee8894b"
-SPLUNK_FILENAME="splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz"
-SPLUNK_URL="https://download.splunk.com/products/${SPLUNK_PRODUCT}/releases/${SPLUNK_VERSION}/linux/${SPLUNK_FILENAME}"
-SPLUNK_CACHE_FILENAME="${CACHE}/${SPLUNK_FILENAME}"
+# Load our variables
+. ./bin/lib.sh
 
 mkdir -p ${CACHE}
 pushd ${CACHE} >/dev/null > /dev/null

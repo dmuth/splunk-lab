@@ -7,13 +7,8 @@ CACHE="cache"
 DEPLOY="${CACHE}/deploy"
 BUILD="${CACHE}/build"
 
-SPLUNK_PRODUCT="splunk"
-SPLUNK_HOME="/opt/splunk"
-SPLUNK_VERSION="8.2.6"
-SPLUNK_BUILD="a6fe1ee8894b"
-SPLUNK_FILENAME="splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz"
-SPLUNK_URL="https://download.splunk.com/products/${SPLUNK_PRODUCT}/releases/${SPLUNK_VERSION}/linux/${SPLUNK_FILENAME}"
-SPLUNK_CACHE_FILENAME="${CACHE}/${SPLUNK_FILENAME}"
+# Load our variables
+. ./bin/lib.sh
 
 #
 # This is set to true if we build even a single container, and subsequent
@@ -200,7 +195,14 @@ echo "# "
 echo "# Tagging Docker containers..."
 echo "# "
 docker tag splunk-lab dmuth1/splunk-lab
-docker tag splunk-lab-ml dmuth1/splunk-lab-ml
+docker tag splunk-lab dmuth1/splunk-lab:latest
+docker tag splunk-lab dmuth1/splunk-lab:${SPLUNK_VERSION_MAJOR}
+docker tag splunk-lab dmuth1/splunk-lab:${SPLUNK_VERSION_MINOR}
+
+docker tag splunk-lab-ml dmuth1/splunk-lab-ml:latest
+docker tag splunk-lab-ml dmuth1/splunk-lab-ml:${SPLUNK_VERSION_MAJOR}
+docker tag splunk-lab-ml dmuth1/splunk-lab-ml:${SPLUNK_VERSION_MINOR}
+
 
 echo "# Done!"
 
