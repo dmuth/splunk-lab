@@ -116,6 +116,8 @@ then
 
 	docker build ${NO_CACHE} \
 		--build-arg SPLUNK_HOME=${SPLUNK_HOME} \
+		--build-arg SPLUNK_VERSION=${SPLUNK_VERSION} \
+		--build-arg SPLUNK_BUILD=${SPLUNK_BUILD} \
 		--build-arg DEPLOY_SPLUNK_FILENAME=${DEPLOY}/${SPLUNK_FILENAME} \
 		--build-arg DEPLOY=${DEPLOY} \
 		. -f docker/${DOCKER} -t splunk-lab-core-1

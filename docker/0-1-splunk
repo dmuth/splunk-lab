@@ -7,6 +7,9 @@ FROM splunk-lab-core-0
 #
 ARG SPLUNK_HOME
 ARG DEPLOY
+ARG SPLUNK_VERSION
+ARG SPLUNK_BUILD
+
 
 #
 # I know that at first glance, this looks kinda crazy.
@@ -14,42 +17,52 @@ ARG DEPLOY
 # up into smaller pieces keeps individual Docker layers from getting too big.
 # I'm not thrilled with this approach either, it's the best I can do for now, though.
 #
-COPY ${DEPLOY}/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-01-of-10 /tmp
-COPY ${DEPLOY}/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-02-of-10 /tmp
-COPY ${DEPLOY}/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-03-of-10 /tmp
-COPY ${DEPLOY}/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-04-of-10 /tmp
-COPY ${DEPLOY}/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-05-of-10 /tmp
-COPY ${DEPLOY}/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-06-of-10 /tmp
-COPY ${DEPLOY}/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-07-of-10 /tmp
-COPY ${DEPLOY}/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-08-of-10 /tmp
-COPY ${DEPLOY}/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-09-of-10 /tmp
-COPY ${DEPLOY}/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-10-of-10 /tmp
+COPY ${DEPLOY}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-01-of-10 /tmp
+COPY ${DEPLOY}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-02-of-10 /tmp
+COPY ${DEPLOY}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-03-of-10 /tmp
+COPY ${DEPLOY}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-04-of-10 /tmp
+COPY ${DEPLOY}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-05-of-10 /tmp
+COPY ${DEPLOY}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-06-of-10 /tmp
+COPY ${DEPLOY}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-07-of-10 /tmp
+COPY ${DEPLOY}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-08-of-10 /tmp
+COPY ${DEPLOY}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-09-of-10 /tmp
+COPY ${DEPLOY}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-10-of-10 /tmp
 
 #
 # Download official Splunk release and unzip in /opt/splunk
 #
 RUN mkdir -p ${SPLUNK_HOME}
 
-RUN tar xzf /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-01-of-10 --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-01-of-10
-RUN tar xzf /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-02-of-10 --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-02-of-10
-RUN tar xzf /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-03-of-10 --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-03-of-10
-RUN tar xzf /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-04-of-10 --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-04-of-10
-RUN tar xzf /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-05-of-10 --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-05-of-10
-RUN tar xzf /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-06-of-10 --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-06-of-10
-RUN tar xzf /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-07-of-10 --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-07-of-10
-RUN tar xzf /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-08-of-10 --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-08-of-10
-RUN tar xzf /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-09-of-10 --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-09-of-10
-RUN tar xzf /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-10-of-10 --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz-part-10-of-10
+RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-01-of-10 \
+    --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-01-of-10
+RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-02-of-10 \
+    --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-02-of-10
+RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-03-of-10 \
+    --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-03-of-10
+RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-04-of-10 \
+    --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-04-of-10
+RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-05-of-10 \
+    --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-05-of-10
+RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-06-of-10 \
+    --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-06-of-10
+RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-07-of-10 \
+    --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-07-of-10
+RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-08-of-10 \
+    --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-08-of-10
+RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-09-of-10 \
+    --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-09-of-10
+RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-10-of-10 \
+    --strip 1 -C ${SPLUNK_HOME} \
+	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-10-of-10
 
 
 #
