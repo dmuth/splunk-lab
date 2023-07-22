@@ -1,4 +1,4 @@
-<dashboard>
+<dashboard version="1.1">
   <label>Welcome To Splunk Lab!</label>
   <row>
     <panel>
@@ -66,7 +66,7 @@
     <li>
               <a href="/app/splunk-lab/search?q=search%20index%3D_internal%20earliest%3D-1h&amp;display.page.search.mode=smart&amp;dispatch.sample_ratio=1&amp;workload_pool=&amp;earliest=-1h&amp;latest=now">Search "_internal" Index over the last hour</a> - This is guaranteed to have data from Splunk itself</li>
     <li>
-              <a href="/app/splunk-lab/search?q=search%20index%3Dmain%20earliest%3D-1d&amp;display.page.search.mode=smart&amp;dispatch.sample_ratio=1&amp;workload_pool=&amp;earliest=-1h&amp;latest=now">Search "main" Index over the last day</a> - This will not have data unless there are files in your logs/ directory or you have turned on HTTP or REST data ingestion.</li>
+              <a href="/app/splunk-lab/search?q=search%20index%3Dmain%20earliest%3D-1d&amp;display.page.search.mode=smart&amp;dispatch.sample_ratio=1&amp;workload_pool=&amp;earliest=-1h&amp;latest=now">Search "main" Index over the last day</a> - This will not have data unless there are files in your <b>logs/</b> directory, you have turned on HTTP or REST data ingestion, or you have enabled Eventgen with <b>SPLUNK_EVENTGEN=yes</b> at startup.</li>
   </ul>
   <li>
             <a href="/app/splunk-lab/dashboards">Dashboards</a>

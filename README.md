@@ -234,7 +234,7 @@ Sure does!  I built this on a Mac. :-)
 I wrote a series of helper scripts in `bin/` to make the process easier:
 
 - `./bin/download.sh` - Download tarballs of various apps and splits some of them into chunks
-  - If downloading a new version of Splunk, edit this script and bump the `SPLUNK_VERSION` and `SPLUNK_BUILD` variables.
+  - If downloading a new version of Splunk, edit `bin/lib.sh` and bump the `SPLUNK_VERSION` and `SPLUNK_BUILD` variables.
 - `./bin/build.sh [ --force ]` - Build the containers.
    - Note that this downloads packages from an AWS S3 bucket that I created.  This bucket is set to "requestor pays", so you'll need to make sure the `aws` CLI app set up.
    - If you are (re)building Splunk Lab, you'll want to use `--force`.
