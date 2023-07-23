@@ -1,6 +1,10 @@
 
-FROM splunk-lab-core-0
-
+#
+# This is our builder container.
+# We extract our tarball(s) here, and then copy the extracted files
+# over into our actual container.
+#
+FROM splunk-lab-core-0 as builder
 
 #
 # These are passed in with --build-args
@@ -16,6 +20,9 @@ ARG SPLUNK_BUILD
 # The reason for all these files is because the Splunk tarball is HUGE, and breaking it
 # up into smaller pieces keeps individual Docker layers from getting too big.
 # I'm not thrilled with this approach either, it's the best I can do for now, though.
+#
+# NOTE: Now that I have a builder container, this may no longer be necessary, and
+# I should revisit it in a future maintenance.
 #
 COPY ${DEPLOY}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-01-of-10 /tmp
 COPY ${DEPLOY}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-02-of-10 /tmp
@@ -34,35 +41,36 @@ COPY ${DEPLOY}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-10
 RUN mkdir -p ${SPLUNK_HOME}
 
 RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-01-of-10 \
-    --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-01-of-10
+    --strip 1 -C ${SPLUNK_HOME} 
 RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-02-of-10 \
-    --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-02-of-10
+    --strip 1 -C ${SPLUNK_HOME} 
 RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-03-of-10 \
-    --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-03-of-10
+    --strip 1 -C ${SPLUNK_HOME} 
 RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-04-of-10 \
-    --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-04-of-10
+    --strip 1 -C ${SPLUNK_HOME} 
 RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-05-of-10 \
-    --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-05-of-10
+    --strip 1 -C ${SPLUNK_HOME} 
 RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-06-of-10 \
-    --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-06-of-10
+    --strip 1 -C ${SPLUNK_HOME} 
 RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-07-of-10 \
-    --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-07-of-10
+    --strip 1 -C ${SPLUNK_HOME} 
 RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-08-of-10 \
-    --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-08-of-10
+    --strip 1 -C ${SPLUNK_HOME} 
 RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-09-of-10 \
-    --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-09-of-10
+    --strip 1 -C ${SPLUNK_HOME} 
 RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-10-of-10 \
-    --strip 1 -C ${SPLUNK_HOME} \
-	&& rm /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-10-of-10
+    --strip 1 -C ${SPLUNK_HOME} 
+
+
+#
+# This is the actual container we're building.
+# It copies Splunk from the previous container to this one, avoiding having
+# giant tarballs hanging out in this image, which makes the resulting Docker images
+# several hundred MB smaller. :-)
+#
+FROM splunk-lab-core-0
+
+COPY --from=builder /opt/splunk /opt/splunk
 
 
 #
@@ -76,5 +84,6 @@ RUN tar xzf /tmp/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-
 #
 RUN ln -s /opt/splunk/var/lib/splunk/ /data \
 	&& ln -s /opt/splunk/etc/apps/splunk-lab/local /app 
+
 
 
