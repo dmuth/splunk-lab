@@ -2,9 +2,11 @@
 #
 # This is based on our existing Splunk Lab
 #
-FROM splunk-lab-core
+FROM splunk-lab-core as builder
 
 ARG DEPLOY
+
+WORKDIR /tmp
 
 COPY ${DEPLOY}/splunk-machine-learning-toolkit_520.tgz /tmp/splunk-packages/
 COPY ${DEPLOY}/nlp-text-analytics_102.tgz /tmp/splunk-packages/
@@ -16,6 +18,10 @@ COPY ${DEPLOY}/sankey-diagram-custom-visualization_130.tgz /tmp/splunk-packages/
 # The reason for all these files is because the Python tarball is HUGE, and breaking it
 # up into smaller pieces keeps individual Docker layers from getting too big.
 # I'm not thrilled with this approach either, it's the best I can do for now, though.
+#
+#
+# NOTE: Now that I have a builder container, this may no longer be necessary, and
+# I should revisit it in a future maintenance.
 #
 COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-1-of-8 /tmp/
 COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-2-of-8 /tmp/
@@ -31,65 +37,57 @@ COPY ${DEPLOY}/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-8-o
 #
 RUN mkdir -p /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64
 RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-1-of-8 \
-	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-1-of-8.tgz 
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 
 RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-2-of-8 \
-	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-2-of-8.tgz 
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 
 RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-3-of-8 \
-	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-3-of-8.tgz 
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 
 RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-4-of-8 \
-	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-4-of-8.tgz 
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 
 RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-5-of-8 \
-	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-5-of-8.tgz 
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 
 RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-6-of-8 \
-	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-6-of-8.tgz 
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 
 RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-7-of-8 \
-	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-7-of-8.tgz 
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 
 RUN tar xfvz /tmp/python-for-scientific-computing-for-linux-64-bit_202.tgz-part-8-of-8 \
-	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 \
-	&& rm -fv /tmp/python-for-scientific-computing-for-linux-64-bit_202-part-8-of-8.tgz 
+	--strip 1 -C /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 
 
 
 #
 # Machine Learning toolkit
 #
-RUN tar xfvz /tmp/splunk-packages/splunk-machine-learning-toolkit_520.tgz \
-	&& mv Splunk_ML_Toolkit /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/splunk-machine-learning-toolkit_520.tgz 
+RUN tar xfvz /tmp/splunk-packages/splunk-machine-learning-toolkit_520.tgz 
 
 #
 # NLP text analytics
 #
-RUN tar xfvz /tmp/splunk-packages/nlp-text-analytics_102.tgz \
-	&& mv nlp-text-analytics /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/nlp-text-analytics_102.tgz 
+RUN tar xfvz /tmp/splunk-packages/nlp-text-analytics_102.tgz 
 
 #
 # Halo custom visualization
 #
-RUN tar xfvz /tmp/splunk-packages/halo-custom-visualization_113.tgz \
-	&& mv viz_halo /opt/splunk/etc/apps \
-	&& rm -fv /tmp/splunk-packages/halo-custom-visualization_113.tgz 
+RUN tar xfvz /tmp/splunk-packages/halo-custom-visualization_113.tgz 
 
 #
 # Sankey custom visualization
 #
-RUN tar xfvz /tmp/splunk-packages/sankey-diagram-custom-visualization_130.tgz \
-	&& mv sankey_diagram_app /opt/splunk/etc/apps \
-	&& rm -fv /tmp/splunk-packages/sankey-diagram-custom-visualization_130.tgz 
+RUN tar xfvz /tmp/splunk-packages/sankey-diagram-custom-visualization_130.tgz 
 
 
-#####
 #
 # Now that apps are installed, we can install the config files, with a lot less 
 # stuff being downlaoded/images being re-built.
 #
+FROM splunk-lab-core
+
+WORKDIR /tmp
+
+COPY --from=builder /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64 /opt/splunk/etc/apps/Splunk_SA_Scientific_Python_linux_x86_64
+COPY --from=builder /tmp/Splunk_ML_Toolkit /opt/splunk/etc/apps/Splunk_ML_Toolkit
+COPY --from=builder /tmp/nlp-text-analytics /opt/splunk/etc/apps/nlp-text-analytics
+COPY --from=builder /tmp/viz_halo /opt/splunk/etc/apps/viz_halo
+COPY --from=builder /tmp/sankey_diagram_app /opt/splunk/etc/apps/sankey_diagram_app
 
 
 #
@@ -109,7 +107,6 @@ COPY splunk-config/* /opt/splunk/etc/system/local/
 #
 # Install the Splunk Lab app and set it to the default
 #
-WORKDIR /tmp
 COPY splunk-lab-app /opt/splunk/etc/apps/splunk-lab
 RUN mkdir -p /opt/splunk/etc/users/admin/user-prefs/local \
 	&& mv /opt/splunk/etc/apps/splunk-lab/user-prefs.conf /opt/splunk/etc/users/admin/user-prefs/local/

@@ -11,7 +11,11 @@
 # I slimmed this down, as I have no desire to run as a separate user, set up a Deployment
 # Server, generate PDFs, etc.  All I want to do is run a this single app.
 #
-FROM debian:stretch
+
+#
+# Release names can be found at https://www.debian.org/releases/
+#
+FROM debian:bookworm
 
 ARG DEBIAN_FRONTEND=noninteractive
 

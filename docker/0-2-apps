@@ -1,5 +1,11 @@
 
-FROM splunk-lab-core-1
+#
+# This is our builder container.
+# We extract our tarball(s) here, and then copy the extracted files
+# over into our actual container.
+#
+FROM splunk-lab-core-1 as builder
+
 
 WORKDIR /tmp
 
@@ -17,48 +23,51 @@ COPY ${DEPLOY}/rest-api-modular-input_198.tgz /tmp/splunk-packages/
 # Install Syndication app
 # https://splunkbase.splunk.com/app/2646/
 #
-RUN tar xfvz /tmp/splunk-packages/syndication-input-rssatomrdf_124.tgz \
-	&& mv syndication /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/syndication-input-rssatomrdf_124.tgz
+RUN tar xfvz /tmp/splunk-packages/syndication-input-rssatomrdf_124.tgz 
 
 #
 # Install Rest API Modular Input
 # https://splunkbase.splunk.com/app/1546/#/details
 #
-RUN tar xfvz /tmp/splunk-packages/rest-api-modular-input_198.tgz \
-	&& mv rest_ta /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/rest-api-modular-input_198.tgz 
+RUN tar xfvz /tmp/splunk-packages/rest-api-modular-input_198.tgz 
 
 #
 # Install Wordcloud app
 # https://splunkbase.splunk.com/app/3212/
 #
-RUN tar xfvz /tmp/splunk-packages/wordcloud-custom-visualization_111.tgz \
-	&& mv wordcloud_app /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/wordcloud-custom-visualization_111.tgz
+RUN tar xfvz /tmp/splunk-packages/wordcloud-custom-visualization_111.tgz 
 
 #
 # Install Slack Notification Alert
 # https://splunkbase.splunk.com/app/2878/
 #
-RUN tar xfvz /tmp/splunk-packages/slack-notification-alert_203.tgz \
-	&& mv slack_alerts /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/slack-notification-alert_203.tgz 
+RUN tar xfvz /tmp/splunk-packages/slack-notification-alert_203.tgz 
 
 #
 # Install Splunk Dashboard Examples
 # https://splunkbase.splunk.com/app/1603/
 #
-RUN tar xfvz /tmp/splunk-packages/splunk-dashboard-examples_800.tgz \
-	&& mv simple_xml_examples /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/splunk-dashboard-examples_800.tgz 
+RUN tar xfvz /tmp/splunk-packages/splunk-dashboard-examples_800.tgz 
 
 #
 # Install Eventgen
 # https://splunkbase.splunk.com/app/1924
 #
-RUN tar xfvz /tmp/splunk-packages/eventgen_720.tgz \
-	&& mv SA-Eventgen /opt/splunk/etc/apps/ \
-	&& rm -fv /tmp/splunk-packages/eventgen_720.tgz 
+RUN tar xfvz /tmp/splunk-packages/eventgen_720.tgz 
+
+#
+# This is the actual container we're building.
+# It copies Splunk from the previous container to this one, avoiding having
+# giant tarballs hanging out in this image, which makes the resulting Docker images
+# several hundred MB smaller. :-)
+#
+FROM splunk-lab-core-1
+
+COPY --from=builder /tmp/syndication /opt/splunk/etc/apps/syndication
+COPY --from=builder /tmp/rest_ta /opt/splunk/etc/apps/rest_ta
+COPY --from=builder /tmp/wordcloud_app /opt/splunk/etc/apps/wordcloud_app
+COPY --from=builder /tmp/slack_alerts /opt/splunk/etc/apps/slack_alerts
+COPY --from=builder /tmp/simple_xml_examples /opt/splunk/etc/apps/simple_xml_examples
+COPY --from=builder /tmp/SA-Eventgen /opt/splunk/etc/apps/SA-Eventgen
 
 
