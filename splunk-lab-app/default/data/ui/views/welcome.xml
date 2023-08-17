@@ -4,7 +4,7 @@
     <panel>
       <html>
 
-<img src="/static/app/splunk-lab/splunk-lab.png" align="right" />
+<img src="/static/app/splunk-lab/splunk-lab.png" align="right"/>
 
 <h1>Welcome to Splunk Lab!</h1>
 
@@ -110,6 +110,7 @@
   </html>
     </panel>
   </row>
+  
   <row>
     <panel>
       <title></title>
@@ -166,8 +167,45 @@
       </html>
     </panel>
   </row>
+  
+  <row>
+    <panel>
+      <html>
+        <h1>Troubleshooting</h1>
+        
+        <ul>
+          <li>Q: Errors from KV Store or Mongod</li>
+          <li>
+            A: If you see errors such as <tt>Failed to start KV Store process</tt> or <tt>KV Store changed status to failed.</tt>, that means that Splunk is having issues with system calls related to the disk when you are running Docker in certain VMs <em>and</em> have a directory mounted against one on the host computer.  VirtualBox in particular is affected.
+          
+          The fix for this is to start Splunk Lab with <tt>SPLUNK_DATA=no</tt> in the environment.  This will prevent the mount from taking place and all indexed data will stay within Docker container.
+          </li>
+        </ul>
+        
+        <p/>
 
+        <ul>
+          <li>Q: No data is being indexed, not even in <tt>_internal</tt>!</li>
+          
+          <li>This also sometimes shows up with errors like this in <tt>splunkd.log</tt>:
+<pre>
+11-15-2022 01:45:31.042 +0000 ERROR StreamGroup [217 IndexerTPoolWorker-0] - failed to drain remainder total_sz=24 bytes_freed=7977 avg_bytes_per_iv=332 sth=0x7fb586dfdba0: [1668476729, /opt/splunk/var/lib/splunk/_internaldb/db/hot_v1_1, 0x7fb587f7e840] reason=st_sync failed rc=-6 warm_rc=[-35,1]
+</pre>
 
+          The fix for this the same as previous: start Splunk Lab with <tt>SPLUNK_DATA=no</tt> in the environment.
+          <p/>
+          
+          Splunk just doesn't like Virtual Box, it seems. 🤷
+          <p/>
+
+          </li>
+          
+        </ul>
+        
+      </html>
+    </panel>
+  </row>
+  
   <row>
     <panel>
       <html>
@@ -180,9 +218,5 @@
 
       </html>
     </panel>
-    
   </row>
-
-
-
 </dashboard>

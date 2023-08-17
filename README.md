@@ -211,7 +211,7 @@ Example: `SSL_KEY=./localhost.key SSL_CERT=./localhost.pem ./go.sh`
 
 ### How do I get this to work in Vagrant?
 
-If you're running <a href="https://github.com/dmuth/docker-in-vagrant">Docker in Vagrant</a>, or just plain Vagrant, you'll run into issues because Splunk does some low-level stuff with its Vagrant directory that will result in errors like this:
+If you're running <a href="https://github.com/dmuth/docker-in-vagrant">Docker in Vagrant</a>, or just plain Vagrant, you'll run into issues because Splunk does some low-level stuff with its Vagrant directory that will result in errors in `splunkd.log` that look like this:
 
 ```
 11-15-2022 01:45:31.042 +0000 ERROR StreamGroup [217 IndexerTPoolWorker-0] - failed to drain remainder total_sz=24 bytes_freed=7977 avg_bytes_per_iv=332 sth=0x7fb586dfdba0: [1668476729, /opt/splunk/var/lib/splunk/_internaldb/db/hot_v1_1, 0x7fb587f7e840] reason=st_sync failed rc=-6 warm_rc=[-35,1]
@@ -276,7 +276,7 @@ This way, any changes that are made to dashboards will be propagated outside of
 the container and can be checked in to Git.
 
 When in production mode (e.g. running `./go.sh` directly), no symlink is created,
-instead `local/` is mounted by whatever `$SPLUNK_APP` is pointing to, so that any
+instead `local/` is mounted by whatever `$SPLUNK_APP` is pointing to (default is `app/`), so that any
 changes made by the user will show up on their host, with Splunk Lab's `default/`
 directory being untouched.
 
