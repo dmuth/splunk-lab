@@ -192,7 +192,7 @@ Feel free to expand on that app for your own apps.
 
 HTTPS is turned on by default.  Passwords such as `password` and <a href="https://www.youtube.com/watch?v=a6iW-8xPw3k">12345</a> are not permitted.
 
-Please, <a href="https://diceware.dmuth.org/">use a strong password</a> if you are deploying
+Please, for the love of god, <a href="https://diceware.dmuth.org/">use a strong password</a> if you are deploying
 this on a public-facing machine.
 
 
@@ -211,6 +211,8 @@ Example: `SSL_KEY=./localhost.key SSL_CERT=./localhost.pem ./go.sh`
 
 ### How do I get this to work in Vagrant?
 
+TL;DR If you're on a Mac, use <a href="https://orbstack.dev/">OrbStack</a>.
+
 If you're running <a href="https://github.com/dmuth/docker-in-vagrant">Docker in Vagrant</a>, or just plain Vagrant, you'll run into issues because Splunk does some low-level stuff with its Vagrant directory that will result in errors in `splunkd.log` that look like this:
 
 ```
@@ -227,6 +229,8 @@ By doing this, any data ingested into Spunk will not persist between runs.  But 
 ### Does this work on Macs?
 
 Sure does!  I built this on a Mac. :-)
+
+For best results, run under <a href="https://orbstack.dev/">OrbStack</a>.
 
 
 ## Development
