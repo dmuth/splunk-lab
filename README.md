@@ -243,10 +243,10 @@ I wrote a series of helper scripts in `bin/` to make the process easier:
    - Note that this downloads packages from an AWS S3 bucket that I created.  This bucket is set to "requestor pays", so you'll need to make sure the `aws` CLI app set up.
    - If you are (re)building Splunk Lab, you'll want to use `--force`.
 - `./bin/upload-file-to-s3.sh` - Upload a specific file to S3.  For rolling out new versions of apps
-- `./bin/push.sh` - Tag and push the container.
 - `./bin/devel.sh` - Build and tag the container, then start it with an interactive bash shell.
    - This is a wrapper for the above-mentioned `go.sh` script. Any environment variables that work there will work here.
    - **To force rebuilding a container during development** touch the associated Dockerfile in `docker/`.  E.g. `touch docker/1-splunk-lab` to rebuild the contents of that container.
+- `./bin/push.sh` - Tag and push the container.
 - `./bin/create-1-million-events.py` - Create 1 million events in the file `1-million-events.txt` in the current directory.
    - If not in `logs/` but reachable from the Docker container, the file can then be oneshotted into Splunk with the following command: `/opt/splunk/bin/splunk add oneshot ./1-million-events.txt -index main -sourcetype oneshot-0001`
 - `./bin/kill.sh` - Kill a running `splunk-lab` container.
@@ -257,9 +257,17 @@ I wrote a series of helper scripts in `bin/` to make the process easier:
 
 ### Building a New Version of Splunk
 
-- Bump version number and build number in `bin/download.sh`
-- Bump version number and build number in `bin/build.sh`
-- Bump version number and build number in `docker/0-1-splunk`
+- Bump version number and build number in `bin/lib.sh`
+- Run `./bin/build.sh`, use `--force` if necessary
+  - This can take several MINUTES, especially if no apps are cached locally
+- Run `SPLUNK_EVENTGEN=yes SPLUNK_ML=yes ./bin/devel.sh` 
+  - This will build and tag the container, and spawn an interactive shell
+  - Run `/opt/splunk/bin/splunk version` inside the container to verify the version number
+- Go to <a href="https://localhost:8000/">https://localhost:8000/</a> and verify you can log into Splunk
+  - Run the query `index=main earliest=-1d` and verify Eventgen events are coming in
+  - Go to <a href="https://localhost:8000/en-US/app/Splunk_ML_Toolkit/contents">https://localhost:8000/en-US/app/Splunk_ML_Toolkit/contents</a> and verify that the ML Toolkit has been installed.
+- Type `exit` in the shell to shut down the server
+- Run `./bin/push.sh` to deploy the image.  This will take awhile.
 
 
 ### Building Container Internals
