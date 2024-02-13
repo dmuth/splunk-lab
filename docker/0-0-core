@@ -15,21 +15,30 @@
 #
 # Release names can be found at https://www.debian.org/releases/
 #
-FROM debian:bookworm
+# Slim saves me like 50 Megs, so I'll take it.
+#
+FROM debian:bookworm-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 
 ENV LANG en_US.utf8 
 
 #
-# make the "en_US.UTF-8" locale so splunk will be utf-8 enabled by default
+# Change our sources to be HTTPS then install some things.
+#
+# I'm not thrilled that CAs apparently aren't shipped with Debian, so I gotta
+# download them in cleartext here.  At least future downloads after this one
+# will be over HTTPS.
 #
 RUN apt-get update \
-	&& apt-get install -y --no-install-recommends apt-utils \
-	&& apt-get install -y locales \
+    && apt-get install -y ca-certificates \
+    #
+    # Change "http" to "https"
+    #
+    && sed -i -e "s/http:/https:/" /etc/apt/sources.list.d/debian.sources \
+    && apt-get install -y --no-install-recommends apt-utils locales wget procps less \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
-	&& apt-get update \
-	&& apt-get install -y wget procps less
+	&& apt-get update 
 
 
