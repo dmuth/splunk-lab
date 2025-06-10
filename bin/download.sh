@@ -24,6 +24,8 @@ pushd ${CACHE} >/dev/null > /dev/null
 echo "# "
 echo "# Downloading Splunk..."
 echo "# "
+echo "# URL: ${SPLUNK_URL}"
+echo "# "
 if test ! -f "${SPLUNK_FILENAME}"
 then
 	wget -O ${SPLUNK_FILENAME}.tmp ${SPLUNK_URL}
@@ -35,15 +37,24 @@ else
 fi
 
 NUM_PARTS=10
-if test ! -f "splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-${NUM_PARTS}-of-${NUM_PARTS}"
+#if test ! -f "splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-${NUM_PARTS}-of-${NUM_PARTS}"
+TARGET="splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-linux-amd64.tgz-part-${NUM_PARTS}-of-${NUM_PARTS}"
+if test ! -f "${TARGET}"
 then
 	echo "# "
 	echo "# Splitting up the Splunk tarball into ${NUM_PARTS} separate pieces..."
+  echo "# "
+  echo "# This may take some time and the progress bar may freeze, but you can"
+  echo "# watch the files being written in another terminal with this command:"
+  echo "# "
+  echo "# watch -d -n1 \"ls -ltrh cache/ | tail -n10\""
+  echo "# "
+
 	echo "# "
 	../bin/tarsplit ${SPLUNK_FILENAME} ${NUM_PARTS}
 
 else
-	echo "# Oh, splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-${NUM_PARTS}-of-${NUM_PARTS} already exists, skipping!"
+	echo "# Oh, ${TARGET}, already exists skipping!"
 
 fi
 

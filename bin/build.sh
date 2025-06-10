@@ -111,7 +111,8 @@ if test "${BUILDING}"
 then
 	for I in $(seq -w 10)
 	do
-        	ln -f ${CACHE}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-${I}-of-10 ${DEPLOY}
+        	#ln -f ${CACHE}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-Linux-x86_64.tgz-part-${I}-of-10 ${DEPLOY}
+        	ln -f ${CACHE}/splunk-${SPLUNK_VERSION}-${SPLUNK_BUILD}-linux-amd64.tgz-part-${I}-of-10 ${DEPLOY}
 	done
 
 	docker build ${NO_CACHE} \

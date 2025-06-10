@@ -242,7 +242,7 @@ I wrote a series of helper scripts in `bin/` to make the process easier:
 - `./bin/build.sh [ --force ]` - Build the containers.
    - Note that this downloads packages from an AWS S3 bucket that I created.  This bucket is set to "requestor pays", so you'll need to make sure the `aws` CLI app set up.
    - If you are (re)building Splunk Lab, you'll want to use `--force`.
-- `./bin/upload-file-to-s3.sh` - Upload a specific file to S3.  For rolling out new versions of apps
+- `./bin/upload-file-to-s3.sh` - Upload a specific file to S3.  For rolling out new versions of Splunk apps
 - `./bin/devel.sh` - Build and tag the container, then start it with an interactive bash shell.
    - This is a wrapper for the above-mentioned `go.sh` script. Any environment variables that work there will work here.
    - **To force rebuilding a container during development** touch the associated Dockerfile in `docker/`.  E.g. `touch docker/1-splunk-lab` to rebuild the contents of that container.
